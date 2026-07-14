@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
   <head>
-    {% # Inlined CSS Variables %}
+    {% comment %} Inlined CSS Variables {% endcomment %}
     {% render 'css-variables' %}
 
     {% comment %}
@@ -17,14 +17,14 @@
       {{ settings.type_primary_font | font_url | preload_tag: as: 'font', crossorigin: 'anonymous' }}
     {% endunless %}
 
-    {% # Load and preload the critical CSS %}
+    {% comment %} Load and preload the critical CSS {% endcomment %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
     {{ 'theme.css' | asset_url | stylesheet_tag }}
 
-    {% # Social, title, etc. %}
+    {% comment %} Social, title, etc. {% endcomment %}
     {% render 'meta-tags' %}
 
-    {% # Global JS %}
+    {% comment %} Global JS {% endcomment %}
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
     <script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
 
@@ -43,9 +43,9 @@
     {% render 'cart-drawer' %}
 
     {% comment %} GSAP Animation Engine & Smooth Scrolling {% endcomment %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script src="https://unpkg.com/split-type" defer></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js" defer></script>
+    <script src="{{ 'gsap.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'ScrollTrigger.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'split-type.js' | asset_url }}" defer></script>
+    <script src="{{ 'lenis.min.js' | asset_url }}" defer></script>
   </body>
 </html>
