@@ -1,0 +1,36 @@
+<div class="announcement-bar bg-primary-accent" role="region" aria-label="Announcement">
+  <div class="announcement-bar__marquee">
+    <div class="announcement-bar__content">
+      {% for i in (1..5) %}
+        <span class="announcement-bar__message">{{ section.settings.text }}</span>
+        <span class="announcement-bar__separator">•</span>
+      {% endfor %}
+    </div>
+    <!-- Duplicate for seamless infinite loop -->
+    <div class="announcement-bar__content" aria-hidden="true">
+      {% for i in (1..5) %}
+        <span class="announcement-bar__message">{{ section.settings.text }}</span>
+        <span class="announcement-bar__separator">•</span>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "default": "PREMIUM T-SHIRTS • FREE SHIPPING ON ORDERS OVER $50 • NEW COLLECTION OUT NOW",
+      "label": "Announcement Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

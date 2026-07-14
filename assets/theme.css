@@ -71,20 +71,21 @@ button {
    Header Styles
    ============================================================================ */
 .site-header {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: transparent;
+  background-color: #000000;
+  color: #ffffff;
   transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
   padding: 2rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .site-header.is-scrolled {
-  background-color: var(--color-background);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  padding: 1rem 0;
+  background-color: #000000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  padding: 1.5rem 0;
 }
 
 .site-header__inner {
@@ -100,27 +101,31 @@ button {
 
 .site-header__logo span {
   margin: 0;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-weight: 900;
+  font-size: 2.8rem;
+  font-style: italic;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .site-header__menu-list {
   display: flex;
-  gap: 3rem;
+  gap: 3.5rem;
 }
 
 .site-header__menu-link {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   position: relative;
+  padding: 0.5rem 0;
 }
 
 .site-header__menu-link::after {
   content: '';
   position: absolute;
-  bottom: -4px;
+  bottom: 0;
   left: 0;
   width: 0;
   height: 2px;
@@ -136,13 +141,18 @@ button {
 .site-header__icons {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .site-header__icon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   display: flex;
+  transition: color 0.3s ease;
+}
+
+.site-header__icon:hover {
+  color: var(--color-primary-accent);
 }
 
 .site-header__icon svg {
@@ -162,10 +172,56 @@ button {
   color: #fff;
   font-size: 1rem;
   font-weight: 700;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+}
+
+/* ============================================================================
+   Announcement Bar (Marquee)
+   ============================================================================ */
+.announcement-bar {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  white-space: nowrap;
+  padding: 1.2rem 0;
+  z-index: 1001;
+}
+
+.announcement-bar__marquee {
+  display: flex;
+  animation: marquee 15s linear infinite;
+  width: 200%; /* Enough width for the duplicated content to scroll */
+}
+
+.announcement-bar__marquee:hover {
+  animation-play-state: paused;
+}
+
+.announcement-bar__content {
+  display: flex;
+  align-items: center;
+  width: 50%; /* Half the width of marquee container */
+  justify-content: space-around;
+}
+
+.announcement-bar__message {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.announcement-bar__separator {
+  font-size: 1.5rem;
+  margin: 0 3rem;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
