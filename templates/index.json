@@ -31,25 +31,25 @@
         "block_1": {
           "type": "collection",
           "settings": {
-            "title": "T-Shirts"
+            "title": "Graphic Tees"
           }
         },
         "block_2": {
           "type": "collection",
           "settings": {
-            "title": "Hoodies"
+            "title": "Oversized Tees"
           }
         },
         "block_3": {
           "type": "collection",
           "settings": {
-            "title": "Accessories"
+            "title": "Vintage Tees"
           }
         },
         "block_4": {
           "type": "collection",
           "settings": {
-            "title": "New Arrivals"
+            "title": "Basic Tees"
           }
         }
       },
