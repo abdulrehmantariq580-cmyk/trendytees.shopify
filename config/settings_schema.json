@@ -65,8 +65,20 @@
       {
         "type": "color",
         "id": "foreground_color",
-        "default": "#333333",
+        "default": "#111111",
         "label": "t:labels.foreground"
+      },
+      {
+        "type": "color",
+        "id": "primary_accent",
+        "default": "#D4AF37",
+        "label": "Primary Accent (Gold)"
+      },
+      {
+        "type": "color",
+        "id": "secondary_accent",
+        "default": "#000000",
+        "label": "Secondary Accent (Black)"
       },
       {
         "type": "range",
