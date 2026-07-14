@@ -1,7 +1,7 @@
 {%- style -%}
   #HeroBanner-{{ section.id }} {
     position: relative;
-    height: 100vh;
+    height: 80vh;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
@@ -10,6 +10,12 @@
     justify-content: center;
     overflow: hidden;
     background: #000;
+  }
+
+  @media screen and (max-width: 768px) {
+    #HeroBanner-{{ section.id }} {
+      height: 65vh;
+    }
   }
   
   #HeroBanner-{{ section.id }} .hero-banner__media {
