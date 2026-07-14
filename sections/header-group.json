@@ -13,15 +13,20 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "settings": {}
+      "settings": {
+        "text": "PREMIUM T-SHIRTS • FREE SHIPPING ON ORDERS OVER $50 • NEW COLLECTION OUT NOW"
+      }
     },
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "logo": "shopify://shop_images/Screenshot_2026-07-14_153455.png",
+        "menu": "main-menu"
+      }
     }
   },
   "order": [
     "announcement-bar",
     "header"
-  ],
+  ]
 }
