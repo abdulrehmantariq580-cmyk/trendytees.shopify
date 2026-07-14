@@ -32,33 +32,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Custom Cursor Logic ---
-  const cursorDot = document.querySelector('.cursor-dot');
-  const cursorOutline = document.querySelector('.cursor-outline');
+  const cursorTshirt = document.querySelector('.cursor-tshirt');
   
-  if (cursorDot && cursorOutline && typeof gsap !== 'undefined') {
-    gsap.set(cursorDot, {xPercent: -50, yPercent: -50});
-    gsap.set(cursorOutline, {xPercent: -50, yPercent: -50});
+  if (cursorTshirt && typeof gsap !== 'undefined') {
+    gsap.set(cursorTshirt, {xPercent: -50, yPercent: -50});
     
-    const xToDot = gsap.quickTo(cursorDot, "x", {duration: 0.1, ease: "power3"});
-    const yToDot = gsap.quickTo(cursorDot, "y", {duration: 0.1, ease: "power3"});
-    const xToOutline = gsap.quickTo(cursorOutline, "x", {duration: 0.6, ease: "power3.out"});
-    const yToOutline = gsap.quickTo(cursorOutline, "y", {duration: 0.6, ease: "power3.out"});
+    const xTo = gsap.quickTo(cursorTshirt, "x", {duration: 0.1, ease: "power3"});
+    const yTo = gsap.quickTo(cursorTshirt, "y", {duration: 0.1, ease: "power3"});
 
     window.addEventListener("mousemove", (e) => {
-      xToDot(e.clientX);
-      yToDot(e.clientY);
-      xToOutline(e.clientX);
-      yToOutline(e.clientY);
+      xTo(e.clientX);
+      yTo(e.clientY);
     });
 
     document.body.addEventListener("mouseover", (e) => {
       if(e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button' || e.target.closest('a') || e.target.closest('button')){
-         cursorOutline.classList.add('hover');
+         cursorTshirt.classList.add('hover');
       }
     });
     document.body.addEventListener("mouseout", (e) => {
       if(e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button' || e.target.closest('a') || e.target.closest('button')){
-         cursorOutline.classList.remove('hover');
+         cursorTshirt.classList.remove('hover');
       }
     });
   }
