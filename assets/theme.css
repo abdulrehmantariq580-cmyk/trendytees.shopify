@@ -102,7 +102,7 @@ button {
 .site-header__logo span {
   margin: 0;
   font-weight: 900;
-  font-size: 2.8rem;
+  font-size: 1.8rem;
   font-style: italic;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -188,13 +188,13 @@ button {
   overflow: hidden;
   display: flex;
   white-space: nowrap;
-  padding: 1.2rem 0;
+  padding: 0.6rem 0;
   z-index: 1001;
 }
 
 .announcement-bar__marquee {
   display: flex;
-  animation: marquee 25s linear infinite;
+  animation: marquee 45s linear infinite;
   width: max-content;
 }
 
@@ -210,9 +210,9 @@ button {
 }
 
 .announcement-bar__message {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
 }
 
