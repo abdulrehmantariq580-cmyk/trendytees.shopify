@@ -6,9 +6,14 @@
           {% case block.type %}
             {% when 'text' %}
               <div class="footer-block__details">
-                {% if block.settings.heading != blank %}
-                  <h3 class="footer-block__heading">{{ block.settings.heading | escape }}</h3>
-                {% endif %}
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                  {% if block.settings.logo != blank %}
+                    {{ block.settings.logo | image_url: width: 100 | image_tag: alt: block.settings.heading, style: "width: 50px; height: 50px; object-fit: contain;" }}
+                  {% endif %}
+                  {% if block.settings.heading != blank %}
+                    <h3 class="footer-block__heading" style="margin-bottom: 0;">{{ block.settings.heading | escape }}</h3>
+                  {% endif %}
+                </div>
                 <div class="footer-block__text rte">
                   {{ block.settings.text }}
                 </div>
@@ -114,6 +119,11 @@
       "type": "text",
       "name": "Text",
       "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo Image"
+        },
         {
           "type": "text",
           "id": "heading",
