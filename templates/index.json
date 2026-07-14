@@ -26,7 +26,39 @@
       "type": "category-slider",
       "settings": {
         "title": "Shop by Category"
-      }
+      },
+      "blocks": {
+        "block_1": {
+          "type": "collection",
+          "settings": {
+            "title": "T-Shirts"
+          }
+        },
+        "block_2": {
+          "type": "collection",
+          "settings": {
+            "title": "Hoodies"
+          }
+        },
+        "block_3": {
+          "type": "collection",
+          "settings": {
+            "title": "Accessories"
+          }
+        },
+        "block_4": {
+          "type": "collection",
+          "settings": {
+            "title": "New Arrivals"
+          }
+        }
+      },
+      "block_order": [
+        "block_1",
+        "block_2",
+        "block_3",
+        "block_4"
+      ]
     }
   },
   "order": [
