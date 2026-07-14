@@ -19,9 +19,13 @@
 
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
 
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
+
+    {% # Global JS %}
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
 
     {{ content_for_header }}
   </head>

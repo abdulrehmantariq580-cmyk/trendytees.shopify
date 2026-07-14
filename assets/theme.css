@@ -1,0 +1,73 @@
+/* ============================================================================
+   Theme CSS Foundation - Trendy Tees
+   ============================================================================ */
+
+/* CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px for easier math */
+}
+
+body {
+  font-size: 1.6rem; /* 16px */
+  font-family: var(--font-primary--family);
+  font-weight: var(--font-primary--weight);
+  font-style: var(--font-primary--style);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Utility Classes */
+.page-width {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0 var(--page-margin);
+}
+
+.text-primary-accent {
+  color: var(--color-primary-accent);
+}
+
+.bg-primary-accent {
+  background-color: var(--color-primary-accent);
+  color: var(--color-background);
+}
