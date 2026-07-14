@@ -12,11 +12,14 @@
     "hero_banner": {
       "type": "hero-banner",
       "settings": {
+        "video": "shopify://files/videos/A_cinematic_high_quality_slow_gwr_video_mvp.mp4",
+        "overlay_opacity": 40,
         "text_alignment": "center",
         "subheading": "Latest Drop",
         "heading": "Streetwear Evolution",
+        "text": "<p>Discover the new era of fashion with our exclusive collection. Bold designs, premium quality.</p>",
         "button_label": "Shop the Drop",
-        "button_link": "shopify:\/\/collections\/all"
+        "button_link": "shopify://collections/all"
       }
     }
   },
