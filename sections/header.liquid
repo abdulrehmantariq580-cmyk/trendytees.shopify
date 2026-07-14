@@ -4,7 +4,7 @@
     <div class="site-header__logo">
       <a href="{{ routes.root_url }}" class="site-header__logo-link" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit;">
         {% if section.settings.logo != blank %}
-          {{ section.settings.logo | image_url: width: 80 | image_tag: alt: shop.name }}
+          {{ section.settings.logo | image_url: width: 150 | image_tag: alt: shop.name, class: 'header-logo-circle' }}
         {% endif %}
         <span>{{ shop.name }}</span>
       </a>

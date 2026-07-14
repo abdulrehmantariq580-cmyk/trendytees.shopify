@@ -94,9 +94,12 @@ button {
   justify-content: space-between;
 }
 
-.site-header__logo img {
-  max-height: 40px;
-  width: auto;
+.site-header__logo img, .header-logo-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  object-fit: cover;
 }
 
 .site-header__logo span {
