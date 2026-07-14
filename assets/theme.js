@@ -92,4 +92,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // --- Footer Stagger Animation ---
+  if (typeof gsap !== 'undefined') {
+    gsap.from('.footer-block', {
+      scrollTrigger: {
+        trigger: '.site-footer',
+        start: 'top 85%',
+      },
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: 'power3.out'
+    });
+  }
 });

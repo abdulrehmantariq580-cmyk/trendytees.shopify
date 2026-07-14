@@ -1,57 +1,204 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
-  </div>
+<footer class="site-footer">
+  <div class="page-width">
+    <div class="footer__content">
+      {% for block in section.blocks %}
+        <div class="footer-block" {{ block.shopify_attributes }}>
+          {% case block.type %}
+            {% when 'text' %}
+              <div class="footer-block__details">
+                {% if block.settings.heading != blank %}
+                  <h3 class="footer-block__heading">{{ block.settings.heading | escape }}</h3>
+                {% endif %}
+                <div class="footer-block__text rte">
+                  {{ block.settings.text }}
+                </div>
+              </div>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+            {% when 'link_list' %}
+              <div class="footer-block__links">
+                {% if block.settings.heading != blank %}
+                  <h3 class="footer-block__heading">{{ block.settings.heading | escape }}</h3>
+                {% endif %}
+                {% if block.settings.menu != blank %}
+                  <ul class="footer-block__menu">
+                    {% for link in block.settings.menu.links %}
+                      <li>
+                        <a href="{{ link.url }}" class="footer-block__menu-link">
+                          {{ link.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
 
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
+            {% when 'newsletter' %}
+              <div class="footer-block__newsletter">
+                {% if block.settings.heading != blank %}
+                  <h3 class="footer-block__heading">{{ block.settings.heading | escape }}</h3>
+                {% endif %}
+                <div class="footer-block__text rte">
+                  {{ block.settings.text }}
+                </div>
+                {% form 'customer', class: 'footer-newsletter-form' %}
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <div class="newsletter-form__field-wrapper">
+                    <input
+                      id="NewsletterForm--{{ section.id }}"
+                      type="email"
+                      name="contact[email]"
+                      class="newsletter-form__input"
+                      value="{{ form.email }}"
+                      aria-required="true"
+                      autocorrect="off"
+                      autocapitalize="off"
+                      autocomplete="email"
+                      {% if form.errors %}
+                        autofocus
+                        aria-invalid="true"
+                        aria-describedby="Newsletter-error--{{ section.id }}"
+                      {% elsif form.posted_successfully? %}
+                        aria-describedby="Newsletter-success--{{ section.id }}"
+                      {% endif %}
+                      placeholder="Enter your email"
+                      required
+                    >
+                    <button type="submit" class="newsletter-form__button" name="commit" id="Subscribe" aria-label="Subscribe">
+                      Subscribe
+                    </button>
+                  </div>
+                  {%- if form.errors -%}
+                    <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">
+                      {{ form.errors.translated_fields.email | capitalize }}
+                      {{ form.errors.messages.email }}
+                    </small>
+                  {%- endif -%}
+                  {%- if form.posted_successfully? -%}
+                    <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>
+                      Thanks for subscribing!
+                    </h3>
+                  {%- endif -%}
+                {% endform %}
+              </div>
+          {% endcase %}
+        </div>
       {% endfor %}
-    {% endif %}
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__socials">
+        {% if settings.social_facebook_link != blank %}
+          <a href="{{ settings.social_facebook_link }}" class="social-link" aria-label="Facebook">FB</a>
+        {% endif %}
+        {% if settings.social_instagram_link != blank %}
+          <a href="{{ settings.social_instagram_link }}" class="social-link" aria-label="Instagram">IG</a>
+        {% endif %}
+        {% if settings.social_twitter_link != blank %}
+          <a href="{{ settings.social_twitter_link }}" class="social-link" aria-label="Twitter">TW</a>
+        {% endif %}
+      </div>
+
+      <div class="footer__copyright">
+        <small>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url }}</small>
+        <small>{{ powered_by_link }}</small>
+      </div>
+
+      <div class="footer__payment">
+        {% if section.settings.show_payment_icons %}
+          <ul class="list-payment">
+            {% for type in shop.enabled_payment_types %}
+              <li class="list-payment__item">
+                {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
   </div>
 </footer>
-
-{% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  footer .footer__links,
-  footer .footer__payment {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
 
 {% schema %}
 {
   "name": "t:general.footer",
+  "max_blocks": 4,
   "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
-    },
     {
       "type": "checkbox",
       "id": "show_payment_icons",
       "label": "t:labels.show_payment_icons",
       "default": true
     }
-  ]
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "About Us",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Share store details, promotions, or brand content with your customers.</p>",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "link_list",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Quick links",
+          "label": "Heading"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "default": "footer",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Subscribe to our emails",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>A short sentence describing what someone will receive by subscribing</p>",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "text"
+      },
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "newsletter"
+      }
+    ]
+  }
 }
 {% endschema %}
