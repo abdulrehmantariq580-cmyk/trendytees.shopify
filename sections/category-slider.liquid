@@ -3,9 +3,10 @@
     {%- if section.settings.title != blank -%}
       <h2 class="category-slider__title" data-animate-text>{{ section.settings.title }}</h2>
     {%- endif -%}
+  </div>
     
-    <div class="category-slider__marquee-container">
-      <div class="category-slider__marquee">
+  <div class="category-slider__marquee-container">
+    <div class="category-slider__marquee">
         <!-- Original Track -->
         <div class="category-slider__track">
           {%- for block in section.blocks -%}
@@ -57,7 +58,6 @@
         </div>
       </div>
     </div>
-  </div>
 </section>
 
 {%- style -%}
@@ -79,9 +79,7 @@
 
   .category-slider__marquee-container {
     position: relative;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
+    width: 100%;
     overflow: hidden;
     padding: 2rem 0;
   }
