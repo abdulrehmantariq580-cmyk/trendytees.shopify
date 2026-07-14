@@ -78,14 +78,14 @@ button {
   background-color: #000000;
   color: #ffffff;
   transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
-  padding: 2rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .site-header.is-scrolled {
   background-color: #000000;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  padding: 1.5rem 0;
+  padding: 0.5rem 0;
 }
 
 .site-header__inner {
@@ -194,8 +194,8 @@ button {
 
 .announcement-bar__marquee {
   display: flex;
-  animation: marquee 15s linear infinite;
-  width: 200%; /* Enough width for the duplicated content to scroll */
+  animation: marquee 25s linear infinite;
+  width: max-content;
 }
 
 .announcement-bar__marquee:hover {
@@ -205,8 +205,8 @@ button {
 .announcement-bar__content {
   display: flex;
   align-items: center;
-  width: 50%; /* Half the width of marquee container */
-  justify-content: space-around;
+  flex-shrink: 0;
+  padding-right: 3rem;
 }
 
 .announcement-bar__message {
