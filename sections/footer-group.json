@@ -13,8 +13,35 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "heading": "TRENDY TEES",
+            "text": "<p>Discover the finest premium t-shirts crafted for comfort and modern style. Stand out from the crowd.</p>"
+          }
+        },
+        "menu": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick Links",
+            "menu": "main-menu"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Subscribe & Save",
+            "text": "<p>Sign up to get 10% off your first order and exclusive updates.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text",
+        "menu",
+        "newsletter"
+      ],
       "settings": {
-        "menu": "",
         "show_payment_icons": true
       }
     }
