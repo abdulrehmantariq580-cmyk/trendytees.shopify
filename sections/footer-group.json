@@ -28,18 +28,20 @@
             "menu": "main-menu"
           }
         },
-        "newsletter": {
-          "type": "newsletter",
+        "contact": {
+          "type": "contact",
           "settings": {
-            "heading": "Subscribe & Save",
-            "text": "<p>Sign up to get 10% off your first order and exclusive updates.</p>"
+            "heading": "Contact Us",
+            "address": "123 Trendy Street, Fashion City",
+            "email": "hello@trendytees.com",
+            "phone": "+1 (555) 123-4567"
           }
         }
       },
       "block_order": [
         "text",
         "menu",
-        "newsletter"
+        "contact"
       ],
       "settings": {
         "show_payment_icons": true

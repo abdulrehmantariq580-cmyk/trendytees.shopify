@@ -32,53 +32,33 @@
                 {% endif %}
               </div>
 
-            {% when 'newsletter' %}
-              <div class="footer-block__newsletter">
+            {% when 'contact' %}
+              <div class="footer-block__contact">
                 {% if block.settings.heading != blank %}
                   <h3 class="footer-block__heading">{{ block.settings.heading | escape }}</h3>
                 {% endif %}
-                <div class="footer-block__text rte">
-                  {{ block.settings.text }}
+                <ul class="contact-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem;">
+                  {% if block.settings.address != blank %}
+                    <li><strong>Location:</strong> {{ block.settings.address }}</li>
+                  {% endif %}
+                  {% if block.settings.email != blank %}
+                    <li><strong>Email:</strong> <a href="mailto:{{ block.settings.email }}" style="color: inherit; text-decoration: none;">{{ block.settings.email }}</a></li>
+                  {% endif %}
+                  {% if block.settings.phone != blank %}
+                    <li><strong>Phone:</strong> <a href="tel:{{ block.settings.phone }}" style="color: inherit; text-decoration: none;">{{ block.settings.phone }}</a></li>
+                  {% endif %}
+                </ul>
+                <div class="footer-block__socials" style="margin-top: 1.5rem;">
+                  {% if settings.social_facebook_link != blank %}
+                    <a href="{{ settings.social_facebook_link }}" class="social-link" aria-label="Facebook">FB</a>
+                  {% endif %}
+                  {% if settings.social_instagram_link != blank %}
+                    <a href="{{ settings.social_instagram_link }}" class="social-link" aria-label="Instagram">IG</a>
+                  {% endif %}
+                  {% if settings.social_twitter_link != blank %}
+                    <a href="{{ settings.social_twitter_link }}" class="social-link" aria-label="Twitter">TW</a>
+                  {% endif %}
                 </div>
-                {% form 'customer', class: 'footer-newsletter-form' %}
-                  <input type="hidden" name="contact[tags]" value="newsletter">
-                  <div class="newsletter-form__field-wrapper">
-                    <input
-                      id="NewsletterForm--{{ section.id }}"
-                      type="email"
-                      name="contact[email]"
-                      class="newsletter-form__input"
-                      value="{{ form.email }}"
-                      aria-required="true"
-                      autocorrect="off"
-                      autocapitalize="off"
-                      autocomplete="email"
-                      {% if form.errors %}
-                        autofocus
-                        aria-invalid="true"
-                        aria-describedby="Newsletter-error--{{ section.id }}"
-                      {% elsif form.posted_successfully? %}
-                        aria-describedby="Newsletter-success--{{ section.id }}"
-                      {% endif %}
-                      placeholder="Enter your email"
-                      required
-                    >
-                    <button type="submit" class="newsletter-form__button" name="commit" id="Subscribe" aria-label="Subscribe">
-                      Subscribe
-                    </button>
-                  </div>
-                  {%- if form.errors -%}
-                    <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">
-                      {{ form.errors.translated_fields.email | capitalize }}
-                      {{ form.errors.messages.email }}
-                    </small>
-                  {%- endif -%}
-                  {%- if form.posted_successfully? -%}
-                    <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>
-                      Thanks for subscribing!
-                    </h3>
-                  {%- endif -%}
-                {% endform %}
               </div>
           {% endcase %}
         </div>
@@ -167,21 +147,33 @@
       ]
     },
     {
-      "type": "newsletter",
-      "name": "Newsletter",
+      "type": "contact",
+      "name": "Contact Details",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "default": "Subscribe to our emails",
+          "default": "Contact Us",
           "label": "Heading"
         },
         {
-          "type": "richtext",
-          "id": "text",
-          "default": "<p>A short sentence describing what someone will receive by subscribing</p>",
-          "label": "Text"
+          "type": "text",
+          "id": "address",
+          "default": "123 Trendy Street, Fashion City",
+          "label": "Address"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "default": "hello@trendytees.com",
+          "label": "Email Address"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "default": "+1 (555) 123-4567",
+          "label": "Phone Number"
         }
       ]
     }
@@ -195,7 +187,7 @@
         "type": "link_list"
       },
       {
-        "type": "newsletter"
+        "type": "contact"
       }
     ]
   }
