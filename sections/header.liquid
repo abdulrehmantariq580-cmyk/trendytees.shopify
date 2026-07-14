@@ -11,12 +11,20 @@
       </button>
 
       <div class="site-header__logo">
-        <a href="{{ routes.root_url }}" class="site-header__logo-link" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit;">
+        <a href="{{ routes.root_url }}" class="site-header__logo-link">
           {% if section.settings.logo != blank %}
-            {{ section.settings.logo | image_url: width: 150 | image_tag: alt: shop.name, class: 'header-logo-circle' }}
-          {% endif %}
-          <span>{{ shop.name }}</span>
-        </a>
+          {{ section.settings.logo | image_url: width: 150 | image_tag: alt: shop.name, class: 'header-logo-circle' }}
+        {% endif %}
+        <span class="site-header__logo-text">
+          <span class="desktop-only">{{ shop.name }}</span>
+          <span class="mobile-only" style="line-height: 1;">
+            {% assign words = shop.name | split: ' ' %}
+            {% for word in words %}
+              {{ word }}<br>
+            {% endfor %}
+          </span>
+        </span>
+      </a>
       </div>
     </div>
 

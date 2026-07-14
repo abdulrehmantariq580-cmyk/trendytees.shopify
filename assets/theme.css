@@ -102,6 +102,14 @@ button {
   object-fit: cover;
 }
 
+.site-header__logo-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+
 .site-header__logo span {
   margin: 0;
   font-weight: 900;
@@ -456,5 +464,33 @@ button {
   }
   .mobile-only {
     display: block;
+  }
+  .site-header__logo-link {
+    gap: 0.5rem;
+  }
+  .site-header__logo span {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+  .site-header__logo img, .header-logo-circle {
+    width: 38px;
+    height: 38px;
+  }
+  .site-header__left {
+    gap: 0.5rem;
+  }
+  .site-header__icons {
+    gap: 1rem;
+  }
+  .site-header__icon {
+    width: 24px;
+    height: 24px;
+  }
+  .site-header__cart-count {
+    font-size: 0.8rem;
+    width: 16px;
+    height: 16px;
+    top: -5px;
+    right: -8px;
   }
 }
