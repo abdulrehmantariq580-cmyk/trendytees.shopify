@@ -4,27 +4,57 @@
       <h2 class="category-slider__title" data-animate-text>{{ section.settings.title }}</h2>
     {%- endif -%}
     
-    <div class="category-slider__container">
-      <div class="category-slider__track" id="SliderTrack-{{ section.id }}">
-        {%- for block in section.blocks -%}
-          {%- assign collection = collections[block.settings.collection] -%}
-          <a href="{{ collection.url | default: '#' }}" class="category-slider__item" {{ block.shopify_attributes }}>
-            <div class="category-slider__image-wrapper">
-              {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'category-slider__image' }}
-              {%- elsif collection.image != blank -%}
-                {{ collection.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'category-slider__image' }}
-              {%- else -%}
-                <div class="category-slider__placeholder">
-                  {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+    <div class="category-slider__marquee-container">
+      <div class="category-slider__marquee">
+        <!-- Original Track -->
+        <div class="category-slider__track">
+          {%- for block in section.blocks -%}
+            {%- assign collection = collections[block.settings.collection] -%}
+            <a href="{{ collection.url | default: '#' }}" class="category-slider__item" {{ block.shopify_attributes }}>
+              <div class="category-slider__image-wrapper">
+                <div class="category-slider__image-inner">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'category-slider__image' }}
+                  {%- elsif collection.image != blank -%}
+                    {{ collection.image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'category-slider__image' }}
+                  {%- else -%}
+                    <div class="category-slider__placeholder">
+                      {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                  {%- endif -%}
                 </div>
-              {%- endif -%}
-            </div>
-            <h3 class="category-slider__item-title">
-              {{ block.settings.title | default: collection.title | default: 'Category Name' }}
-            </h3>
-          </a>
-        {%- endfor -%}
+              </div>
+              <h3 class="category-slider__item-title">
+                {{ block.settings.title | default: collection.title | default: 'Category Name' }}
+              </h3>
+            </a>
+          {%- endfor -%}
+        </div>
+        
+        <!-- Duplicated Track for Infinite Loop -->
+        <div class="category-slider__track" aria-hidden="true">
+          {%- for block in section.blocks -%}
+            {%- assign collection = collections[block.settings.collection] -%}
+            <a href="{{ collection.url | default: '#' }}" class="category-slider__item">
+              <div class="category-slider__image-wrapper">
+                <div class="category-slider__image-inner">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'category-slider__image' }}
+                  {%- elsif collection.image != blank -%}
+                    {{ collection.image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'category-slider__image' }}
+                  {%- else -%}
+                    <div class="category-slider__placeholder">
+                      {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+              <h3 class="category-slider__item-title">
+                {{ block.settings.title | default: collection.title | default: 'Category Name' }}
+              </h3>
+            </a>
+          {%- endfor -%}
+        </div>
       </div>
     </div>
   </div>
@@ -32,7 +62,7 @@
 
 {%- style -%}
   #CategorySlider-{{ section.id }} {
-    padding: 5rem 0;
+    padding: 6rem 0;
     background-color: var(--color-background);
     overflow: hidden;
   }
@@ -43,134 +73,128 @@
     text-transform: uppercase;
     font-style: italic;
     font-weight: 900;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    letter-spacing: 2px;
   }
 
-  .category-slider__container {
+  .category-slider__marquee-container {
     position: relative;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
-    cursor: grab;
+    overflow: hidden;
+    padding: 2rem 0;
   }
 
-  .category-slider__container:active {
-    cursor: grabbing;
+  .category-slider__marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 25s linear infinite;
+  }
+
+  .category-slider__marquee:hover {
+    animation-play-state: paused;
   }
 
   .category-slider__track {
     display: flex;
-    gap: 2rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: 0 calc(50vw - 50% + var(--page-margin, 2rem));
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    gap: 4rem;
+    padding-right: 4rem; /* Space before duplicate starts */
   }
 
-  .category-slider__track::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
   .category-slider__item {
-    flex: 0 0 75vw;
-    scroll-snap-align: center;
     text-decoration: none;
     color: inherit;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  @media screen and (min-width: 768px) {
-    .category-slider__item {
-      flex: 0 0 calc(33.333% - 1.33rem);
-      scroll-snap-align: start;
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    .category-slider__item {
-      flex: 0 0 calc(25% - 1.5rem);
-    }
-  }
-
-  .category-slider__item:hover {
-    transform: translateY(-10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    perspective: 1200px; /* For 3D effect */
   }
 
   .category-slider__image-wrapper {
-    position: relative;
+    width: clamp(160px, 25vw, 240px);
+    height: clamp(160px, 25vw, 240px);
+    border-radius: 50%;
+    padding: 10px; /* Border gap */
+    background: linear-gradient(135deg, var(--color-primary-accent, #ffcc00), transparent);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.05);
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
+    transform-style: preserve-3d;
+  }
+
+  .category-slider__image-inner {
     width: 100%;
-    padding-top: 120%; /* Portrait aspect ratio */
-    border-radius: 8px;
+    height: 100%;
+    border-radius: 50%;
     overflow: hidden;
-    background-color: #111;
-    margin-bottom: 1.5rem;
+    background-color: #000;
+    position: relative;
+    transform-style: preserve-3d;
   }
 
   .category-slider__image,
   .category-slider__placeholder svg {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.8s ease;
   }
 
   .category-slider__placeholder svg {
-    fill: #333;
-    background-color: #222;
+    fill: #444;
+    background-color: #111;
+  }
+
+  /* 3D Hover Effects */
+  .category-slider__item:hover .category-slider__image-wrapper {
+    transform: rotateY(20deg) rotateX(15deg) scale(1.08) translateZ(30px);
+    box-shadow: -20px 30px 50px rgba(0,0,0,0.6), inset 0 0 15px var(--color-primary-accent);
+    border-color: var(--color-primary-accent);
   }
 
   .category-slider__item:hover .category-slider__image {
-    transform: scale(1.05);
+    transform: scale(1.15) translateZ(20px);
   }
 
   .category-slider__item-title {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     text-align: center;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .category-slider__item:hover .category-slider__item-title {
+    color: var(--color-primary-accent);
+    transform: translateY(5px);
+  }
+
+  @media screen and (max-width: 768px) {
+    .category-slider__track {
+      gap: 2rem;
+      padding-right: 2rem;
+    }
+    .category-slider__image-wrapper {
+      width: 140px;
+      height: 140px;
+      padding: 6px;
+    }
+    .category-slider__item-title {
+      font-size: 1rem;
+    }
   }
 {%- endstyle -%}
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const track = document.getElementById('SliderTrack-{{ section.id }}');
-    if (!track) return;
-
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    track.addEventListener('mousedown', (e) => {
-      isDown = true;
-      track.style.scrollSnapType = 'none'; // Disable snap while dragging
-      startX = e.pageX - track.offsetLeft;
-      scrollLeft = track.scrollLeft;
-    });
-
-    track.addEventListener('mouseleave', () => {
-      isDown = false;
-      track.style.scrollSnapType = 'x mandatory';
-    });
-
-    track.addEventListener('mouseup', () => {
-      isDown = false;
-      track.style.scrollSnapType = 'x mandatory';
-    });
-
-    track.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - track.offsetLeft;
-      const walk = (x - startX) * 2; // Scroll speed multiplier
-      track.scrollLeft = scrollLeft - walk;
-    });
-
     // GSAP text animation for title if available
     setTimeout(() => {
       if (typeof window.animateTextReveal === 'function') {
