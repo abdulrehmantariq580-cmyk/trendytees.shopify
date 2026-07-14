@@ -11,12 +11,7 @@
   padding: 0;
 }
 
-html {
-  font-size: 62.5%; /* 1rem = 10px for easier math */
-}
-
 body {
-  font-size: 1.6rem; /* 16px */
   font-family: var(--font-primary--family);
   font-weight: var(--font-primary--weight);
   font-style: var(--font-primary--style);
