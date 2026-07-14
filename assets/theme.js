@@ -31,31 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Lenis Smooth Scroll Initialized');
   }
 
-  // --- Custom Cursor Logic ---
-  const cursorTshirt = document.querySelector('.cursor-tshirt');
-  
-  if (cursorTshirt && typeof gsap !== 'undefined') {
-    gsap.set(cursorTshirt, {xPercent: -50, yPercent: -50});
-    
-    const xTo = gsap.quickTo(cursorTshirt, "x", {duration: 0.1, ease: "power3"});
-    const yTo = gsap.quickTo(cursorTshirt, "y", {duration: 0.1, ease: "power3"});
 
-    window.addEventListener("mousemove", (e) => {
-      xTo(e.clientX);
-      yTo(e.clientY);
-    });
-
-    document.body.addEventListener("mouseover", (e) => {
-      if(e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button' || e.target.closest('a') || e.target.closest('button')){
-         cursorTshirt.classList.add('hover');
-      }
-    });
-    document.body.addEventListener("mouseout", (e) => {
-      if(e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button' || e.target.closest('a') || e.target.closest('button')){
-         cursorTshirt.classList.remove('hover');
-      }
-    });
-  }
 
   // Register GSAP ScrollTrigger if GSAP is available
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
