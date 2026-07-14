@@ -31,6 +31,7 @@
   </head>
 
   <body>
+    <div class="custom-cursor"></div>
     {% sections 'header-group' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
@@ -39,9 +40,10 @@
 
     {% sections 'footer-group' %}
 
-    {% comment %} GSAP Animation Engine {% endcomment %}
+    {% comment %} GSAP Animation Engine & Smooth Scrolling {% endcomment %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="https://unpkg.com/split-type" defer></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js" defer></script>
   </body>
 </html>
