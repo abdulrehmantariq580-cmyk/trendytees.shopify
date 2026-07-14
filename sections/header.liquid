@@ -1,23 +1,58 @@
 <header class="site-header full-width">
   <div class="page-width site-header__inner">
     
-    <div class="site-header__logo">
-      <a href="{{ routes.root_url }}" class="site-header__logo-link" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit;">
-        {% if section.settings.logo != blank %}
-          {{ section.settings.logo | image_url: width: 150 | image_tag: alt: shop.name, class: 'header-logo-circle' }}
-        {% endif %}
-        <span>{{ shop.name }}</span>
-      </a>
+    <div class="site-header__left">
+      <button type="button" class="site-header__menu-toggle mobile-only" aria-controls="MobileMenu" aria-expanded="false" aria-label="Toggle menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="site-header__logo">
+        <a href="{{ routes.root_url }}" class="site-header__logo-link" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit;">
+          {% if section.settings.logo != blank %}
+            {{ section.settings.logo | image_url: width: 150 | image_tag: alt: shop.name, class: 'header-logo-circle' }}
+          {% endif %}
+          <span>{{ shop.name }}</span>
+        </a>
+      </div>
     </div>
 
-    <nav class="site-header__menu">
+    <nav class="site-header__menu desktop-only">
       <ul class="site-header__menu-list">
         {% for link in section.settings.menu.links %}
-          <li>
-            <a href="{{ link.url }}" class="site-header__menu-link {% if link.active %}site-header__menu-link--active{% endif %}">
-              {{ link.title }}
-            </a>
-          </li>
+          {% if link.links != blank %}
+            <li class="site-header__menu-item has-dropdown">
+              <a href="{{ link.url }}" class="site-header__menu-link {% if link.active %}site-header__menu-link--active{% endif %}">
+                {{ link.title }}
+                <svg viewBox="0 0 24 24" class="icon-caret" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" style="display:inline-block; vertical-align:middle; margin-left:4px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </a>
+              <div class="site-header__mega-menu">
+                <div class="page-width site-header__mega-menu-inner">
+                  {% for childlink in link.links %}
+                    <div class="mega-menu__column">
+                      <a href="{{ childlink.url }}" class="mega-menu__title">{{ childlink.title }}</a>
+                      {% if childlink.links != blank %}
+                        <ul class="mega-menu__list">
+                          {% for grandchildlink in childlink.links %}
+                            <li><a href="{{ grandchildlink.url }}" class="mega-menu__link">{{ grandchildlink.title }}</a></li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </li>
+          {% else %}
+            <li class="site-header__menu-item">
+              <a href="{{ link.url }}" class="site-header__menu-link {% if link.active %}site-header__menu-link--active{% endif %}">
+                {{ link.title }}
+              </a>
+            </li>
+          {% endif %}
         {% endfor %}
       </ul>
     </nav>
@@ -44,6 +79,54 @@
       </a>
     </div>
 
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div id="MobileMenu" class="mobile-drawer" aria-hidden="true">
+    <div class="mobile-drawer__overlay" data-drawer-close></div>
+    <div class="mobile-drawer__inner">
+      <div class="mobile-drawer__header">
+        <span class="mobile-drawer__title">{{ shop.name }}</span>
+        <button type="button" class="mobile-drawer__close" data-drawer-close aria-label="Close menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="mobile-drawer__content">
+        <ul class="mobile-nav">
+          {% for link in section.settings.menu.links %}
+            <li class="mobile-nav__item">
+              {% if link.links != blank %}
+                <details class="mobile-nav__details">
+                  <summary class="mobile-nav__summary">
+                    {{ link.title }}
+                    <svg viewBox="0 0 24 24" class="icon-caret" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </summary>
+                  <ul class="mobile-nav__sublist">
+                    {% for childlink in link.links %}
+                      <li class="mobile-nav__subitem">
+                        <a href="{{ childlink.url }}" class="mobile-nav__sublink">{{ childlink.title }}</a>
+                        {% if childlink.links != blank %}
+                          <ul class="mobile-nav__grandsublist">
+                            {% for grandchildlink in childlink.links %}
+                              <li><a href="{{ grandchildlink.url }}" class="mobile-nav__grandsublink">{{ grandchildlink.title }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </details>
+              {% else %}
+                <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
   </div>
 </header>
 

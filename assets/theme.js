@@ -73,4 +73,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   };
+
+  // --- Mobile Drawer Logic ---
+  const menuToggle = document.querySelector('.site-header__menu-toggle');
+  const mobileMenu = document.getElementById('MobileMenu');
+  const drawerClosers = document.querySelectorAll('[data-drawer-close]');
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    });
+
+    drawerClosers.forEach(closer => {
+      closer.addEventListener('click', () => {
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+  }
 });
