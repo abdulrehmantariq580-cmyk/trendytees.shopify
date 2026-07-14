@@ -74,7 +74,7 @@ button {
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 1002;
   background-color: #000000;
   color: #ffffff;
   transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
@@ -377,11 +377,15 @@ button {
 }
 
 .mobile-drawer__title {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   font-weight: 900;
   font-style: italic;
   color: #fff;
   text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 1rem;
 }
 
 .mobile-drawer__close {
@@ -392,6 +396,7 @@ button {
   padding: 0;
   width: 24px;
   height: 24px;
+  flex-shrink: 0;
 }
 
 .mobile-drawer__close svg {
