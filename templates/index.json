@@ -67,10 +67,19 @@
       "settings": {
         "title": "Shop by Category"
       }
+    },
+    "featured_products": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Trending Tees",
+        "products_to_show": 4,
+        "columns_desktop": 4
+      }
     }
   },
   "order": [
     "hero_banner",
-    "category_slider"
+    "category_slider",
+    "featured_products"
   ]
 }

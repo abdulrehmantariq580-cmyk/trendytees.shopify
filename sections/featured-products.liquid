@@ -1,0 +1,150 @@
+<section class="featured-products" id="FeaturedProducts-{{ section.id }}">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <div class="featured-products__header">
+        <h2 class="featured-products__title" data-animate-text>{{ section.settings.title }}</h2>
+        {%- if section.settings.show_view_all -%}
+          <a href="{{ collections[section.settings.collection].url }}" class="featured-products__view-all">View All</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="product-grid">
+      {%- assign collection = collections[section.settings.collection] -%}
+      {%- if collection != blank and collection.products_count > 0 -%}
+        {%- for product in collection.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..section.settings.products_to_show) -%}
+          <div class="product-card">
+            <div class="product-card__image-wrapper">
+              {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg product-card__image' }}
+            </div>
+            <div class="product-card__info">
+              <h3 class="product-card__title">Example T-Shirt</h3>
+              <p class="product-card__price">$29.99</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- style -%}
+  #FeaturedProducts-{{ section.id }} {
+    padding: 6rem 0;
+    background-color: var(--color-background);
+  }
+
+  .featured-products__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    padding-bottom: 1.5rem;
+  }
+
+  .featured-products__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    font-style: italic;
+    font-weight: 900;
+    margin: 0;
+  }
+
+  .featured-products__view-all {
+    color: var(--color-primary-accent, #ffcc00);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+  }
+
+  .featured-products__view-all:hover {
+    color: #fff;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .product-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+      gap: 2.5rem;
+    }
+  }
+{%- endstyle -%}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // GSAP text animation for title if available
+    setTimeout(() => {
+      if (typeof window.animateTextReveal === 'function') {
+        window.animateTextReveal('#FeaturedProducts-{{ section.id }} [data-animate-text]');
+      }
+    }, 200);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Trending Tees"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 2,
+      "default": 4,
+      "label": "Maximum products to show"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4,
+      "label": "Number of columns on desktop"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "default": true,
+      "label": "Enable \"View all\" button if collection has more products than shown"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}
