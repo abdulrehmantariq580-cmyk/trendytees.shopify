@@ -24,31 +24,36 @@
     },
     "category_slider": {
       "type": "category-slider",
-      "settings": {
-        "title": "Shop by Category"
-      },
       "blocks": {
         "block_1": {
           "type": "collection",
           "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/a-premium-flat-lay-product-photography-of-a-stylish-black-short-sleeve-t-shirt-featuring-a-bold-colorful-modern-streetwear-graphic-design-on-the-front-the-t-shirt-is-perfectly-centere.png",
             "title": "Graphic Tees"
           }
         },
         "block_2": {
           "type": "collection",
           "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/prompt-a-premium-flat-lay-product-photography-of-a-trendy-loose-fitting-dropped-shoulder-oversized-t-shirt-in-a-muted-earth-tone-like-sage-green-or-sand-the-t-shirt-is-perfectly-cente.png",
             "title": "Oversized Tees"
           }
         },
         "block_3": {
           "type": "collection",
           "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/a-premium-flat-lay-product-photography-of-a-faded-acid-wash-charcoal-grey-t-shirt-with-a-retro-distressed-90s-style-typography-and-illustration-printed-on-it-the-t-shirt-is-perfectly.png",
             "title": "Vintage Tees"
           }
         },
         "block_4": {
           "type": "collection",
           "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/a-premium-flat-lay-product-photography-of-a-simple-high-quality-blank-white-or-cream-t-shirt-with-a-perfect-crew-neck-collar-the-t-shirt-is-perfectly-centered-neatly-laid-out-with-no.png",
             "title": "Basic Tees"
           }
         }
@@ -58,7 +63,10 @@
         "block_2",
         "block_3",
         "block_4"
-      ]
+      ],
+      "settings": {
+        "title": "Shop by Category"
+      }
     }
   },
   "order": [
