@@ -514,14 +514,9 @@ button {
   color: #ccc;
   padding: 6rem 0 2rem;
   margin-top: 5rem;
-}
-
-@media screen and (min-width: 990px) {
-  .site-footer {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-  }
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
 }
 
 .footer__content {
