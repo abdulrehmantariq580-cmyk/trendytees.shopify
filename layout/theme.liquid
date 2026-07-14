@@ -26,6 +26,7 @@
 
     {% # Global JS %}
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    <script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
 
     {{ content_for_header }}
   </head>
@@ -38,6 +39,8 @@
     </main>
 
     {% sections 'footer-group' %}
+
+    {% render 'cart-drawer' %}
 
     {% comment %} GSAP Animation Engine & Smooth Scrolling {% endcomment %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>

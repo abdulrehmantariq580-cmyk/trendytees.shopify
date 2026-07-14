@@ -75,16 +75,16 @@
         </a>
       {% endif %}
 
-      <a href="{{ routes.cart_url }}" class="site-header__icon site-header__cart" aria-label="Cart">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <path d="M16 10a4 4 0 0 1-8 0"></path>
-        </svg>
-        {% if cart.item_count > 0 %}
-          <span class="site-header__cart-count">{{ cart.item_count }}</span>
-        {% endif %}
-      </a>
+        <a href="{{ routes.cart_url }}" class="site-header__icon site-header__cart" id="HeaderCartIcon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20a1 1 0 100-2 1 1 0 000 2zM20 20a1 1 0 100-2 1 1 0 000 2zM1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
+          <span class="visually-hidden">Cart</span>
+          <div class="site-header__cart-count" id="HeaderCartCount">
+            {%- if cart.item_count < 100 -%}
+              <span aria-hidden="true">{{ cart.item_count }}</span>
+            {%- endif -%}
+            <span class="visually-hidden">{{ 'general.cart.items_count' | t: count: cart.item_count }}</span>
+          </div>
+        </a>
     </div>
 
   </div>

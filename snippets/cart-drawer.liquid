@@ -1,0 +1,63 @@
+<div id="CartDrawer" class="cart-drawer" aria-hidden="true">
+  <div class="cart-drawer__overlay" data-drawer-close></div>
+  <div class="cart-drawer__inner">
+    <div class="cart-drawer__header">
+      <h2 class="cart-drawer__title">Your Cart (<span class="cart-drawer__count">{{ cart.item_count }}</span>)</h2>
+      <button class="cart-drawer__close" data-drawer-close aria-label="Close cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+      </button>
+    </div>
+
+    <div class="cart-drawer__body" id="CartDrawerBody">
+      {% if cart.item_count > 0 %}
+        {% for item in cart.items %}
+          <div class="cart-drawer__item" data-key="{{ item.key }}">
+            <div class="cart-drawer__item-image">
+              <a href="{{ item.url }}">
+                {% if item.image %}
+                  <img src="{{ item.image | image_url: width: 100 }}" alt="{{ item.title | escape }}">
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </a>
+            </div>
+            <div class="cart-drawer__item-details">
+              <a href="{{ item.url }}" class="cart-drawer__item-title">{{ item.product.title }}</a>
+              {% unless item.product.has_only_default_variant %}
+                <p class="cart-drawer__item-variant">{{ item.variant.title }}</p>
+              {% endunless %}
+              <div class="cart-drawer__item-price">{{ item.final_price | money }}</div>
+              
+              <div class="cart-drawer__item-qty">
+                <button class="qty-btn" type="button" data-action="minus" data-key="{{ item.key }}">-</button>
+                <input class="qty-input" type="number" value="{{ item.quantity }}" min="0" data-key="{{ item.key }}" readonly>
+                <button class="qty-btn" type="button" data-action="plus" data-key="{{ item.key }}">+</button>
+              </div>
+              
+              <a href="{{ item.url_to_remove }}" class="cart-drawer__item-remove" data-key="{{ item.key }}">Remove</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="cart-drawer__empty">
+          <p>Your cart is currently empty.</p>
+          <a href="{{ routes.all_products_collection_url }}" class="button button--primary" data-drawer-close>Continue Shopping</a>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__subtotal">
+        <span>Subtotal</span>
+        <span class="cart-drawer__subtotal-price">{{ cart.total_price | money }}</span>
+      </div>
+      <p class="cart-drawer__tax-note">Taxes and shipping calculated at checkout</p>
+      
+      <form action="{{ routes.cart_url }}" method="post" id="CartDrawerForm">
+        <button type="submit" name="checkout" class="button button--primary button--full-width cart-drawer__checkout">
+          Checkout
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
