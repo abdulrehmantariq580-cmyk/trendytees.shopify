@@ -32,26 +32,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Custom Cursor Logic ---
-  const cursor = document.querySelector('.custom-cursor');
-  if (cursor && typeof gsap !== 'undefined') {
-    gsap.set(cursor, {xPercent: -50, yPercent: -50});
+  const cursorDot = document.querySelector('.cursor-dot');
+  const cursorOutline = document.querySelector('.cursor-outline');
+  
+  if (cursorDot && cursorOutline && typeof gsap !== 'undefined') {
+    gsap.set(cursorDot, {xPercent: -50, yPercent: -50});
+    gsap.set(cursorOutline, {xPercent: -50, yPercent: -50});
     
-    const xTo = gsap.quickTo(cursor, "x", {duration: 0.2, ease: "power3"});
-    const yTo = gsap.quickTo(cursor, "y", {duration: 0.2, ease: "power3"});
+    const xToDot = gsap.quickTo(cursorDot, "x", {duration: 0.1, ease: "power3"});
+    const yToDot = gsap.quickTo(cursorDot, "y", {duration: 0.1, ease: "power3"});
+    const xToOutline = gsap.quickTo(cursorOutline, "x", {duration: 0.6, ease: "power3.out"});
+    const yToOutline = gsap.quickTo(cursorOutline, "y", {duration: 0.6, ease: "power3.out"});
 
     window.addEventListener("mousemove", (e) => {
-      xTo(e.clientX);
-      yTo(e.clientY);
+      xToDot(e.clientX);
+      yToDot(e.clientY);
+      xToOutline(e.clientX);
+      yToOutline(e.clientY);
     });
 
     document.body.addEventListener("mouseover", (e) => {
       if(e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button' || e.target.closest('a') || e.target.closest('button')){
-         cursor.classList.add('hover');
+         cursorOutline.classList.add('hover');
       }
     });
     document.body.addEventListener("mouseout", (e) => {
       if(e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button' || e.target.closest('a') || e.target.closest('button')){
-         cursor.classList.remove('hover');
+         cursorOutline.classList.remove('hover');
       }
     });
   }

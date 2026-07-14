@@ -69,24 +69,32 @@ button {
 
 /* Custom Cursor */
 body {
-  cursor: none; /* Hide default cursor */
+  cursor: none; 
 }
-.custom-cursor {
+.cursor-dot,
+.cursor-outline {
   position: fixed;
   top: 0;
   left: 0;
-  width: 20px;
-  height: 20px;
-  background-color: var(--color-primary-accent);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
-  mix-blend-mode: exclusion;
 }
-.custom-cursor.hover {
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary-accent);
+}
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--color-primary-accent);
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+.cursor-outline.hover {
   width: 60px;
   height: 60px;
-  background-color: #ffffff;
+  background-color: rgba(212, 175, 55, 0.1); /* Slight gold tint */
+  border-color: transparent;
 }
