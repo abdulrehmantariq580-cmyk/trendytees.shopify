@@ -4,7 +4,7 @@ class CartDrawer {
     this.body = document.body;
     this.cartIcon = document.getElementById('HeaderCartIcon');
     this.closeButtons = document.querySelectorAll('[data-drawer-close]');
-    
+
     if (!this.drawer) return;
 
     this.bindEvents();
@@ -43,13 +43,13 @@ class CartDrawer {
         let qty = parseInt(input.value);
         const action = e.target.dataset.action;
         const key = e.target.dataset.key;
-        
+
         if (action === 'plus') {
           qty += 1;
         } else if (action === 'minus') {
           qty = qty > 0 ? qty - 1 : 0;
         }
-        
+
         input.value = qty;
         this.updateItem(key, qty);
       }
@@ -62,7 +62,7 @@ class CartDrawer {
       const form = e.target;
       if (form.getAttribute('action') === '/cart/add' || form.getAttribute('action') === '/cart/add.js') {
         e.preventDefault();
-        
+
         const submitButton = form.querySelector('[type="submit"]');
         if (submitButton) {
           submitButton.disabled = true;
@@ -78,24 +78,24 @@ class CartDrawer {
             'X-Requested-With': 'XMLHttpRequest'
           }
         })
-        .then(response => {
-          if (!response.ok) throw new Error('Error adding to cart');
-          return response.json();
-        })
-        .then(() => {
-          this.refreshCart();
-          this.open();
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          alert('Failed to add item to cart.');
-        })
-        .finally(() => {
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.classList.remove('loading');
-          }
-        });
+          .then(response => {
+            if (!response.ok) throw new Error('Error adding to cart');
+            return response.json();
+          })
+          .then(() => {
+            this.refreshCart();
+            this.open();
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            alert('Failed to add item to cart.');
+          })
+          .finally(() => {
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.classList.remove('loading');
+            }
+          });
       }
     });
   }
@@ -116,14 +116,14 @@ class CartDrawer {
       },
       body: body
     })
-    .then(response => response.json())
-    .then(() => {
-      this.refreshCart();
-    })
-    .catch((error) => {
-      console.error('Error updating cart:', error);
-      this.drawer.classList.remove('is-loading');
-    });
+      .then(response => response.json())
+      .then(() => {
+        this.refreshCart();
+      })
+      .catch((error) => {
+        console.error('Error updating cart:', error);
+        this.drawer.classList.remove('is-loading');
+      });
   }
 
   refreshCart() {
@@ -162,7 +162,7 @@ class CartDrawer {
         countEl.style.display = 'none';
       }
     }
-    
+
     // Update Drawer Count
     const drawerCount = this.drawer.querySelector('.cart-drawer__count');
     if (drawerCount) drawerCount.textContent = cart.item_count;
@@ -183,7 +183,7 @@ class CartDrawer {
       cart.items.forEach(item => {
         const img = item.image ? `<img src="${item.image}" alt="${item.title}">` : '';
         const variantText = item.variant_title ? `<p class="cart-drawer__item-variant">${item.variant_title}</p>` : '';
-        
+
         html += `
           <div class="cart-drawer__item" data-key="${item.key}">
             <div class="cart-drawer__item-image">

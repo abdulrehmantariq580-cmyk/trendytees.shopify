@@ -93,6 +93,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Page Transitions ---
+  setTimeout(() => {
+    document.body.classList.add('is-loaded');
+  }, 100);
+
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href]');
+    if (!link) return;
+
+    if (
+      link.target === '_blank' ||
+      link.getAttribute('href').startsWith('#') ||
+      link.getAttribute('href').startsWith('mailto:') ||
+      link.getAttribute('href').startsWith('tel:') ||
+      link.getAttribute('href').includes('javascript') ||
+      link.hostname !== window.location.hostname ||
+      e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.defaultPrevented
+    ) {
+      return;
+    }
+
+    e.preventDefault();
+    const href = link.getAttribute('href');
+
+    document.body.classList.remove('is-loaded');
+    document.body.classList.add('is-transitioning');
+
+    setTimeout(() => {
+      window.location.href = href;
+    }, 400); // Wait for CSS transition
+  });
+
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      document.body.classList.remove('is-transitioning');
+      document.body.classList.add('is-loaded');
+    }
+  });
+
   // --- Footer Stagger Animation ---
   if (typeof gsap !== 'undefined') {
     gsap.from('.footer-block', {

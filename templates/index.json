@@ -9,12 +9,18 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
-      "settings": {}
+    "hero_banner": {
+      "type": "hero-banner",
+      "settings": {
+        "text_alignment": "center",
+        "subheading": "Latest Drop",
+        "heading": "Streetwear Evolution",
+        "button_label": "Shop the Drop",
+        "button_link": "shopify:\/\/collections\/all"
+      }
     }
   },
   "order": [
-    "main"
+    "hero_banner"
   ]
 }

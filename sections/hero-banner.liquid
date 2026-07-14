@@ -1,0 +1,267 @@
+{%- style -%}
+  #HeroBanner-{{ section.id }} {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #000;
+  }
+  
+  #HeroBanner-{{ section.id }} .hero-banner__media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  #HeroBanner-{{ section.id }} .hero-banner__video,
+  #HeroBanner-{{ section.id }} .hero-banner__image,
+  #HeroBanner-{{ section.id }} .hero-banner__placeholder svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #HeroBanner-{{ section.id }} .hero-banner__placeholder svg {
+    fill: #333;
+    background: #111;
+  }
+
+  #HeroBanner-{{ section.id }} .hero-banner__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 2;
+  }
+
+  #HeroBanner-{{ section.id }} .hero-banner__content {
+    position: relative;
+    z-index: 3;
+    color: #fff;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 2rem;
+  }
+
+  #HeroBanner-{{ section.id }} .hero-banner__content-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Alignment variations */
+  #HeroBanner-{{ section.id }} .hero-banner__content--center {
+    text-align: center;
+    margin: 0 auto;
+  }
+  #HeroBanner-{{ section.id }} .hero-banner__content--left {
+    text-align: left;
+    margin: 0;
+  }
+  #HeroBanner-{{ section.id }} .hero-banner__content--right {
+    text-align: right;
+    margin: 0 0 0 auto;
+  }
+
+  #HeroBanner-{{ section.id }} .hero-banner__subheading {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    color: var(--color-primary-accent);
+  }
+
+  #HeroBanner-{{ section.id }} .hero-banner__heading {
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    font-style: italic;
+  }
+
+  #HeroBanner-{{ section.id }} .hero-banner__text {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+  }
+
+  #HeroBanner-{{ section.id }} .hero-banner__button {
+    display: inline-block;
+    padding: 1.2rem 3.5rem;
+    background-color: var(--color-primary-accent);
+    color: #000;
+    font-weight: 900;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+  }
+
+  #HeroBanner-{{ section.id }} .hero-banner__button:hover {
+    transform: translateY(-3px);
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+{%- endstyle -%}
+
+<section class="hero-banner" id="HeroBanner-{{ section.id }}">
+  <div class="hero-banner__media">
+    {%- if section.settings.video != blank -%}
+      {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, class: 'hero-banner__video' }}
+    {%- elsif section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 3840 | image_tag: loading: 'eager', class: 'hero-banner__image' }}
+    {%- else -%}
+      <div class="hero-banner__placeholder">
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {%- endif -%}
+    <div class="hero-banner__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}"></div>
+  </div>
+
+  <div class="hero-banner__content page-width">
+    <div class="hero-banner__content-inner hero-banner__content--{{ section.settings.text_alignment }}">
+      {%- if section.settings.subheading != blank -%}
+        <p class="hero-banner__subheading" data-animate-hero>{{ section.settings.subheading }}</p>
+      {%- endif -%}
+      
+      {%- if section.settings.heading != blank -%}
+        <h1 class="hero-banner__heading" data-animate-hero-text>{{ section.settings.heading }}</h1>
+      {%- endif -%}
+      
+      {%- if section.settings.text != blank -%}
+        <div class="hero-banner__text" data-animate-hero>{{ section.settings.text }}</div>
+      {%- endif -%}
+      
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="hero-banner__button" data-animate-hero>
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const heroSection = document.getElementById('HeroBanner-{{ section.id }}');
+    if (!heroSection) return;
+
+    // A slight delay to ensure split-type and gsap are ready
+    setTimeout(() => {
+      // Split text animation for heading
+      if (typeof window.animateTextReveal === 'function') {
+        window.animateTextReveal('#HeroBanner-{{ section.id }} [data-animate-hero-text]');
+      } else if (typeof SplitType !== 'undefined' && typeof gsap !== 'undefined') {
+        const headings = heroSection.querySelectorAll('[data-animate-hero-text]');
+        headings.forEach(el => {
+          const split = new SplitType(el, { types: 'lines, words, chars' });
+          gsap.from(split.chars, {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            stagger: 0.02,
+            ease: 'power4.out',
+            delay: 0.2
+          });
+        });
+      }
+      
+      // Basic fade up for other elements
+      if (typeof gsap !== 'undefined') {
+        gsap.from('#HeroBanner-{{ section.id }} [data-animate-hero]', {
+          y: 30,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.2,
+          ease: 'power3.out',
+          delay: 0.5
+        });
+      }
+    }, 100);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Background Video",
+      "info": "Overrides image if both are provided. Supports Shopify hosted videos."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Latest Drop"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Streetwear Evolution"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Discover the new era of fashion with our exclusive collection. Bold designs, premium quality.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop the Drop"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "category": "Hero"
+    }
+  ]
+}
+{% endschema %}
