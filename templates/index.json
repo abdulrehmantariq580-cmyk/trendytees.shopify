@@ -21,9 +21,16 @@
         "button_label": "Shop the Drop",
         "button_link": "shopify://collections/all"
       }
+    },
+    "category_slider": {
+      "type": "category-slider",
+      "settings": {
+        "title": "Shop by Category"
+      }
     }
   },
   "order": [
-    "hero_banner"
+    "hero_banner",
+    "category_slider"
   ]
 }
