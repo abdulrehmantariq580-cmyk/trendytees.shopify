@@ -33,6 +33,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+  // --- Sticky Header Logic ---
+  const siteHeader = document.querySelector('.site-header');
+  if (siteHeader) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        siteHeader.classList.add('is-scrolled');
+      } else {
+        siteHeader.classList.remove('is-scrolled');
+      }
+    });
+  }
+
   // Register GSAP ScrollTrigger if GSAP is available
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
