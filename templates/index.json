@@ -13,6 +13,7 @@
       "type": "hero-banner",
       "settings": {
         "video": "shopify://files/videos/A_cinematic_high_quality_slow_gwr_video_mvp.mp4",
+        "image": "shopify://shop_images/Screenshot_20260715-152154.png",
         "overlay_opacity": 40,
         "text_alignment": "center",
         "subheading": "Latest Drop",
