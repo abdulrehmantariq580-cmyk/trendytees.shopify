@@ -2,9 +2,6 @@
   <div class="product-card__image-wrapper">
     {%- if product.featured_image != blank -%}
       {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'product-card__image' }}
-      {%- if product.images[1] != blank -%}
-        {{ product.images[1] | image_url: width: 600 | image_tag: loading: 'lazy', class: 'product-card__image product-card__image--secondary' }}
-      {%- endif -%}
     {%- else -%}
       {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
     {%- endif -%}
