@@ -72,8 +72,10 @@
       "type": "featured-products",
       "settings": {
         "title": "Trending Tees",
+        "collection": "featured-products",
         "products_to_show": 4,
-        "columns_desktop": 4
+        "columns_desktop": 4,
+        "show_view_all": true
       }
     }
   },
