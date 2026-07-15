@@ -1,0 +1,458 @@
+<section id="Testimonials-{{ section.id }}" class="testimonials-section page-width">
+  {%- if section.settings.title != blank -%}
+    <h2 class="testimonials__heading" data-animate-text>{{ section.settings.title }}</h2>
+  {%- endif -%}
+
+  <div class="testimonials-carousel" data-autoplay-speed="{{ section.settings.autoplay_speed | times: 1000 }}">
+    <div class="testimonials-carousel__inner">
+      {%- for block in section.blocks -%}
+        <div class="testimonial-card" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="testimonial-card__content">
+            <div class="testimonial-card__stars">
+              {%- for i in (1..5) -%}
+                <svg viewBox="0 0 24 24" class="icon-star {% if i <= block.settings.rating %}icon-star--filled{% else %}icon-star--empty{% endif %}">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              {%- endfor -%}
+            </div>
+            
+            <blockquote class="testimonial-card__text">
+              "{{ block.settings.text }}"
+            </blockquote>
+            
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 100 | image_tag: loading: 'lazy' }}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="testimonial-card__info">
+                <span class="testimonial-card__name">{{ block.settings.author_name }}</span>
+                {%- if block.settings.author_title != blank -%}
+                  <span class="testimonial-card__title">{{ block.settings.author_title }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- else -%}
+        {%- for i in (1..3) -%}
+          <div class="testimonial-card" data-index="{{ forloop.index0 }}">
+            <div class="testimonial-card__content">
+              <div class="testimonial-card__stars">
+                {%- for j in (1..5) -%}
+                  <svg viewBox="0 0 24 24" class="icon-star icon-star--filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                {%- endfor -%}
+              </div>
+              <blockquote class="testimonial-card__text">"This is an example review. Add your own customer reviews in the Theme Editor!"</blockquote>
+              <div class="testimonial-card__author">
+                <div class="testimonial-card__avatar">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+                <div class="testimonial-card__info">
+                  <span class="testimonial-card__name">Customer Name</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="testimonials-carousel__controls">
+      <button class="testimonials-carousel__btn testimonials-carousel__btn--prev" aria-label="Previous review">
+        <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+      <button class="testimonials-carousel__btn testimonials-carousel__btn--next" aria-label="Next review">
+        <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M10.59 6L9.17 7.41 13.58 12l-4.41 4.59L10.59 18l6-6z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+{%- style -%}
+  #Testimonials-{{ section.id }} {
+    padding: 6rem 0;
+    overflow: hidden;
+  }
+
+  .testimonials__heading {
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    font-style: italic;
+    font-weight: 900;
+    margin-bottom: 4rem;
+  }
+
+  .testimonials-carousel {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  .testimonials-carousel__inner {
+    position: relative;
+    height: 350px;
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .testimonial-card {
+    position: absolute;
+    width: 100%;
+    max-width: 500px;
+    background: #111;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1), 
+                opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1),
+                z-index 0.6s step-end;
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  /* 3D Positions */
+  .testimonial-card.is-active {
+    opacity: 1;
+    z-index: 3;
+    pointer-events: auto;
+    transform: translateX(0) translateZ(0) rotateY(0deg);
+  }
+
+  .testimonial-card.is-prev {
+    opacity: 0.6;
+    z-index: 2;
+    transform: translateX(-35%) translateZ(-150px) rotateY(15deg);
+  }
+
+  .testimonial-card.is-next {
+    opacity: 0.6;
+    z-index: 2;
+    transform: translateX(35%) translateZ(-150px) rotateY(-15deg);
+  }
+
+  .testimonial-card.is-hidden-left {
+    opacity: 0;
+    z-index: 1;
+    transform: translateX(-60%) translateZ(-300px) rotateY(25deg);
+  }
+
+  .testimonial-card.is-hidden-right {
+    opacity: 0;
+    z-index: 1;
+    transform: translateX(60%) translateZ(-300px) rotateY(-25deg);
+  }
+
+  /* Card Content Styles */
+  .testimonial-card__stars {
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+  }
+
+  .icon-star {
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon-star--filled {
+    fill: var(--color-primary-accent, #ffcc00);
+  }
+
+  .icon-star--empty {
+    fill: #444;
+  }
+
+  .testimonial-card__text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: center;
+    margin: 0 0 2rem;
+    font-style: italic;
+    color: #e0e0e0;
+  }
+
+  .testimonial-card__author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .testimonial-card__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #333;
+    flex-shrink: 0;
+  }
+
+  .testimonial-card__avatar img, .testimonial-card__avatar svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .testimonial-card__info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .testimonial-card__name {
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+
+  .testimonial-card__title {
+    font-size: 0.85rem;
+    color: var(--color-primary-accent, #ffcc00);
+  }
+
+  /* Controls */
+  .testimonials-carousel__controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 1rem;
+  }
+
+  .testimonials-carousel__btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #222;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .testimonials-carousel__btn:hover {
+    background: var(--color-primary-accent, #ffcc00);
+    color: #000;
+    transform: scale(1.1);
+  }
+
+  @media screen and (max-width: 768px) {
+    .testimonials-carousel__inner {
+      height: 400px;
+    }
+    .testimonial-card {
+      padding: 2rem 1.5rem;
+      max-width: 85%;
+    }
+    .testimonial-card.is-prev {
+      transform: translateX(-15%) translateZ(-150px) rotateY(10deg);
+      opacity: 0.3;
+    }
+    .testimonial-card.is-next {
+      transform: translateX(15%) translateZ(-150px) rotateY(-10deg);
+      opacity: 0.3;
+    }
+  }
+{%- endstyle -%}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.querySelector('#Testimonials-{{ section.id }}');
+    if (!section) return;
+
+    const carousel = section.querySelector('.testimonials-carousel');
+    const cards = Array.from(carousel.querySelectorAll('.testimonial-card'));
+    const prevBtn = carousel.querySelector('.testimonials-carousel__btn--prev');
+    const nextBtn = carousel.querySelector('.testimonials-carousel__btn--next');
+    
+    if (cards.length === 0) return;
+
+    let currentIndex = 0;
+    let autoplayInterval;
+    const speed = parseInt(carousel.dataset.autoplaySpeed) || 5000;
+
+    function updateCards() {
+      const total = cards.length;
+      
+      cards.forEach((card, index) => {
+        card.classList.remove('is-active', 'is-prev', 'is-next', 'is-hidden-left', 'is-hidden-right');
+        
+        if (index === currentIndex) {
+          card.classList.add('is-active');
+        } else if (index === (currentIndex - 1 + total) % total) {
+          card.classList.add('is-prev');
+        } else if (index === (currentIndex + 1) % total) {
+          card.classList.add('is-next');
+        } else {
+          // Determine if it should be hidden-left or hidden-right based on shortest distance
+          let diff = index - currentIndex;
+          if (diff < 0) diff += total;
+          
+          if (diff <= total / 2) {
+            card.classList.add('is-hidden-right');
+          } else {
+            card.classList.add('is-hidden-left');
+          }
+        }
+      });
+    }
+
+    function next() {
+      currentIndex = (currentIndex + 1) % cards.length;
+      updateCards();
+    }
+
+    function prev() {
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      updateCards();
+    }
+
+    function startAutoplay() {
+      if (speed > 0) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = setInterval(next, speed);
+      }
+    }
+
+    function stopAutoplay() {
+      clearInterval(autoplayInterval);
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        prev();
+        startAutoplay(); // Reset timer
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        next();
+        startAutoplay(); // Reset timer
+      });
+    }
+
+    // Swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    carousel.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopAutoplay();
+    }, {passive: true});
+
+    carousel.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+      startAutoplay();
+    }, {passive: true});
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) next();
+      if (touchEndX > touchStartX + 50) prev();
+    }
+
+    // Pause on hover
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+
+    // Initial setup
+    updateCards();
+    startAutoplay();
+    
+    // Text reveal animation
+    setTimeout(() => {
+      if (typeof window.animateTextReveal === 'function') {
+        window.animateTextReveal('#Testimonials-{{ section.id }} [data-animate-text]');
+      }
+    }, 200);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Testimonials Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "What Our Customers Say"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay Speed (0 to disable)",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Customer Image"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Customer Name",
+          "default": "John Doe"
+        },
+        {
+          "type": "text",
+          "id": "author_title",
+          "label": "Customer Title/Location",
+          "default": "Verified Buyer"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review Text",
+          "default": "The quality of these tees is absolutely insane. Best streetwear drop I've copped this year!"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials 3D Slider",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" }
+      ]
+    }
+  ]
+}
+{% endschema %}
