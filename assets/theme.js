@@ -146,4 +146,20 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'power3.out'
     });
   }
+
+  // --- Product Card Fade Up Animation ---
+  if (typeof gsap !== 'undefined') {
+    gsap.utils.toArray('.product-card').forEach(card => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 90%',
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.7,
+        ease: 'power3.out'
+      });
+    });
+  }
 });

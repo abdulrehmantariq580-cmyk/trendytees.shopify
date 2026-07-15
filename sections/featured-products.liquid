@@ -10,23 +10,58 @@
     {%- endif -%}
 
     <div class="product-grid">
-      {%- assign collection = collections[section.settings.collection] -%}
-      {%- if collection != blank and collection.products_count > 0 -%}
-        {%- for product in collection.products limit: section.settings.products_to_show -%}
-          {% render 'product-card', product: product %}
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'shopify_product' -%}
+            {%- assign product = block.settings.product -%}
+            {%- if product != blank -%}
+              {% render 'product-card', product: product %}
+            {%- else -%}
+              <div class="product-card" {{ block.shopify_attributes }}>
+                <div class="product-card__image-wrapper">
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-card__image' }}
+                </div>
+                <div class="product-card__info">
+                  <h3 class="product-card__title">Select a Product</h3>
+                  <p class="product-card__price">$0.00</p>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- elsif block.type == 'custom_product' -%}
+            <a href="{{ block.settings.link | default: '#' }}" class="product-card" {{ block.shopify_attributes }}>
+              <div class="product-card__image-wrapper">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'product-card__image' }}
+                {%- else -%}
+                  {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg product-card__image' }}
+                {%- endif -%}
+              </div>
+              <div class="product-card__info">
+                <h3 class="product-card__title">{{ block.settings.title }}</h3>
+                <p class="product-card__price">{{ block.settings.price }}</p>
+              </div>
+            </a>
+          {%- endif -%}
         {%- endfor -%}
       {%- else -%}
-        {%- for i in (1..section.settings.products_to_show) -%}
-          <div class="product-card">
-            <div class="product-card__image-wrapper">
-              {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg product-card__image' }}
+        {%- assign collection = collections[section.settings.collection] -%}
+        {%- if collection != blank and collection.products_count > 0 -%}
+          {%- for product in collection.products limit: section.settings.products_to_show -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..section.settings.products_to_show) -%}
+            <div class="product-card">
+              <div class="product-card__image-wrapper">
+                {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg product-card__image' }}
+              </div>
+              <div class="product-card__info">
+                <h3 class="product-card__title">Example T-Shirt</h3>
+                <p class="product-card__price">$29.99</p>
+              </div>
             </div>
-            <div class="product-card__info">
-              <h3 class="product-card__title">Example T-Shirt</h3>
-              <p class="product-card__price">$29.99</p>
-            </div>
-          </div>
-        {%- endfor -%}
+          {%- endfor -%}
+        {%- endif -%}
       {%- endif -%}
     </div>
   </div>
@@ -141,9 +176,56 @@
       "label": "Enable \"View all\" button if collection has more products than shown"
     }
   ],
+  "blocks": [
+    {
+      "type": "custom_product",
+      "name": "Custom Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Name",
+          "default": "Custom T-Shirt"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$29.99"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Product Link"
+        }
+      ]
+    },
+    {
+      "type": "shopify_product",
+      "name": "Select Shopify Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Featured Products"
+      "name": "Featured Products",
+      "blocks": [
+        { "type": "custom_product" },
+        { "type": "custom_product" },
+        { "type": "custom_product" },
+        { "type": "custom_product" }
+      ]
     }
   ]
 }

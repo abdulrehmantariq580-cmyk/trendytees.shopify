@@ -854,7 +854,7 @@ body.is-transitioning .page-transition-overlay {
   position: relative;
   width: 100%;
   padding-top: 125%; /* 4:5 aspect ratio */
-  background-color: #111;
+  background-color: #fff;
   overflow: hidden;
   margin-bottom: 1.5rem;
   border-radius: 8px;
@@ -880,8 +880,8 @@ body.is-transitioning .page-transition-overlay {
 }
 
 .product-card__image-wrapper svg {
-  fill: #333;
-  background-color: #1a1a1a;
+  fill: #ccc;
+  background-color: #f4f4f4;
 }
 
 .product-card__image--secondary {
