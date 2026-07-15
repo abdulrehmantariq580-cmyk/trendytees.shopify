@@ -79,64 +79,76 @@
         "show_view_all": true
       }
     },
-    "parallax_banner": {
+    "parallax_banner_PiL3GR": {
       "type": "parallax-banner",
-      "settings": {}
+      "name": "Parallax Banner",
+      "settings": {
+        "overlay_opacity": 40,
+        "section_height": 70,
+        "title": "Elevate Your Style",
+        "text": "<p>Discover the latest drops in our exclusive collection.</p>",
+        "button_label": "Shop Now",
+        "button_link": ""
+      }
     },
-    "shop_the_look": {
-      "type": "shop-the-look",
-      "blocks": {
-        "hotspot_1": {
-          "type": "hotspot",
-          "settings": {
-            "top_position": 40,
-            "left_position": 30
-          }
-        },
-        "hotspot_2": {
-          "type": "hotspot",
-          "settings": {
-            "top_position": 60,
-            "left_position": 70
-          }
-        }
-      },
-      "block_order": [
-        "hotspot_1",
-        "hotspot_2"
-      ],
-      "settings": {}
-    },
-    "testimonials_slider": {
+    "testimonials_slider_MCDYHz": {
       "type": "testimonials-slider",
       "blocks": {
-        "testimonial_1": {
+        "testimonial_MTRngL": {
           "type": "testimonial",
-          "settings": {}
+          "settings": {
+            "author_name": "John Doe",
+            "author_title": "Verified Buyer",
+            "rating": 5,
+            "text": "The quality of these tees is absolutely insane. Best streetwear drop I've copped this year!"
+          }
         },
-        "testimonial_2": {
+        "testimonial_YbHYrf": {
           "type": "testimonial",
-          "settings": {}
+          "settings": {
+            "author_name": "John Doe",
+            "author_title": "Verified Buyer",
+            "rating": 5,
+            "text": "The quality of these tees is absolutely insane. Best streetwear drop I've copped this year!"
+          }
         },
-        "testimonial_3": {
+        "testimonial_U4N6BE": {
           "type": "testimonial",
-          "settings": {}
+          "settings": {
+            "author_name": "John Doe",
+            "author_title": "Verified Buyer",
+            "rating": 5,
+            "text": "The quality of these tees is absolutely insane. Best streetwear drop I've copped this year!"
+          }
+        },
+        "testimonial_a64i7V": {
+          "type": "testimonial",
+          "settings": {
+            "author_name": "John Doe",
+            "author_title": "Verified Buyer",
+            "rating": 5,
+            "text": "The quality of these tees is absolutely insane. Best streetwear drop I've copped this year!"
+          }
         }
       },
       "block_order": [
-        "testimonial_1",
-        "testimonial_2",
-        "testimonial_3"
+        "testimonial_MTRngL",
+        "testimonial_YbHYrf",
+        "testimonial_U4N6BE",
+        "testimonial_a64i7V"
       ],
-      "settings": {}
+      "name": "Testimonials 3D Slider",
+      "settings": {
+        "title": "What Our Customers Say",
+        "autoplay_speed": 5
+      }
     }
   },
   "order": [
     "hero_banner",
     "category_slider",
+    "parallax_banner_PiL3GR",
     "featured_products",
-    "parallax_banner",
-    "shop_the_look",
-    "testimonials_slider"
+    "testimonials_slider_MCDYHz"
   ]
 }
