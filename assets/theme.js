@@ -162,4 +162,32 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // --- Shop The Look Hotspot Logic ---
+  const hotspots = document.querySelectorAll('.hotspot');
+  
+  hotspots.forEach(hotspot => {
+    const btn = hotspot.querySelector('.hotspot__btn');
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation(); // Prevent document click from firing immediately
+        
+        // Close others
+        hotspots.forEach(h => {
+          if (h !== hotspot) h.classList.remove('is-active');
+        });
+        
+        // Toggle current
+        hotspot.classList.toggle('is-active');
+      });
+    }
+  });
+
+  // Close hotspots when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.hotspot')) {
+      hotspots.forEach(h => h.classList.remove('is-active'));
+    }
+  });
 });

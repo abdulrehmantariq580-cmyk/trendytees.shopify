@@ -1,0 +1,206 @@
+<section id="ParallaxBanner-{{ section.id }}" class="parallax-banner">
+  {%- if section.settings.image != blank -%}
+    <div class="parallax-banner__image" style="background-image: url('{{ section.settings.image | image_url: width: 2000 }}');"></div>
+  {%- else -%}
+    <div class="parallax-banner__image parallax-banner__image--placeholder">
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {%- endif -%}
+
+  <div class="parallax-banner__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+
+  <div class="parallax-banner__content page-width">
+    {%- if section.settings.title != blank -%}
+      <h2 class="parallax-banner__title" data-animate-text>{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="parallax-banner__text">{{ section.settings.text }}</div>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      <a href="{{ section.settings.button_link }}" class="parallax-banner__btn btn">
+        {{ section.settings.button_label }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- style -%}
+  .parallax-banner {
+    position: relative;
+    height: {{ section.settings.section_height }}vh;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .parallax-banner__image {
+    position: absolute;
+    top: -20%;
+    left: 0;
+    width: 100%;
+    height: 140%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    will-change: transform;
+  }
+
+  .parallax-banner__image--placeholder {
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .parallax-banner__image--placeholder svg {
+    width: 100%;
+    height: 100%;
+    fill: #555;
+  }
+
+  .parallax-banner__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    z-index: 2;
+  }
+
+  .parallax-banner__content {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    padding: 2rem;
+  }
+
+  .parallax-banner__title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: italic;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .parallax-banner__text {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+  }
+
+  .parallax-banner__btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: var(--color-primary-accent, #ffcc00);
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .parallax-banner__btn:hover {
+    transform: translateY(-3px);
+    background-color: #fff;
+  }
+{%- endstyle -%}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Parallax logic via GSAP for buttery smooth performance
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      const banner = document.querySelector('#ParallaxBanner-{{ section.id }}');
+      const image = banner.querySelector('.parallax-banner__image');
+
+      if (banner && image) {
+        gsap.to(image, {
+          yPercent: 20,
+          ease: "none",
+          scrollTrigger: {
+            trigger: banner,
+            start: "top bottom", 
+            end: "bottom top",
+            scrub: true
+          }
+        });
+      }
+      
+      // Text reveal animation
+      setTimeout(() => {
+        if (typeof window.animateTextReveal === 'function') {
+          window.animateTextReveal('#ParallaxBanner-{{ section.id }} [data-animate-text]');
+        }
+      }, 200);
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Parallax Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Section height",
+      "default": 70
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Elevate Your Style"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Discover the latest drops in our exclusive collection.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Parallax Banner"
+    }
+  ]
+}
+{% endschema %}
