@@ -78,11 +78,65 @@
         "columns_desktop": 4,
         "show_view_all": true
       }
+    },
+    "parallax_banner": {
+      "type": "parallax-banner",
+      "settings": {}
+    },
+    "shop_the_look": {
+      "type": "shop-the-look",
+      "blocks": {
+        "hotspot_1": {
+          "type": "hotspot",
+          "settings": {
+            "top_position": 40,
+            "left_position": 30
+          }
+        },
+        "hotspot_2": {
+          "type": "hotspot",
+          "settings": {
+            "top_position": 60,
+            "left_position": 70
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_1",
+        "hotspot_2"
+      ],
+      "settings": {}
+    },
+    "testimonials_slider": {
+      "type": "testimonials-slider",
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {}
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {}
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "hero_banner",
     "category_slider",
-    "featured_products"
+    "featured_products",
+    "parallax_banner",
+    "shop_the_look",
+    "testimonials_slider"
   ]
 }
