@@ -71,7 +71,7 @@
       {
         "type": "color",
         "id": "primary_accent",
-        "default": "#D4AF37",
+        "default": "#000000",
         "label": "Primary Accent (Gold)"
       },
       {

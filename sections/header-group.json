@@ -14,13 +14,13 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "text": "PREMIUM T-SHIRTS • FREE SHIPPING ON ORDERS OVER $50 • NEW COLLECTION OUT NOW"
+        "text": "PRETTY DAMAGE VOLUME I IS LIVE NOW &rarr;"
       }
     },
     "header": {
       "type": "header",
       "settings": {
-        "logo": "shopify://shop_images/Screenshot_2026-07-14_153455.png",
+        "logo": "",
         "menu": "main-menu"
       }
     }

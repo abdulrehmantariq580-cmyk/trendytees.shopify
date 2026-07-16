@@ -13,7 +13,7 @@
       "type": "hero-banner",
       "settings": {
         "video": "",
-        "image": "shopify://shop_images/Screenshot_20260715-152154.png",
+        "image": "",
         "overlay_opacity": 20,
         "text_alignment": "center",
         "subheading": "KARVAAN",
@@ -30,7 +30,7 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/a-premium-flat-lay-product-photography-of-a-stylish-black-short-sleeve-t-shirt-featuring-a-bold-colorful-modern-streetwear-graphic-design-on-the-front-the-t-shirt-is-perfectly-centere.png",
+            "image": "",
             "title": "Graphic Tees"
           }
         },
@@ -38,7 +38,7 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/Gemini_Generated_Image_xmzvirxmzvirxmzv.png",
+            "image": "",
             "title": "Oversized Tees"
           }
         },
@@ -46,7 +46,7 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/a-premium-flat-lay-product-photography-of-a-faded-acid-wash-charcoal-grey-t-shirt-with-a-retro-distressed-90s-style-typography-and-illustration-printed-on-it-the-t-shirt-is-perfectly.png",
+            "image": "",
             "title": "Vintage Tees"
           }
         },
@@ -54,7 +54,7 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/a-premium-flat-lay-product-photography-of-a-simple-high-quality-blank-white-or-cream-t-shirt-with-a-perfect-crew-neck-collar-the-t-shirt-is-perfectly-centered-neatly-laid-out-with-no.png",
+            "image": "",
             "title": "Basic Tees"
           }
         }

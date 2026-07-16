@@ -1,19 +1,5 @@
-<div class="announcement-bar bg-primary-accent full-width" role="region" aria-label="Announcement">
-  <div class="announcement-bar__marquee">
-    <div class="announcement-bar__content">
-      {% for i in (1..5) %}
-        <span class="announcement-bar__message">{{ section.settings.text }}</span>
-        <span class="announcement-bar__separator">•</span>
-      {% endfor %}
-    </div>
-    <!-- Duplicate for seamless infinite loop -->
-    <div class="announcement-bar__content" aria-hidden="true">
-      {% for i in (1..5) %}
-        <span class="announcement-bar__message">{{ section.settings.text }}</span>
-        <span class="announcement-bar__separator">•</span>
-      {% endfor %}
-    </div>
-  </div>
+<div class="announcement-bar full-width" role="region" aria-label="Announcement" style="background-color: #000; color: #fff; padding: 10px 0; text-align: center; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">
+  <span class="announcement-bar__message">{{ section.settings.text }}</span>
 </div>
 
 {% schema %}
