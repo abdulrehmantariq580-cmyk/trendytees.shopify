@@ -81,10 +81,7 @@
     .site-header__menu-toggle {
       display: block;
     }
-    .desktop-search-icon { display: none !important; }
-    .mobile-search-icon { display: flex !important; align-items: center; }
   }
-  .mobile-search-icon { display: none; }
 </style>
 
 <header class="site-header full-width" style="position: relative;">
@@ -107,8 +104,8 @@
             <line x1="3" y1="18" x2="21" y2="18"></line>
           </svg>
         </button>
-        <!-- Desktop search -->
-        <a href="#" class="site-header__icon desktop-search-icon" aria-label="Search" style="display: inline-flex; align-items: center;" onclick="event.preventDefault(); document.getElementById('HeaderSearchContainer').style.display = document.getElementById('HeaderSearchContainer').style.display === 'none' ? 'block' : 'none';">
+        <!-- Desktop/Mobile search -->
+        <a href="#" class="site-header__icon" aria-label="Search" style="display: inline-flex; align-items: center;" onclick="event.preventDefault(); document.getElementById('HeaderSearchContainer').style.display = document.getElementById('HeaderSearchContainer').style.display === 'none' ? 'block' : 'none';">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -128,8 +125,8 @@
               .logo-main-text { font-size: 2.2rem; }
               .logo-sub-text { font-size: 0.6rem; }
               @media screen and (max-width: 768px) {
-                .logo-main-text { font-size: 1.5rem; letter-spacing: 1px; }
-                .logo-sub-text { font-size: 0.45rem; letter-spacing: 0px; }
+                .logo-main-text { font-size: 1.25rem; letter-spacing: 0.5px; }
+                .logo-sub-text { font-size: 0.4rem; letter-spacing: 0px; }
               }
             </style>
           </div>
@@ -138,13 +135,6 @@
       </div>
 
       <div class="site-header__icons-container">
-        <!-- Mobile Search Icon -->
-        <a href="#" class="site-header__icon mobile-search-icon" aria-label="Search" onclick="event.preventDefault(); document.getElementById('HeaderSearchContainer').style.display = document.getElementById('HeaderSearchContainer').style.display === 'none' ? 'block' : 'none';">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </a>
         <!-- Account Icon -->
         <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="site-header__icon" aria-label="Account">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
