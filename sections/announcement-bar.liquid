@@ -1,4 +1,23 @@
-<div class="announcement-bar full-width" role="region" aria-label="Announcement" style="background-color: #000; color: #fff; padding: 10px 0; font-size: 0.8rem; letter-spacing: 1px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;">
+<style>
+  .announcement-bar-wrapper {
+    background-color: #000; color: #fff; padding: 10px 0; font-size: 0.8rem; letter-spacing: 1px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  }
+  @media screen and (max-width: 768px) {
+    .announcement-bar-wrapper {
+      display: flex; justify-content: center;
+    }
+    .announcement-bar__socials, .announcement-bar__empty {
+      display: none !important;
+    }
+    .announcement-bar__message {
+      font-size: 0.65rem;
+    }
+    .announcement-bar__content {
+      gap: 1rem !important;
+    }
+  }
+</style>
+<div class="announcement-bar full-width announcement-bar-wrapper" role="region" aria-label="Announcement">
   <div class="announcement-bar__socials" style="padding-left: 2rem; display: flex; gap: 15px;">
     <!-- Facebook Icon -->
     <a href="#" style="color: #fff; text-decoration: none;">
@@ -14,7 +33,7 @@
     <span class="announcement-bar__message" style="text-transform: uppercase;">{{ section.settings.text }}</span>
     <span style="cursor: pointer; opacity: 0.7;">&gt;</span>
   </div>
-  <div></div> <!-- Empty div for grid alignment -->
+  <div class="announcement-bar__empty"></div>
 </div>
 
 {% schema %}

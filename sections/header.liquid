@@ -81,7 +81,10 @@
     .site-header__menu-toggle {
       display: block;
     }
+    .desktop-search-icon { display: none !important; }
+    .mobile-search-icon { display: flex !important; align-items: center; }
   }
+  .mobile-search-icon { display: none; }
 </style>
 
 <header class="site-header full-width" style="position: relative;">
@@ -105,7 +108,7 @@
           </svg>
         </button>
         <!-- Desktop search -->
-        <a href="#" class="site-header__icon" aria-label="Search" style="display: inline-block;" onclick="event.preventDefault(); document.getElementById('HeaderSearchContainer').style.display = document.getElementById('HeaderSearchContainer').style.display === 'none' ? 'block' : 'none';">
+        <a href="#" class="site-header__icon desktop-search-icon" aria-label="Search" style="display: inline-flex; align-items: center;" onclick="event.preventDefault(); document.getElementById('HeaderSearchContainer').style.display = document.getElementById('HeaderSearchContainer').style.display === 'none' ? 'block' : 'none';">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -127,6 +130,13 @@
       </div>
 
       <div class="site-header__icons-container">
+        <!-- Mobile Search Icon -->
+        <a href="#" class="site-header__icon mobile-search-icon" aria-label="Search" onclick="event.preventDefault(); document.getElementById('HeaderSearchContainer').style.display = document.getElementById('HeaderSearchContainer').style.display === 'none' ? 'block' : 'none';">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </a>
         <!-- Account Icon -->
         <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="site-header__icon" aria-label="Account">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
@@ -214,51 +224,51 @@
       <div class="mobile-drawer__content">
         <ul class="mobile-nav">
           <!-- Mobile Home -->
-          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1rem 0;">
-            <a href="/" class="mobile-nav__link" style="color: #000; font-weight: 500; text-decoration: none; text-transform: uppercase;">HOME</a>
+          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
+            <a href="/" class="mobile-nav__link" style="color: #000; font-weight: 500; font-size: 1rem; text-decoration: none; text-transform: uppercase;">HOME</a>
           </li>
           <!-- Mobile Best Sellers -->
-          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1rem 0;">
-            <a href="/collections/best-sellers" class="mobile-nav__link" style="color: #000; font-weight: 500; text-decoration: none; text-transform: uppercase;">BEST SELLERS</a>
+          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
+            <a href="/collections/best-sellers" class="mobile-nav__link" style="color: #000; font-weight: 500; font-size: 1rem; text-decoration: none; text-transform: uppercase;">BEST SELLERS</a>
           </li>
           <!-- Mobile Tops Dropdown -->
-          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1rem 0;">
-            <div style="display: flex; justify-content: space-between; align-items: center;" onclick="var ul = this.nextElementSibling; ul.style.display = ul.style.display === 'none' ? 'block' : 'none';">
-              <span style="color: #000; font-weight: 500; text-transform: uppercase; cursor: pointer;">TOPS</span>
-              <button type="button" style="background: none; border: none; font-size: 1.2rem; cursor: pointer;">+</button>
+          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="var ul = this.nextElementSibling; ul.style.display = ul.style.display === 'none' ? 'block' : 'none';">
+              <span style="color: #000; font-weight: 500; font-size: 1rem; text-transform: uppercase;">TOPS</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
-            <ul style="display: none; list-style: none; padding-left: 1rem; margin-top: 1rem; width: 100%;">
-              <li style="margin-bottom: 0.8rem;"><a href="/collections/t-shirts" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">T-Shirts</a></li>
-              <li style="margin-bottom: 0.8rem;"><a href="/collections/hoodies" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Hoodies</a></li>
-              <li style="margin-bottom: 0.8rem;"><a href="/collections/jackets" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Jackets</a></li>
+            <ul style="display: none; list-style: none; padding-left: 1rem; margin-top: 1.5rem; width: 100%;">
+              <li style="margin-bottom: 1rem;"><a href="/collections/t-shirts" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">T-Shirts</a></li>
+              <li style="margin-bottom: 1rem;"><a href="/collections/hoodies" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Hoodies</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="/collections/jackets" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Jackets</a></li>
             </ul>
           </li>
           <!-- Mobile Bottoms Dropdown -->
-          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1rem 0;">
-            <div style="display: flex; justify-content: space-between; align-items: center;" onclick="var ul = this.nextElementSibling; ul.style.display = ul.style.display === 'none' ? 'block' : 'none';">
-              <span style="color: #000; font-weight: 500; text-transform: uppercase; cursor: pointer;">BOTTOMS</span>
-              <button type="button" style="background: none; border: none; font-size: 1.2rem; cursor: pointer;">+</button>
+          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="var ul = this.nextElementSibling; ul.style.display = ul.style.display === 'none' ? 'block' : 'none';">
+              <span style="color: #000; font-weight: 500; font-size: 1rem; text-transform: uppercase;">BOTTOMS</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
-            <ul style="display: none; list-style: none; padding-left: 1rem; margin-top: 1rem; width: 100%;">
-              <li style="margin-bottom: 0.8rem;"><a href="/collections/cargos" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Cargos</a></li>
-              <li style="margin-bottom: 0.8rem;"><a href="/collections/jeans" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Jeans</a></li>
-              <li style="margin-bottom: 0.8rem;"><a href="/collections/sweatpants" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Sweatpants</a></li>
+            <ul style="display: none; list-style: none; padding-left: 1rem; margin-top: 1.5rem; width: 100%;">
+              <li style="margin-bottom: 1rem;"><a href="/collections/cargos" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Cargos</a></li>
+              <li style="margin-bottom: 1rem;"><a href="/collections/jeans" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Jeans</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="/collections/sweatpants" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Sweatpants</a></li>
             </ul>
           </li>
           <!-- Mobile Collections Dropdown -->
-          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1rem 0;">
-            <div style="display: flex; justify-content: space-between; align-items: center;" onclick="var ul = this.nextElementSibling; ul.style.display = ul.style.display === 'none' ? 'block' : 'none';">
-              <span style="color: #000; font-weight: 500; text-transform: uppercase; cursor: pointer;">COLLECTIONS</span>
-              <button type="button" style="background: none; border: none; font-size: 1.2rem; cursor: pointer;">+</button>
+          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="var ul = this.nextElementSibling; ul.style.display = ul.style.display === 'none' ? 'block' : 'none';">
+              <span style="color: #000; font-weight: 500; font-size: 1rem; text-transform: uppercase;">COLLECTIONS</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
-            <ul style="display: none; list-style: none; padding-left: 1rem; margin-top: 1rem; width: 100%;">
-              <li style="margin-bottom: 0.8rem;"><a href="/collections/pretty-damage" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Pretty Damage Vol 1</a></li>
-              <li style="margin-bottom: 0.8rem;"><a href="/collections/summer-24" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Summer 24</a></li>
+            <ul style="display: none; list-style: none; padding-left: 1rem; margin-top: 1.5rem; width: 100%;">
+              <li style="margin-bottom: 1rem;"><a href="/collections/pretty-damage" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Pretty Damage Vol 1</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="/collections/summer-24" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Summer 24</a></li>
             </ul>
           </li>
           <!-- Mobile Karvaan Essentials -->
-          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1rem 0;">
-            <a href="/collections/essentials" class="mobile-nav__link" style="color: #000; font-weight: 500; text-decoration: none; text-transform: uppercase;">KARVAAN ESSENTIALS</a>
+          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
+            <a href="/collections/essentials" class="mobile-nav__link" style="color: #000; font-weight: 500; font-size: 1rem; text-decoration: none; text-transform: uppercase;">KARVAAN ESSENTIALS</a>
           </li>
         </ul>
       </div>
