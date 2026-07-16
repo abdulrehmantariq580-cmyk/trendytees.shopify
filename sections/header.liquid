@@ -3,39 +3,24 @@
     background-color: #ffffff;
     color: #000000;
     border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 1.5rem 0 0 0;
   }
-  .site-header.is-scrolled {
-    background-color: #ffffff;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  }
-  .site-header__menu-toggle {
-    color: #000;
+  .site-header__top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
   }
   .site-header__icon {
     color: #000;
+    text-decoration: none;
   }
   .site-header__icon:hover {
     color: #666;
   }
-  .site-header__logo img, .header-logo-circle {
-    border: none;
-  }
-  .site-header__cart-count {
-    background-color: #000;
-    color: #fff;
-  }
-  .site-header__inner {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-  }
-  .site-header__left-nav {
-    display: flex;
-    align-items: center;
-  }
   .site-header__logo-container {
-    display: flex;
-    justify-content: center;
+    text-align: center;
+    flex-grow: 1;
   }
   .site-header__icons-container {
     display: flex;
@@ -43,54 +28,129 @@
     align-items: center;
     gap: 1.5rem;
   }
+  .site-header__left-nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .site-header__nav-row {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+  .site-header__nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 2rem;
+  }
+  .site-header__nav-item {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #666;
+    text-decoration: none;
+    letter-spacing: 1px;
+    padding-bottom: 5px;
+  }
+  .site-header__nav-item:hover, .site-header__nav-item--active {
+    color: #000;
+    border-bottom: 2px solid #000;
+  }
+  .site-header__cart-count {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  /* Mobile menu styles */
   .site-header__menu-toggle {
-    display: block; /* Show hamburger even on desktop to match Karvaan if desired, or keep mobile-only */
+    display: none;
+    color: #000;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  @media screen and (max-width: 768px) {
+    .site-header__nav-row {
+      display: none;
+    }
+    .site-header__menu-toggle {
+      display: block;
+    }
   }
 </style>
 
 <header class="site-header full-width">
-  <div class="page-width site-header__inner">
+  <div class="page-width">
+    <div class="site-header__top-row">
+      <div class="site-header__left-nav">
+        <!-- Mobile hamburger -->
+        <button type="button" class="site-header__menu-toggle" aria-controls="MobileMenu" aria-expanded="false" aria-label="Toggle menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <!-- Desktop search -->
+        <a href="/search" class="site-header__icon" aria-label="Search" style="display: inline-block;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </a>
+      </div>
+
+      <div class="site-header__logo-container">
+        <a href="{{ routes.root_url }}" class="site-header__logo-link" style="text-decoration: none;">
+          {% if section.settings.logo != blank %}
+          {{ section.settings.logo | image_url: width: 200 | image_tag: alt: shop.name, class: 'header-logo' }}
+          {% else %}
+          <div class="site-header__logo-text" style="color: #000; display: flex; flex-direction: column; align-items: center;">
+            <span style="font-style:italic; font-weight:900; font-size:2.2rem; letter-spacing:2px; text-transform:uppercase; line-height: 1;">{{ shop.name }}</span>
+            <span style="font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px;">HOUSE OF STREETWEAR</span>
+          </div>
+          {% endif %}
+        </a>
+      </div>
+
+      <div class="site-header__icons-container">
+        <!-- Account Icon -->
+        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="site-header__icon" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+
+        <!-- Shopping Bag Icon -->
+        <a href="{{ routes.cart_url }}" class="site-header__icon site-header__cart" id="HeaderCartIcon" style="position: relative;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="visually-hidden">Cart</span>
+          <div class="site-header__cart-count" id="HeaderCartCount" {% if cart.item_count == 0 %}style="display: none;"{% endif %} style="position: absolute; top: -8px; right: -8px; font-size: 0.7rem; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <span aria-hidden="true">{{ cart.item_count }}</span>
+          </div>
+        </a>
+      </div>
+    </div>
     
-    <div class="site-header__left-nav">
-      <button type="button" class="site-header__menu-toggle" aria-controls="MobileMenu" aria-expanded="false" aria-label="Toggle menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
+    <!-- Desktop Navigation -->
+    <div class="site-header__nav-row">
+      <ul class="site-header__nav-list">
+        {% for link in section.settings.menu.links %}
+          <li>
+            <a href="{{ link.url }}" class="site-header__nav-item {% if link.active %}site-header__nav-item--active{% endif %}">
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
-
-    <div class="site-header__logo-container">
-      <a href="{{ routes.root_url }}" class="site-header__logo-link">
-        {% if section.settings.logo != blank %}
-        {{ section.settings.logo | image_url: width: 200 | image_tag: alt: shop.name, class: 'header-logo' }}
-        {% else %}
-        <span class="site-header__logo-text" style="color: #000;">
-          <span style="font-style:italic; font-weight:900; font-size:2rem; letter-spacing:2px; text-transform:uppercase;">{{ shop.name }}</span>
-        </span>
-        {% endif %}
-      </a>
-    </div>
-
-    <div class="site-header__icons-container">
-      <a href="/search" class="site-header__icon" aria-label="Search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-      </a>
-
-      <a href="{{ routes.cart_url }}" class="site-header__icon site-header__cart" id="HeaderCartIcon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M9 20a1 1 0 100-2 1 1 0 000 2zM20 20a1 1 0 100-2 1 1 0 000 2zM1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
-        <span class="visually-hidden">Cart</span>
-        <div class="site-header__cart-count" id="HeaderCartCount" {% if cart.item_count == 0 %}style="display: none;"{% endif %}>
-          <span aria-hidden="true">{{ cart.item_count }}</span>
-          <span class="visually-hidden">items in cart</span>
-        </div>
-      </a>
-    </div>
-
   </div>
 
   <!-- Mobile Drawer (Full screen menu) -->
@@ -99,8 +159,8 @@
     <div class="mobile-drawer__inner" style="background-color: #fff; color: #000;">
       <div class="mobile-drawer__header" style="border-bottom: 1px solid #eee;">
         <span class="mobile-drawer__title" style="color: #000;">MENU</span>
-        <button type="button" class="mobile-drawer__close" data-drawer-close aria-label="Close menu" style="color: #000;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <button type="button" class="mobile-drawer__close" data-drawer-close aria-label="Close menu" style="color: #000; background: none; border: none; cursor: pointer;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
@@ -110,7 +170,7 @@
         <ul class="mobile-nav">
           {% for link in section.settings.menu.links %}
             <li class="mobile-nav__item">
-              <a href="{{ link.url }}" class="mobile-nav__link" style="color: #000; font-weight: 500;">{{ link.title }}</a>
+              <a href="{{ link.url }}" class="mobile-nav__link" style="color: #000; font-weight: 500; text-decoration: none;">{{ link.title }}</a>
             </li>
           {% endfor %}
         </ul>
