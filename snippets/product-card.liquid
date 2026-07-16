@@ -1,13 +1,21 @@
-<a href="{{ product.url }}" class="product-card">
-  <div class="product-card__image-wrapper">
-    {%- if product.featured_image != blank -%}
-      {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'product-card__image' }}
-    {%- else -%}
-      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-    {%- endif -%}
-  </div>
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card__link" style="text-decoration:none; color:inherit; display:block; position:relative;">
+    <div class="product-card__image-wrapper">
+      {%- if product.compare_at_price > product.price -%}
+        {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+        <span class="product-card__badge">{{ savings }}% OFF</span>
+      {%- endif -%}
+      {%- if product.featured_image != blank -%}
+        {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'product-card__image' }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </a>
   <div class="product-card__info">
-    <h3 class="product-card__title">{{ product.title }}</h3>
+    <a href="{{ product.url }}" style="text-decoration:none; color:inherit; display:block;">
+      <h3 class="product-card__title">{{ product.title }}</h3>
+    </a>
     <p class="product-card__price">
       {%- if product.compare_at_price > product.price -%}
         <span class="product-card__price--sale">{{ product.price | money }}</span>
@@ -16,5 +24,6 @@
         {{ product.price | money }}
       {%- endif -%}
     </p>
+    <button class="product-card__button" type="button" onclick="window.location.href='{{ product.url }}'">Choose options</button>
   </div>
-</a>
+</div>

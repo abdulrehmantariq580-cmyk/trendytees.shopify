@@ -8,5 +8,10 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {}
+  "current": {
+    "background_color": "#f3f4f6",
+    "primary_accent": "#000000",
+    "secondary_accent": "#000000",
+    "input_corner_radius": 20
+  }
 }

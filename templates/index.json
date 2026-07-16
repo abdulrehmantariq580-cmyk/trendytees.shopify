@@ -12,15 +12,15 @@
     "hero_banner": {
       "type": "hero-banner",
       "settings": {
-        "video": "shopify://files/videos/A_cinematic_high_quality_slow_gwr_video_mvp.mp4",
+        "video": "",
         "image": "shopify://shop_images/Screenshot_20260715-152154.png",
-        "overlay_opacity": 40,
+        "overlay_opacity": 20,
         "text_alignment": "center",
-        "subheading": "Latest Drop",
-        "heading": "Streetwear Evolution",
-        "text": "<p>Discover the new era of fashion with our exclusive collection. Bold designs, premium quality.</p>",
-        "button_label": "Shop the Drop",
-        "button_link": "shopify://collections/all"
+        "subheading": "KARVAAN",
+        "heading": "HOUSE OF STREETWEAR",
+        "text": "",
+        "button_label": "",
+        "button_link": ""
       }
     },
     "category_slider": {

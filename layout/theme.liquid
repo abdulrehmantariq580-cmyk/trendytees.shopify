@@ -43,6 +43,21 @@
 
     {% render 'cart-drawer' %}
 
+    <!-- Sticky Countdown Timer -->
+    <div class="sticky-countdown" style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #000; color: #fff; padding: 10px 0; z-index: 1000; display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 0.9rem;">
+      <span style="font-weight: 500; text-transform: uppercase;">Sale ends in:</span>
+      <div style="display: flex; gap: 5px; align-items: center;">
+        <div style="background: #222; padding: 5px 8px; border-radius: 4px; text-align: center; line-height: 1;"><span style="font-weight: 700; font-size: 1.1rem; display: block;">00</span><span style="font-size: 0.6rem; text-transform: lowercase;">days</span></div>
+        <span>:</span>
+        <div style="background: #222; padding: 5px 8px; border-radius: 4px; text-align: center; line-height: 1;"><span style="font-weight: 700; font-size: 1.1rem; display: block;">00</span><span style="font-size: 0.6rem; text-transform: lowercase;">hours</span></div>
+        <span>:</span>
+        <div style="background: #222; padding: 5px 8px; border-radius: 4px; text-align: center; line-height: 1;"><span style="font-weight: 700; font-size: 1.1rem; display: block;">53</span><span style="font-size: 0.6rem; text-transform: lowercase;">mins</span></div>
+        <span>:</span>
+        <div style="background: #222; padding: 5px 8px; border-radius: 4px; text-align: center; line-height: 1;"><span style="font-weight: 700; font-size: 1.1rem; display: block;">48</span><span style="font-size: 0.6rem; text-transform: lowercase;">secs</span></div>
+      </div>
+      <button style="position: absolute; right: 20px; color: #666; background: none; border: none; font-size: 1.2rem; cursor: pointer;" onclick="this.parentElement.style.display='none'">×</button>
+    </div>
+
     {% comment %} GSAP Animation Engine & Smooth Scrolling {% endcomment %}
     <script src="{{ 'gsap.min.js' | asset_url }}" defer></script>
     <script src="{{ 'ScrollTrigger.min.js' | asset_url }}" defer></script>

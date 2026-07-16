@@ -2,9 +2,14 @@
   <div class="page-width">
     {%- if section.settings.title != blank -%}
       <div class="featured-products__header">
-        <h2 class="featured-products__title" data-animate-text>{{ section.settings.title }}</h2>
+        <div style="text-align: center; width: 100%;">
+          <h2 class="featured-products__title" data-animate-text style="font-size: clamp(1.8rem, 4vw, 2.5rem); font-style: normal; font-weight: 700; text-transform: uppercase;">{{ section.settings.title }}</h2>
+          {%- if section.settings.subtitle != blank -%}
+            <p class="featured-products__subtitle" style="font-size: 1.1rem; color: #666; margin-top: 1rem; text-transform: uppercase; letter-spacing: 1px;">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+        </div>
         {%- if section.settings.show_view_all -%}
-          <a href="{{ collections[section.settings.collection].url }}" class="featured-products__view-all">View All</a>
+          <a href="{{ collections[section.settings.collection].url }}" class="featured-products__view-all" style="position: absolute; right: 0; bottom: 0;">View All</a>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -74,19 +79,15 @@
   }
 
   .featured-products__header {
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 4rem;
-    border-bottom: 2px solid rgba(255,255,255,0.1);
     padding-bottom: 1.5rem;
   }
 
   .featured-products__title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    text-transform: uppercase;
-    font-style: italic;
-    font-weight: 900;
     margin: 0;
   }
 
@@ -144,7 +145,13 @@
       "type": "text",
       "id": "title",
       "label": "Heading",
-      "default": "Trending Tees"
+      "default": "PRETTY DAMAGE VOL I IS LIVE NOW!"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "NO SECOND CHANCES, COP NOW OR WATCH IT SELL OUT."
     },
     {
       "type": "collection",
