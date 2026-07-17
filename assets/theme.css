@@ -34,8 +34,12 @@ body {
   overflow-x: hidden;
 }
 
-main#MainContent, .content-for-layout, .page-width {
+main#MainContent, .content-for-layout, .page-width, .shopify-section, .product-grid, .featured-products {
   background-color: transparent !important;
+}
+
+:root {
+  --color-background: #f2f4f8 !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
