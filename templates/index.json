@@ -140,11 +140,25 @@
         "title": "What Our Customers Say",
         "autoplay_speed": 5
       }
+    },
+    "featured_products_2": {
+      "type": "featured-products",
+      "settings": {
+        "title": "New Arrivals",
+        "subtitle": "Fresh drops just landed.",
+        "collection": "",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "video": "",
+        "video_url": ""
+      }
     }
   },
   "order": [
     "hero_banner",
     "featured_products",
+    "featured_products_2",
     "category_slider",
     "parallax_banner_PiL3GR",
     "testimonials_slider_MCDYHz"
