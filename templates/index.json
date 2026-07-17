@@ -12,8 +12,7 @@
     "hero_banner": {
       "type": "hero-banner",
       "settings": {
-        "video": "",
-        "image": "",
+        "image": "shopify://shop_images/Gemini_Generated_Image_kkyp45kkyp45kkyp.png",
         "overlay_opacity": 0,
         "text_alignment": "center",
         "subheading": "",
@@ -30,7 +29,6 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "",
             "title": "Graphic Tees"
           }
         },
@@ -38,7 +36,6 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "",
             "title": "Oversized Tees"
           }
         },
@@ -46,7 +43,6 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "",
             "title": "Vintage Tees"
           }
         },
@@ -54,7 +50,6 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "",
             "title": "Basic Tees"
           }
         }
@@ -69,16 +64,6 @@
         "title": "Shop by Category"
       }
     },
-    "featured_products": {
-      "type": "featured-products",
-      "settings": {
-        "title": "Trending Tees",
-        "collection": "featured-products",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "show_view_all": true
-      }
-    },
     "parallax_banner_PiL3GR": {
       "type": "parallax-banner",
       "name": "Parallax Banner",
@@ -89,6 +74,17 @@
         "text": "<p>Discover the latest drops in our exclusive collection.</p>",
         "button_label": "Shop Now",
         "button_link": ""
+      }
+    },
+    "featured_products": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Trending Tees",
+        "subtitle": "NO SECOND CHANCES, COP NOW OR WATCH IT SELL OUT.",
+        "collection": "featured-products",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "show_view_all": true
       }
     },
     "testimonials_slider_MCDYHz": {
