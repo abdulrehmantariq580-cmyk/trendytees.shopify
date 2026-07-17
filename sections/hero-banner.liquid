@@ -1,8 +1,8 @@
 {%- style -%}
   #HeroBanner-{{ section.id }} {
     position: relative;
-    height: 80vh;
     width: 100vw;
+    aspect-ratio: 16 / 9;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     display: flex;
@@ -14,8 +14,9 @@
 
   @media screen and (max-width: 768px) {
     #HeroBanner-{{ section.id }} {
-      height: 70vh;
-      min-height: 500px;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      min-height: unset;
     }
     #HeroBanner-{{ section.id }} .hero-banner__content {
       padding: 0 1.5rem;
