@@ -165,6 +165,19 @@
         "title": "What Our Customers Say",
         "autoplay_speed": 5
       }
+    },
+    "featured_products_3": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Best Sellers",
+        "subtitle": "Grab them before they're gone.",
+        "collection": "",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "video": "",
+        "video_url": ""
+      }
     }
   },
   "order": [
@@ -172,6 +185,7 @@
     "featured_products",
     "featured_products_2",
     "hero_banner_2",
+    "featured_products_3",
     "category_slider",
     "parallax_banner_PiL3GR",
     "testimonials_slider_MCDYHz"
