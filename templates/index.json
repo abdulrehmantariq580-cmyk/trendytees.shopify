@@ -12,7 +12,7 @@
     "hero_banner": {
       "type": "hero-banner",
       "settings": {
-        "image": "shopify://shop_images/Gemini_Generated_Image_kkyp45kkyp45kkyp.png",
+        "image": "shopify://shop_images/Gemini_Generated_Image_kkyp45kkyp45kkyp-clean.png",
         "overlay_opacity": 0,
         "text_alignment": "center",
         "subheading": "",
@@ -20,6 +20,17 @@
         "text": "",
         "button_label": "",
         "button_link": ""
+      }
+    },
+    "featured_products": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Trending Tees",
+        "subtitle": "NO SECOND CHANCES, COP NOW OR WATCH IT SELL OUT.",
+        "collection": "featured-products",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "show_view_all": true
       }
     },
     "category_slider": {
@@ -74,17 +85,6 @@
         "text": "<p>Discover the latest drops in our exclusive collection.</p>",
         "button_label": "Shop Now",
         "button_link": ""
-      }
-    },
-    "featured_products": {
-      "type": "featured-products",
-      "settings": {
-        "title": "Trending Tees",
-        "subtitle": "NO SECOND CHANCES, COP NOW OR WATCH IT SELL OUT.",
-        "collection": "featured-products",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "show_view_all": true
       }
     },
     "testimonials_slider_MCDYHz": {
