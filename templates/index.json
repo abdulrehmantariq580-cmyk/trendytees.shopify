@@ -153,12 +153,26 @@
         "video": "",
         "video_url": ""
       }
+    },
+    "hero_banner_2": {
+      "type": "hero-banner",
+      "settings": {
+        "image": "shopify://shop_images/Gemini_Generated_Image_kkyp45kkyp45kkyp-clean.png",
+        "overlay_opacity": 0,
+        "text_alignment": "center",
+        "subheading": "",
+        "heading": "",
+        "text": "",
+        "button_label": "",
+        "button_link": ""
+      }
     }
   },
   "order": [
     "hero_banner",
     "featured_products",
     "featured_products_2",
+    "hero_banner_2",
     "category_slider",
     "parallax_banner_PiL3GR",
     "testimonials_slider_MCDYHz"
