@@ -1,4 +1,24 @@
 <section class="about-us-section" id="AboutUs-{{ section.id }}">
+  
+  {%- if section.blocks.size > 0 -%}
+    <div class="about-us__features page-width">
+      {%- for block in section.blocks -%}
+        <div class="about-us__feature" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <div class="about-us__feature-image-wrapper">
+               {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'about-us__feature-image' }}
+            </div>
+          {%- endif -%}
+          <h3 class="about-us__feature-title">{{ block.settings.heading }}</h3>
+          <div class="about-us__feature-text">{{ block.settings.text }}</div>
+          {%- if block.settings.button_label != blank -%}
+            <a href="{{ block.settings.button_link }}" class="about-us__feature-button">{{ block.settings.button_label }}</a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
   {%- if section.settings.image != blank -%}
     <div class="about-us__banner">
       {{ section.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy', class: 'about-us__banner-img' }}
@@ -17,6 +37,68 @@
   #AboutUs-{{ section.id }} {
     background-color: transparent;
     padding-bottom: 6rem;
+  }
+
+  .about-us__features {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    margin-bottom: 6rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .about-us__feature {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-us__feature-image-wrapper {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  
+  .about-us__feature-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .about-us__feature-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    color: #000;
+  }
+
+  .about-us__feature-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 2rem;
+  }
+
+  .about-us__feature-button {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 1px solid #000;
+    border-radius: 50px;
+    color: #000;
+    text-decoration: none;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+  }
+
+  .about-us__feature-button:hover {
+    background-color: #000;
+    color: #fff;
   }
 
   .about-us__banner {
@@ -78,6 +160,42 @@
       "id": "text",
       "label": "Text",
       "default": "<p>Trendy Tees is more than just a clothing brand—it's a movement. Rooted in modern streetwear, each garment tells a powerful story of resilience, skill, and bold style.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article",
+      "name": "Article / Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Feature Name"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Description about this feature or article.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "View Article"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
     }
   ],
   "presets": [
