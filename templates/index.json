@@ -14,10 +14,10 @@
       "settings": {
         "video": "",
         "image": "",
-        "overlay_opacity": 20,
+        "overlay_opacity": 0,
         "text_alignment": "center",
-        "subheading": "KARVAAN",
-        "heading": "HOUSE OF STREETWEAR",
+        "subheading": "",
+        "heading": "",
         "text": "",
         "button_label": "",
         "button_link": ""
