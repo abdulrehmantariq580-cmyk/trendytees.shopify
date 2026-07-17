@@ -106,7 +106,7 @@
       "settings": {
         "title": "Lead The Trend Dont Follow it",
         "subtitle": "Trendy Tees",
-        "collection": "",
+        "collection": "new-colleection",
         "products_to_show": 4,
         "columns_desktop": 4,
         "show_view_all": true,
