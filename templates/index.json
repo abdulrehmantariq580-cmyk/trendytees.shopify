@@ -71,6 +71,15 @@
         "show_view_all": true,
         "video_url": ""
       }
+    },
+    "about_us": {
+      "type": "about-us",
+      "settings": {
+        "heading": "Born in the Streets.",
+        "text": "<p>We don't follow trends, we create them. Trendy Tees represents the bold, the unapologetic, and the visionaries. Every piece is crafted for maximum impact and ultimate comfort. Step into the new era of streetwear.</p>",
+        "button_label": "Discover More",
+        "button_link": ""
+      }
     }
   },
   "order": [
@@ -78,6 +87,7 @@
     "featured_products",
     "featured_products_9VBgeW",
     "hero_banner_2",
-    "featured_products_iLrA6p"
+    "featured_products_iLrA6p",
+    "about_us"
   ]
 }
