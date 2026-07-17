@@ -30,7 +30,9 @@
         "collection": "featured-products",
         "products_to_show": 4,
         "columns_desktop": 4,
-        "show_view_all": true
+        "show_view_all": true,
+        "video": "shopify://files/videos/A_cinematic_high_quality_slow_gwr_video_mvp.mp4",
+        "video_url": ""
       }
     },
     "category_slider": {
