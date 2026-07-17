@@ -142,9 +142,9 @@
   },
   "order": [
     "hero_banner",
+    "featured_products",
     "category_slider",
     "parallax_banner_PiL3GR",
-    "featured_products",
     "testimonials_slider_MCDYHz"
   ]
 }
