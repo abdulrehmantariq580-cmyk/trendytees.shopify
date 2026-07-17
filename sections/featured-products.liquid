@@ -72,6 +72,16 @@
         <a href="{{ collections[section.settings.collection].url }}" class="featured-products__view-all-btn" style="display: inline-block; padding: 12px 40px; background-color: #000; color: #fff; text-decoration: none; border-radius: 50px; font-weight: 500; letter-spacing: 1px; font-size: 0.9rem; transition: transform 0.3s ease, background-color 0.3s ease;">View all</a>
       </div>
     {%- endif -%}
+
+    {%- if section.settings.video != blank or section.settings.video_url != blank -%}
+      <div class="featured-products__video-wrapper" style="margin-top: 4rem; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 10px; background-color: #000;">
+        {%- if section.settings.video != blank -%}
+          {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, style: 'width: 100%; height: 100%; object-fit: cover;' }}
+        {%- else -%}
+          <video src="{{ section.settings.video_url }}" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -184,6 +194,16 @@
       "id": "show_view_all",
       "default": true,
       "label": "Enable \"View all\" button if collection has more products than shown"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Section Video (16:9)"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Or Video URL (MP4)"
     }
   ],
   "blocks": [
