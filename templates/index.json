@@ -35,12 +35,12 @@
         "video_url": ""
       }
     },
-    "featured_products_2": {
+    "featured_products_9VBgeW": {
       "type": "featured-products",
       "settings": {
-        "title": "New Arrivals",
-        "subtitle": "Fresh drops just landed.",
-        "collection": "",
+        "title": "Trending Tees",
+        "subtitle": "NO SECOND CHANCES, COP NOW OR WATCH IT SELL OUT.",
+        "collection": "new-colleection",
         "products_to_show": 4,
         "columns_desktop": 4,
         "show_view_all": true,
@@ -60,53 +60,12 @@
         "button_link": ""
       }
     },
-    "featured_products_ciaqjK": {
+    "featured_products_iLrA6p": {
       "type": "featured-products",
-      "blocks": {
-        "custom_product_LBKhtJ": {
-          "type": "custom_product",
-          "settings": {
-            "title": "Custom T-Shirt",
-            "price": "$29.99",
-            "link": ""
-          }
-        },
-        "custom_product_NEPERn": {
-          "type": "custom_product",
-          "settings": {
-            "title": "Custom T-Shirt",
-            "price": "$29.99",
-            "link": ""
-          }
-        },
-        "custom_product_yKTTJA": {
-          "type": "custom_product",
-          "settings": {
-            "title": "Custom T-Shirt",
-            "price": "$29.99",
-            "link": ""
-          }
-        },
-        "custom_product_kGJiEw": {
-          "type": "custom_product",
-          "settings": {
-            "title": "Custom T-Shirt",
-            "price": "$29.99",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "custom_product_LBKhtJ",
-        "custom_product_NEPERn",
-        "custom_product_yKTTJA",
-        "custom_product_kGJiEw"
-      ],
-      "name": "Featured Products",
       "settings": {
-        "title": "Lead The Trend Dont Follow it",
-        "subtitle": "Trendy Tees",
-        "collection": "new-colleection",
+        "title": "Trending Tees",
+        "subtitle": "NO SECOND CHANCES, COP NOW OR WATCH IT SELL OUT.",
+        "collection": "featured-products",
         "products_to_show": 4,
         "columns_desktop": 4,
         "show_view_all": true,
@@ -117,8 +76,8 @@
   "order": [
     "hero_banner",
     "featured_products",
-    "featured_products_2",
+    "featured_products_9VBgeW",
     "hero_banner_2",
-    "featured_products_ciaqjK"
+    "featured_products_iLrA6p"
   ]
 }
