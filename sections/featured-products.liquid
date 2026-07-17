@@ -8,9 +8,6 @@
             <p class="featured-products__subtitle" style="font-size: 1.1rem; color: #666; margin-top: 1rem; text-transform: uppercase; letter-spacing: 1px;">{{ section.settings.subtitle }}</p>
           {%- endif -%}
         </div>
-        {%- if section.settings.show_view_all -%}
-          <a href="{{ collections[section.settings.collection].url }}" class="featured-products__view-all" style="position: absolute; right: 0; bottom: 0;">View All</a>
-        {%- endif -%}
       </div>
     {%- endif -%}
 
@@ -69,6 +66,12 @@
         {%- endif -%}
       {%- endif -%}
     </div>
+
+    {%- if section.settings.show_view_all -%}
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="{{ collections[section.settings.collection].url }}" class="featured-products__view-all-btn" style="display: inline-block; padding: 12px 40px; background-color: #000; color: #fff; text-decoration: none; border-radius: 50px; font-weight: 500; letter-spacing: 1px; font-size: 0.9rem; transition: transform 0.3s ease, background-color 0.3s ease;">View all</a>
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
