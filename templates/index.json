@@ -35,6 +35,31 @@
         "video_url": ""
       }
     },
+    "featured_products_2": {
+      "type": "featured-products",
+      "settings": {
+        "title": "New Arrivals",
+        "subtitle": "Fresh drops just landed.",
+        "collection": "",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "video_url": ""
+      }
+    },
+    "hero_banner_2": {
+      "type": "hero-banner",
+      "settings": {
+        "image": "shopify://shop_images/Gemini_Generated_Image_xl85pbxl85pbxl85.png",
+        "overlay_opacity": 0,
+        "text_alignment": "center",
+        "subheading": "",
+        "heading": "",
+        "text": "",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
     "category_slider": {
       "type": "category-slider",
       "blocks": {
@@ -139,32 +164,6 @@
       "settings": {
         "title": "What Our Customers Say",
         "autoplay_speed": 5
-      }
-    },
-    "featured_products_2": {
-      "type": "featured-products",
-      "settings": {
-        "title": "New Arrivals",
-        "subtitle": "Fresh drops just landed.",
-        "collection": "",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "show_view_all": true,
-        "video": "",
-        "video_url": ""
-      }
-    },
-    "hero_banner_2": {
-      "type": "hero-banner",
-      "settings": {
-        "image": "shopify://shop_images/Gemini_Generated_Image_kkyp45kkyp45kkyp-clean.png",
-        "overlay_opacity": 0,
-        "text_alignment": "center",
-        "subheading": "",
-        "heading": "",
-        "text": "",
-        "button_label": "",
-        "button_link": ""
       }
     }
   },
