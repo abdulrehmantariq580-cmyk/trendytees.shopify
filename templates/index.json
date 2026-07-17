@@ -38,7 +38,7 @@
     "featured_products_9VBgeW": {
       "type": "featured-products",
       "settings": {
-        "title": "Trending Tees",
+        "title": "New Collection",
         "subtitle": "NO SECOND CHANCES, COP NOW OR WATCH IT SELL OUT.",
         "collection": "new-colleection",
         "products_to_show": 4,
@@ -63,9 +63,9 @@
     "featured_products_iLrA6p": {
       "type": "featured-products",
       "settings": {
-        "title": "Trending Tees",
+        "title": "Amazing Designs",
         "subtitle": "NO SECOND CHANCES, COP NOW OR WATCH IT SELL OUT.",
-        "collection": "featured-products",
+        "collection": "amazing-designs",
         "products_to_show": 4,
         "columns_desktop": 4,
         "show_view_all": true,
