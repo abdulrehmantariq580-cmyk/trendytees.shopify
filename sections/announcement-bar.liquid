@@ -1,9 +1,9 @@
 <style>
   .announcement-bar-wrapper {
-    background-color: #000; color: #fff; padding: 10px 0; font-size: 0.8rem; letter-spacing: 1px; display: flex; justify-content: center; align-items: center; overflow: hidden;
+    background-color: #000; color: #fff; padding: 10px 0; font-size: 0.8rem; letter-spacing: 1px; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative;
   }
   .announcement-bar__content {
-    display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%; padding: 0 10px; box-sizing: border-box;
+    display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%; padding: 0 80px; box-sizing: border-box;
   }
   .announcement-fade-wrapper {
     display: grid; align-items: center; justify-items: center;
@@ -11,10 +11,22 @@
   .announcement-bar__message {
     grid-area: 1 / 1; text-transform: uppercase; text-align: center; white-space: nowrap; transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
   }
-  .announcement-bar__socials, .announcement-bar__empty {
-    display: none; /* Hide socials in slider to guarantee center alignment */
+  .announcement-bar__socials {
+    display: flex; gap: 15px; position: absolute; left: 20px; z-index: 2; align-items: center;
+  }
+  .announcement-bar__socials a {
+    color: #fff; opacity: 0.8; transition: opacity 0.3s; display: flex; align-items: center;
+  }
+  .announcement-bar__socials a:hover {
+    opacity: 1;
   }
   @media screen and (max-width: 768px) {
+    .announcement-bar__socials {
+      display: none;
+    }
+    .announcement-bar__content {
+      padding: 0 10px;
+    }
     .announcement-bar-wrapper {
       padding: 10px 0;
     }
@@ -37,6 +49,22 @@
   }
 </style>
 <div class="announcement-bar full-width announcement-bar-wrapper" role="region" aria-label="Announcement">
+  <div class="announcement-bar__socials">
+    {% if settings.social_instagram_link != blank %}
+      <a href="{{ settings.social_instagram_link }}" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+      </a>
+    {% endif %}
+    {% if settings.social_whatsapp_link != blank %}
+      <a href="{{ settings.social_whatsapp_link }}" aria-label="WhatsApp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path>
+          <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"></path>
+        </svg>
+      </a>
+    {% endif %}
+  </div>
+
   <div class="announcement-bar__content">
     <span class="announcement-prev" style="cursor: pointer; opacity: 0.7; padding: 0 10px; user-select: none; flex-shrink: 0; font-weight: bold;">&lt;</span>
     <div class="announcement-fade-wrapper">
