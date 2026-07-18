@@ -1,6 +1,5 @@
 {%- assign limit = section.settings.products_to_show | default: 4 -%}
 {%- assign current_product_id = product.id -%}
-{%- assign collection_to_use = product.collections.first | default: collections.all -%}
 
 <div class="product-recommendations">
   <div class="page-width" style="padding-top: 4rem; padding-bottom: 4rem; border-top: 1px solid #eee;">
@@ -8,30 +7,25 @@
     
     <div class="product-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
       {%- assign count = 0 -%}
-      {%- assign current_time = "now" | date: "%s" | modulo: 5 -%}
-      {%- assign loop_index = 0 -%}
+      {%- assign current_time = "now" | date: "%s" | modulo: 10 -%}
       
-      {% comment %} Output exactly 'limit' products from the same collection {% endcomment %}
-      {%- for prod in collection_to_use.products -%}
+      {% comment %} Output exactly 'limit' products from all products {% endcomment %}
+      {%- for prod in collections.all.products offset: current_time -%}
         {%- if prod.id != current_product_id -%}
-          {%- assign loop_index = loop_index | plus: 1 -%}
-          {%- if loop_index > current_time -%}
-            <div class="random-product-card">
-              {% render 'product-card', product: prod %}
-            </div>
-            {%- assign count = count | plus: 1 -%}
-            {%- if count >= limit -%}
-              {%- break -%}
-            {%- endif -%}
+          <div class="random-product-card">
+            {% render 'product-card', product: prod %}
+          </div>
+          {%- assign count = count | plus: 1 -%}
+          {%- if count >= limit -%}
+            {%- break -%}
           {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
       
-      {% comment %} In case the offset caused us to get less than 'limit' products, fill the rest {% endcomment %}
+      {% comment %} In case the offset caused us to get less than 'limit' products, fill the rest from the start {% endcomment %}
       {%- if count < limit -%}
-        {%- for prod in collection_to_use.products -%}
+        {%- for prod in collections.all.products -%}
           {%- if prod.id != current_product_id -%}
-            {%- assign is_rendered = false -%}
             <div class="random-product-card">
               {% render 'product-card', product: prod %}
             </div>
