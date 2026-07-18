@@ -398,12 +398,14 @@
   
   .custom-payment-button-wrapper .shopify-payment-button,
   .custom-payment-button-wrapper shopify-accelerated-checkout,
+  .custom-payment-button-wrapper shopify-buy-it-now-button,
   .custom-payment-button-wrapper shopify-accelerated-checkout-cart,
   .custom-payment-button-wrapper shopify-payment-terms {
     width: 100% !important;
     display: block !important;
   }
 
+  .custom-payment-button-wrapper button,
   .custom-payment-button-wrapper .shopify-payment-button__button,
   .custom-payment-button-wrapper .shopify-payment-button__button--unbranded,
   .custom-payment-button-wrapper .shopify-payment-button__button--hidden {
@@ -421,6 +423,7 @@
     min-height: 52px !important;
   }
   
+  .custom-payment-button-wrapper button:hover:not([disabled]),
   .custom-payment-button-wrapper .shopify-payment-button__button:hover:not([disabled]),
   .custom-payment-button-wrapper .shopify-payment-button__button--unbranded:hover:not([disabled]) {
     transform: scale(1.02);
