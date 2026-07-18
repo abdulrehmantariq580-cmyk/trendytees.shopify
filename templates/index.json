@@ -26,7 +26,7 @@
       "type": "featured-products",
       "settings": {
         "title": "Trending Tees",
-        "subtitle": "NO SECOND CHANCES, COP NOW OR WATCH IT SELL OUT.",
+        "subtitle": "Lead the Trend, Don't follow it",
         "collection": "featured-products",
         "products_to_show": 4,
         "columns_desktop": 4,
@@ -39,7 +39,7 @@
       "type": "featured-products",
       "settings": {
         "title": "New Collection",
-        "subtitle": "NO SECOND CHANCES, COP NOW OR WATCH IT SELL OUT.",
+        "subtitle": "Lead the trend, Don't Follow it",
         "collection": "new-colleection",
         "products_to_show": 4,
         "columns_desktop": 4,
@@ -64,7 +64,7 @@
       "type": "featured-products",
       "settings": {
         "title": "Amazing Designs",
-        "subtitle": "NO SECOND CHANCES, COP NOW OR WATCH IT SELL OUT.",
+        "subtitle": "Lead the trend, don't Follow it",
         "collection": "amazing-designs",
         "products_to_show": 4,
         "columns_desktop": 4,
@@ -74,6 +74,7 @@
     },
     "about_us": {
       "type": "about-us",
+      "name": "About Us (Trendy Tees)",
       "settings": {
         "heading": "Born in the Streets.",
         "text": "<p>We don't follow trends, we create them. Trendy Tees represents the bold, the unapologetic, and the visionaries. Every piece is crafted for maximum impact and ultimate comfort. Step into the new era of streetwear.</p>"
