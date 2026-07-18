@@ -8,7 +8,7 @@
 <section class="collection-page" id="CollectionPage-{{ section.id }}">
   <div class="page-width">
     <div class="collection-page__header">
-      <h1 class="collection-page__title">{{ collection.title }}</h1>
+      <h1 class="collection-page__title">{% if collection.handle == 'all' %}ALL PRODUCTS{% else %}{{ collection.title }}{% endif %}</h1>
       {%- if collection.description != blank -%}
         <div class="collection-page__description">{{ collection.description }}</div>
       {%- endif -%}

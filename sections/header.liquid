@@ -186,17 +186,17 @@
     <div class="site-header__nav-row">
       <ul class="site-header__nav-list">
         <!-- Home -->
-        <li><a href="/" class="site-header__nav-item site-header__nav-item--active">HOME</a></li>
+        <li><a href="/" class="site-header__nav-item {% if request.path == '/' %}site-header__nav-item--active{% endif %}">HOME</a></li>
         
         <!-- Dynamic Collections -->
         {% for collection in collections %}
           {% if collection.handle != 'all' and collection.handle != 'frontpage' %}
-            <li><a href="{{ collection.url }}" class="site-header__nav-item" style="text-transform: uppercase;">{{ collection.title }}</a></li>
+            <li><a href="{{ collection.url }}" class="site-header__nav-item {% if request.path == collection.url %}site-header__nav-item--active{% endif %}" style="text-transform: uppercase;">{{ collection.title }}</a></li>
           {% endif %}
         {% endfor %}
         
         <!-- Shop All -->
-        <li><a href="/collections/all" class="site-header__nav-item">SHOP ALL</a></li>
+        <li><a href="/collections/all" class="site-header__nav-item {% if request.path == '/collections/all' %}site-header__nav-item--active{% endif %}">SHOP ALL</a></li>
       </ul>
     </div>
   </div>
