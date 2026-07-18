@@ -13,6 +13,17 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
+      "blocks": {
+        "announcement_gfH8B6": {
+          "type": "announcement",
+          "settings": {
+            "text": "FREE SHIPPING ON ORDERS ABOVE RS. 3999"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_gfH8B6"
+      ],
       "settings": {
         "text": "FREE SHIPPING ON ORDERS ABOVE RS. 3999"
       }
