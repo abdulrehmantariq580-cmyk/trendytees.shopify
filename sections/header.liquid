@@ -119,8 +119,16 @@
           {{ section.settings.logo | image_url: width: 200 | image_tag: alt: shop.name, class: 'header-logo' }}
           {% else %}
           <div class="site-header__logo-text" style="color: #000; display: flex; flex-direction: column; align-items: center;">
-            <span class="logo-main-text" style="font-style:italic; font-weight:900; letter-spacing:2px; text-transform:uppercase; line-height: 1;">{{ shop.name }}</span>
-            <span class="logo-sub-text" style="letter-spacing: 0.5px; margin-top: 2px;">Lead the Trend Don't Follow it</span>
+            <span class="logo-main-text" style="font-style:italic; font-weight:900; letter-spacing:2px; text-transform:uppercase; line-height: 1;">
+              {% if section.settings.logo_text != blank %}
+                {{ section.settings.logo_text }}
+              {% else %}
+                {{ shop.name }}
+              {% endif %}
+            </span>
+            {% if section.settings.logo_subtext != blank %}
+              <span class="logo-sub-text" style="letter-spacing: 0.5px; margin-top: 2px;">{{ section.settings.logo_subtext }}</span>
+            {% endif %}
             <style>
               .logo-main-text { font-size: 2.2rem; }
               .logo-sub-text { font-size: 0.6rem; }
@@ -281,7 +289,20 @@
     {
       "type": "image_picker",
       "id": "logo",
-      "label": "Logo"
+      "label": "Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "Trendy Tees",
+      "info": "Leave blank to use the store name."
+    },
+    {
+      "type": "text",
+      "id": "logo_subtext",
+      "label": "Logo Subtext",
+      "default": "Lead the Trend Don't Follow it"
     },
     {
       "type": "link_list",
