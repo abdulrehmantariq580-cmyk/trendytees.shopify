@@ -88,7 +88,7 @@
 
 {%- style -%}
   #FeaturedProducts-{{ section.id }} {
-    padding: 6rem 0;
+    padding: 5rem 0;
     background-color: var(--color-background);
   }
 
@@ -136,6 +136,19 @@
     .product-grid {
       grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
       gap: 2.5rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #FeaturedProducts-{{ section.id }} {
+      padding: 1.5rem 0;
+    }
+    .featured-products__header {
+      margin-bottom: 2rem;
+      padding-bottom: 0.5rem;
+    }
+    .featured-products__video-wrapper {
+      margin-top: 1.5rem !important;
     }
   }
 {%- endstyle -%}
