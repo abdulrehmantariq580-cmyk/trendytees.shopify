@@ -1,0 +1,84 @@
+<div class="product-recommendations" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}">
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <div class="page-width" style="padding-top: 4rem; padding-bottom: 4rem; border-top: 1px solid #eee;">
+      <h2 class="product-recommendations__heading" style="text-align: center; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; text-transform: uppercase; margin-bottom: 3rem;">{{ section.settings.heading }}</h2>
+      
+      <div class="product-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+        {%- for product in recommendations.products -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+  @media screen and (min-width: 768px) {
+    .product-recommendations .product-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 2rem !important;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .product-recommendations .product-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr) !important;
+      gap: 2.5rem !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const recommendationsSection = document.querySelector('.product-recommendations');
+    if (!recommendationsSection) return;
+
+    const url = recommendationsSection.dataset.url;
+    
+    fetch(url)
+      .then(response => response.text())
+      .then(text => {
+        const html = document.createElement('div');
+        html.innerHTML = text;
+        const recommendations = html.querySelector('.product-recommendations');
+        
+        if (recommendations && recommendations.innerHTML.trim().length) {
+          recommendationsSection.innerHTML = recommendations.innerHTML;
+        }
+      })
+      .catch(e => {
+        console.error('Error fetching product recommendations', e);
+      });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product recommendations",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "You May Also Like",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4,
+      "label": "Maximum products to show"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "Number of columns on desktop"
+    }
+  ]
+}
+{% endschema %}

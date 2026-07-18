@@ -1,45 +1,568 @@
 {% comment %}
-  This section is used in the product template to render product page with
-  media, content, and add-to-cart form.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/product
+  Main Product Section Template
 {% endcomment %}
 
-<div class="product-images">
-  {% for image in product.images %}
-    {% render 'image', class: 'product-image', image: image %}
-  {% endfor %}
-</div>
+<section class="main-product" id="MainProduct-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="page-width">
+    <div class="product-layout">
+      
+      <!-- Product Media (Left) -->
+      <div class="product-media-wrapper">
+        <div class="product-main-image">
+          {%- if product.selected_or_first_available_variant.featured_image -%}
+            {%- assign main_image = product.selected_or_first_available_variant.featured_image -%}
+          {%- elsif product.featured_image -%}
+            {%- assign main_image = product.featured_image -%}
+          {%- else -%}
+            {%- assign main_image = false -%}
+          {%- endif -%}
 
-<div class="product-info">
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.price | money }}</p>
-  <p>{{ product.description }}</p>
-</div>
+          {%- if main_image -%}
+            <img id="MainProductImage" src="{{ main_image | image_url: width: 1000 }}" alt="{{ main_image.alt | escape }}" loading="lazy">
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
 
-<div class="product-form">
-  {% form 'product', product %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
+        {%- if product.images.size > 1 -%}
+          <div class="product-thumbnails">
+            {%- for image in product.images -%}
+              <button type="button" class="thumbnail-btn {% if image == main_image %}is-active{% endif %}" data-image-url="{{ image | image_url: width: 1000 }}">
+                <img src="{{ image | image_url: width: 150 }}" alt="{{ image.alt | escape }}" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
 
-    <select name="id">
-      {% for variant in product.variants %}
-        <option
-          value="{{ variant.id }}"
-          {% if variant == current_variant %}
-            selected="selected"
-          {% endif %}
-        >
-          {{ variant.title }} - {{ variant.price | money }}
-        </option>
-      {% endfor %}
-    </select>
+      <!-- Product Info (Right) -->
+      <div class="product-info-wrapper">
+        <div class="product-info__vendor">{{ product.vendor | default: shop.name }}</div>
+        <h1 class="product-info__title">{{ product.title }}</h1>
+        
+        <div class="product-info__price-container">
+          <span class="product-info__compare-price" id="ComparePrice" {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}style="display:none;"{% endunless %}>
+            {{ product.selected_or_first_available_variant.compare_at_price | money }}
+          </span>
+          <span class="product-info__price" id="ProductPrice">
+            {{ product.selected_or_first_available_variant.price | money }}
+          </span>
+          <span class="product-info__sale-badge" id="SaleBadge" {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}style="display:none;"{% endunless %}>
+            {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+              {%- assign savings = product.selected_or_first_available_variant.compare_at_price | minus: product.selected_or_first_available_variant.price | times: 100.0 | divided_by: product.selected_or_first_available_variant.compare_at_price | round -%}
+              {{ savings }}% OFF
+            {%- endif -%}
+          </span>
+        </div>
 
-    <input type="text" name="quantity" min="1" value="1">
+        <p class="product-info__shipping"><u>Shipping</u> calculated at checkout.</p>
 
-    <input type="submit" value="Add to cart">
-    {{ form | payment_button }}
-  {% endform %}
-</div>
+        {% form 'product', product, id: 'AddToCartForm', class: 'product-form' %}
+          <input type="hidden" name="id" id="ProductSelect" value="{{ product.selected_or_first_available_variant.id }}">
+          
+          {%- unless product.has_only_default_variant -%}
+            <div class="product-options">
+              {%- for option in product.options_with_values -%}
+                <div class="product-option-block">
+                  <label class="product-option-label">{{ option.name }}</label>
+                  <div class="pill-group" data-option-index="{{ forloop.index0 }}">
+                    {%- for value in option.values -%}
+                      {%- assign is_selected = false -%}
+                      {%- if option.selected_value == value -%}
+                        {%- assign is_selected = true -%}
+                      {%- endif -%}
+                      <button type="button" class="pill-btn {% if is_selected %}is-active{% endif %}" data-value="{{ value | escape }}">
+                        {{ value }}
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
+
+          <div class="product-form__actions">
+            <div class="quantity-wrapper">
+              <label class="quantity-label" for="Quantity">Quantity</label>
+              <div class="quantity-selector">
+                <button type="button" class="quantity-btn minus" aria-label="Decrease quantity">&minus;</button>
+                <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-input">
+                <button type="button" class="quantity-btn plus" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+
+            <button type="submit" name="add" id="AddToCart" class="btn btn--add-to-cart" {% unless product.selected_or_first_available_variant.available %}disabled="disabled"{% endunless %}>
+              <span id="AddToCartText">
+                {% if product.selected_or_first_available_variant.available %}
+                  Add to cart
+                {% else %}
+                  Sold out
+                {% endif %}
+              </span>
+            </button>
+            
+            {{ form | payment_button }}
+          </div>
+        {% endform %}
+
+        <div class="product-info__description">
+          {{ product.description }}
+        </div>
+
+        <div class="product-info__share">
+          <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied to clipboard!');">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            Share
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Include product variants in JS for client-side selection -->
+<script type="application/json" id="ProductJson-{{ section.id }}">
+  {{ product | json }}
+</script>
+
+{%- style -%}
+  /* Global Resets for Product Page */
+  #MainProduct-{{ section.id }} {
+    padding: 3rem 0 6rem;
+    background-color: var(--color-background, #f2f3f5); /* Light greyish background from screenshot */
+  }
+
+  .product-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  @media screen and (min-width: 900px) {
+    .product-layout {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 5rem;
+    }
+  }
+
+  /* Media Wrapper */
+  .product-media-wrapper {
+    flex: 1;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .product-main-image {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    aspect-ratio: 1 / 1.1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  }
+
+  .product-main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-thumbnails {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .thumbnail-btn {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #fff;
+    padding: 0;
+    transition: border-color 0.3s;
+    flex-shrink: 0;
+  }
+
+  .thumbnail-btn.is-active, .thumbnail-btn:hover {
+    border-color: #000;
+  }
+
+  .thumbnail-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Info Wrapper */
+  .product-info-wrapper {
+    flex: 1;
+    width: 100%;
+  }
+
+  .product-info__vendor {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .product-info__title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 400; /* Regular sans-serif from screenshot */
+    margin: 0 0 1.5rem 0;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .product-info__price-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-info__compare-price {
+    font-size: 1.1rem;
+    color: #999;
+    text-decoration: line-through;
+  }
+
+  .product-info__price {
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+
+  .product-info__sale-badge {
+    background: #000;
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    border-radius: 2px;
+  }
+
+  .product-info__shipping {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
+
+  /* Options / Variants */
+  .product-option-block {
+    margin-bottom: 1.5rem;
+  }
+
+  .product-option-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+
+  .pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .pill-btn {
+    background: transparent;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    padding: 8px 24px;
+    font-size: 0.9rem;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .pill-btn:hover {
+    border-color: #000;
+  }
+
+  .pill-btn.is-active {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+  }
+
+  /* Quantity */
+  .quantity-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .quantity-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+
+  .quantity-selector {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    height: 45px;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .quantity-btn {
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 100%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    transition: background 0.2s;
+  }
+
+  .quantity-btn:hover {
+    background: #eee;
+  }
+
+  .quantity-input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    -moz-appearance: textfield;
+  }
+  .quantity-input::-webkit-outer-spin-button,
+  .quantity-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Actions */
+  .product-form__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .btn--add-to-cart {
+    width: 100%;
+    padding: 14px;
+    border-radius: 50px;
+    border: 1px solid #000;
+    background: transparent;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn--add-to-cart:hover {
+    background: #f4f4f4;
+  }
+
+  /* Shopify Payment Button Overrides */
+  .shopify-payment-button__button--unbranded {
+    border-radius: 50px !important;
+    background-color: #000 !important;
+    color: #fff !important;
+    padding: 14px !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    transition: transform 0.3s ease !important;
+  }
+  .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+    transform: scale(1.02);
+    background-color: #222 !important;
+  }
+
+  /* Description */
+  .product-info__description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 2rem;
+    border-top: 1px solid #eee;
+    padding-top: 2rem;
+  }
+  
+  .product-info__description ul {
+    padding-left: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  .product-info__description li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Share */
+  .product-info__share {
+    margin-top: 2rem;
+  }
+
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+  }
+  .share-btn:hover {
+    color: #000;
+  }
+
+{%- endstyle -%}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 1. Thumbnail Image Swap
+    const thumbnails = document.querySelectorAll('.thumbnail-btn');
+    const mainImage = document.getElementById('MainProductImage');
+
+    thumbnails.forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Update active class
+        thumbnails.forEach(b => b.classList.remove('is-active'));
+        this.classList.add('is-active');
+        // Swap image
+        mainImage.src = this.getAttribute('data-image-url');
+      });
+    });
+
+    // 2. Quantity Selector
+    const qtyMinus = document.querySelector('.quantity-btn.minus');
+    const qtyPlus = document.querySelector('.quantity-btn.plus');
+    const qtyInput = document.getElementById('Quantity');
+
+    if(qtyMinus && qtyPlus && qtyInput) {
+      qtyMinus.addEventListener('click', () => {
+        let val = parseInt(qtyInput.value);
+        if (val > 1) qtyInput.value = val - 1;
+      });
+      qtyPlus.addEventListener('click', () => {
+        let val = parseInt(qtyInput.value);
+        qtyInput.value = val + 1;
+      });
+    }
+
+    // 3. Variant Selector Logic (Pills -> Hidden Select)
+    const productJsonEl = document.getElementById('ProductJson-{{ section.id }}');
+    if (!productJsonEl) return;
+    const productData = JSON.parse(productJsonEl.textContent);
+    const hiddenSelect = document.getElementById('ProductSelect');
+    const pillGroups = document.querySelectorAll('.pill-group');
+    
+    // UI Elements to update
+    const priceEl = document.getElementById('ProductPrice');
+    const comparePriceEl = document.getElementById('ComparePrice');
+    const saleBadgeEl = document.getElementById('SaleBadge');
+    const addToCartBtn = document.getElementById('AddToCart');
+    const addToCartText = document.getElementById('AddToCartText');
+
+    let currentOptions = [];
+
+    pillGroups.forEach((group, index) => {
+      const pills = group.querySelectorAll('.pill-btn');
+      
+      // Initialize currentOptions based on active pills
+      const activePill = group.querySelector('.pill-btn.is-active');
+      if (activePill) {
+        currentOptions[index] = activePill.getAttribute('data-value');
+      }
+
+      pills.forEach(pill => {
+        pill.addEventListener('click', function() {
+          // Visual update
+          pills.forEach(p => p.classList.remove('is-active'));
+          this.classList.add('is-active');
+
+          // State update
+          currentOptions[index] = this.getAttribute('data-value');
+
+          // Find matching variant
+          const matchedVariant = productData.variants.find(variant => {
+            return variant.options.every((opt, i) => opt === currentOptions[i]);
+          });
+
+          if (matchedVariant) {
+            // Update hidden select
+            hiddenSelect.value = matchedVariant.id;
+
+            // Update Price
+            const formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: Shopify.currency.active || 'USD',
+              minimumFractionDigits: 2
+            });
+
+            // Shopify stores prices in cents, so we divide by 100 for JS formatting
+            priceEl.textContent = formatter.format(matchedVariant.price / 100);
+
+            if (matchedVariant.compare_at_price > matchedVariant.price) {
+              comparePriceEl.textContent = formatter.format(matchedVariant.compare_at_price / 100);
+              comparePriceEl.style.display = 'inline-block';
+              
+              const savings = Math.round(((matchedVariant.compare_at_price - matchedVariant.price) / matchedVariant.compare_at_price) * 100);
+              saleBadgeEl.textContent = savings + '% OFF';
+              saleBadgeEl.style.display = 'inline-block';
+            } else {
+              comparePriceEl.style.display = 'none';
+              saleBadgeEl.style.display = 'none';
+            }
+
+            // Update Add to Cart
+            if (matchedVariant.available) {
+              addToCartBtn.disabled = false;
+              addToCartText.textContent = 'Add to cart';
+            } else {
+              addToCartBtn.disabled = true;
+              addToCartText.textContent = 'Sold out';
+            }
+
+            // Update Main Image if variant has a specific image
+            if (matchedVariant.featured_image) {
+              mainImage.src = matchedVariant.featured_image.src;
+              // Also update thumbnail active state
+              thumbnails.forEach(b => {
+                b.classList.remove('is-active');
+                if (b.getAttribute('data-image-url').includes(matchedVariant.featured_image.src.split('?')[0])) {
+                  b.classList.add('is-active');
+                }
+              });
+            }
+          }
+        });
+      });
+    });
+  });
+</script>
 
 {% schema %}
 {
