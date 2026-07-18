@@ -1,4 +1,4 @@
-{%- assign limit = section.settings.products_to_show -%}
+{%- assign limit = section.settings.products_to_show | default: 4 -%}
 {%- assign current_product_id = product.id -%}
 {%- assign collection_to_use = product.collections.first | default: collections.all -%}
 
@@ -8,21 +8,35 @@
     
     <div class="product-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
       {%- assign count = 0 -%}
+      {%- assign current_time = "now" | date: "%s" | modulo: 5 -%}
+      {%- assign loop_index = 0 -%}
       
-      {% comment %} First try to get products from the Shopify Recommendation API if there are enough {% endcomment %}
-      {%- if recommendations.performed and recommendations.products_count >= limit -%}
-        {%- for prod in recommendations.products limit: limit -%}
-          {% render 'product-card', product: prod %}
-        {%- endfor -%}
-      {%- else -%}
-        {% comment %} Fallback: Output products from the same collection to ensure we always show 4 {% endcomment %}
-        {%- for prod in collection_to_use.products -%}
-          {%- if prod.id != current_product_id -%}
-            <div class="random-product-card" style="display: none;">
+      {% comment %} Output exactly 'limit' products from the same collection {% endcomment %}
+      {%- for prod in collection_to_use.products -%}
+        {%- if prod.id != current_product_id -%}
+          {%- assign loop_index = loop_index | plus: 1 -%}
+          {%- if loop_index > current_time -%}
+            <div class="random-product-card">
               {% render 'product-card', product: prod %}
             </div>
             {%- assign count = count | plus: 1 -%}
-            {%- if count >= 12 -%}
+            {%- if count >= limit -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      
+      {% comment %} In case the offset caused us to get less than 'limit' products, fill the rest {% endcomment %}
+      {%- if count < limit -%}
+        {%- for prod in collection_to_use.products -%}
+          {%- if prod.id != current_product_id -%}
+            {%- assign is_rendered = false -%}
+            <div class="random-product-card">
+              {% render 'product-card', product: prod %}
+            </div>
+            {%- assign count = count | plus: 1 -%}
+            {%- if count >= limit -%}
               {%- break -%}
             {%- endif -%}
           {%- endif -%}
@@ -41,35 +55,11 @@
   }
   @media screen and (min-width: 1024px) {
     .product-recommendations .product-grid {
-      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr) !important;
+      grid-template-columns: repeat({{ section.settings.columns_desktop | default: 4 }}, 1fr) !important;
       gap: 2.5rem !important;
     }
   }
 </style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Collect all loaded fallback products
-    const cards = Array.from(document.querySelectorAll('.random-product-card'));
-    if (cards.length > 0) {
-      // Shuffle array to make it random
-      for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-      }
-      
-      // Show exactly 'limit' number of products
-      const limit = {{ section.settings.products_to_show }};
-      cards.slice(0, limit).forEach(card => {
-        card.style.display = 'block';
-      });
-      // Remove the rest from DOM so they don't take up space or mess up CSS grid
-      cards.slice(limit).forEach(card => {
-        card.remove();
-      });
-    }
-  });
-</script>
 
 {% schema %}
 {
