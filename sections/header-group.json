@@ -14,6 +14,12 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_C8X6Kn": {
+          "type": "announcement",
+          "settings": {
+            "text": "PREMIUM DTF PRINTS — High quality & long lasting"
+          }
+        },
         "announcement_FnBzNB": {
           "type": "announcement",
           "settings": {
@@ -28,6 +34,7 @@
         }
       },
       "block_order": [
+        "announcement_C8X6Kn",
         "announcement_FnBzNB",
         "announcement_gfH8B6"
       ],
