@@ -26,7 +26,7 @@
       "type": "featured-products",
       "settings": {
         "title": "Trending Tees",
-        "subtitle": "Lead the Trend, Don't follow it",
+        "subtitle": "Lead the Trend, Don't f",
         "collection": "featured-products",
         "products_to_show": 4,
         "columns_desktop": 4,
@@ -86,7 +86,7 @@
       "settings": {
         "image": "shopify://shop_images/Gemini_Generated_Image_mbwvl7mbwvl7mbwv-clean.png",
         "heading": "More Than Just A Clothing Brand",
-        "text": "<p>Trendy Tees is more than just a clothing brand—it's a movement. Rooted in modern streetwear, each garment tells a powerful story of resilience, skill, and bold style.</p>"
+        "text": "<p>Trendy Tees is more than just a clothing brand—it's a movement. Rooted in modern streetwear, each T-shirt  tells a powerful story of resilience, skill, and bold style.</p>"
       }
     }
   },
