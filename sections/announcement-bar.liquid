@@ -31,13 +31,80 @@
       <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
     </a>
   </div>
-  <div class="announcement-bar__content" style="text-align: center; display: flex; align-items: center; justify-content: center; gap: 2rem;">
-    <span style="cursor: pointer; opacity: 0.7;">&lt;</span>
-    <span class="announcement-bar__message" style="text-transform: uppercase;">{{ section.settings.text }}</span>
-    <span style="cursor: pointer; opacity: 0.7;">&gt;</span>
+  <div class="announcement-bar__content" style="text-align: center; display: flex; align-items: center; justify-content: center; gap: 1rem; width: 100%; max-width: 500px; margin: 0 auto;">
+    <span class="announcement-prev" style="cursor: pointer; opacity: 0.7; padding: 0 10px; user-select: none;">&lt;</span>
+    <div class="announcement-slider-wrapper" style="overflow: hidden; flex-grow: 1;">
+      <div class="announcement-slider" style="display: flex; transition: transform 0.5s ease-in-out; width: 100%;">
+        {% for block in section.blocks %}
+          <span class="announcement-bar__message" style="text-transform: uppercase; flex: 0 0 100%; text-align: center; width: 100%;" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+        {% else %}
+          <span class="announcement-bar__message" style="text-transform: uppercase; flex: 0 0 100%; text-align: center; width: 100%;">{{ section.settings.text }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    <span class="announcement-next" style="cursor: pointer; opacity: 0.7; padding: 0 10px; user-select: none;">&gt;</span>
   </div>
   <div class="announcement-bar__empty"></div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.querySelector('.announcement-slider');
+    const prevBtn = document.querySelector('.announcement-prev');
+    const nextBtn = document.querySelector('.announcement-next');
+    const slides = document.querySelectorAll('.announcement-bar__message');
+    
+    if (!slider || slides.length <= 1) {
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      return;
+    }
+
+    let currentIndex = 0;
+    const slideCount = slides.length;
+    let interval;
+
+    function goToSlide(index) {
+      if (index < 0) index = slideCount - 1;
+      if (index >= slideCount) index = 0;
+      currentIndex = index;
+      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function nextSlide() {
+      goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentIndex - 1);
+    }
+
+    function startAutoSlide() {
+      interval = setInterval(nextSlide, 4000);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(interval);
+    }
+
+    nextBtn.addEventListener('click', () => {
+      stopAutoSlide();
+      nextSlide();
+      startAutoSlide();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      stopAutoSlide();
+      prevSlide();
+      startAutoSlide();
+    });
+
+    slider.addEventListener('mouseenter', stopAutoSlide);
+    slider.addEventListener('mouseleave', startAutoSlide);
+
+    startAutoSlide();
+  });
+</script>
 
 {% schema %}
 {
@@ -50,9 +117,31 @@
       "label": "Announcement Text"
     }
   ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "PREMIUM T-SHIRTS",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Announcement Bar"
+      "name": "Announcement Bar",
+      "blocks": [
+        {
+          "type": "announcement"
+        },
+        {
+          "type": "announcement"
+        }
+      ]
     }
   ]
 }
