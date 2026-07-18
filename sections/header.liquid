@@ -81,6 +81,14 @@
     .site-header__menu-toggle {
       display: block;
     }
+    .desktop-only {
+      display: none !important;
+    }
+  }
+  @media screen and (min-width: 769px) {
+    .mobile-only {
+      display: none !important;
+    }
   }
 </style>
 
@@ -104,7 +112,13 @@
             <line x1="3" y1="18" x2="21" y2="18"></line>
           </svg>
         </button>
-        <!-- Removed left search icon as requested -->
+        <!-- Desktop search (left side) -->
+        <a href="#" class="site-header__icon desktop-only" aria-label="Search" style="display: inline-flex; align-items: center;" onclick="event.preventDefault(); document.getElementById('HeaderSearchContainer').style.display = document.getElementById('HeaderSearchContainer').style.display === 'none' ? 'block' : 'none';">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </a>
       </div>
 
       <div class="site-header__logo-container">
@@ -137,11 +151,19 @@
       </div>
 
       <div class="site-header__icons-container">
-        <!-- Desktop/Mobile search -->
-        <a href="#" class="site-header__icon" aria-label="Search" onclick="event.preventDefault(); document.getElementById('HeaderSearchContainer').style.display = document.getElementById('HeaderSearchContainer').style.display === 'none' ? 'block' : 'none';">
+        <!-- Mobile search (right side) -->
+        <a href="#" class="site-header__icon mobile-only" aria-label="Search" style="display: inline-flex; align-items: center;" onclick="event.preventDefault(); document.getElementById('HeaderSearchContainer').style.display = document.getElementById('HeaderSearchContainer').style.display === 'none' ? 'block' : 'none';">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </a>
+
+        <!-- Account Icon (Desktop only) -->
+        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="site-header__icon desktop-only" aria-label="Account" style="display: inline-flex; align-items: center;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
           </svg>
         </a>
 
