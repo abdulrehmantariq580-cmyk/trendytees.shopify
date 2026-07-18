@@ -18,7 +18,7 @@
           {%- endif -%}
 
           {%- if main_image -%}
-            <img id="MainProductImage" src="{{ main_image | image_url: width: 1000 }}" alt="{{ main_image.alt | escape }}" loading="lazy">
+            <img id="MainProductImage" src="{{ main_image | image_url: width: 1000 }}" alt="{{ main_image.alt | escape }}" width="{{ main_image.width }}" height="{{ main_image.height }}" loading="lazy">
           {%- else -%}
             {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
           {%- endif -%}
@@ -28,7 +28,7 @@
           <div class="product-thumbnails">
             {%- for image in product.images -%}
               <button type="button" class="thumbnail-btn {% if image == main_image %}is-active{% endif %}" data-image-url="{{ image | image_url: width: 1000 }}">
-                <img src="{{ image | image_url: width: 150 }}" alt="{{ image.alt | escape }}" loading="lazy">
+                <img src="{{ image | image_url: width: 150 }}" alt="{{ image.alt | escape }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy">
               </button>
             {%- endfor -%}
           </div>
@@ -101,7 +101,9 @@
               </span>
             </button>
             
-            {{ form | payment_button }}
+            <div class="custom-payment-button-wrapper">
+              {{ form | payment_button }}
+            </div>
           </div>
         {% endform %}
 
@@ -385,7 +387,28 @@
   }
 
   /* Shopify Payment Button Overrides */
-  .shopify-payment-button__button--unbranded {
+  .custom-payment-button-wrapper {
+    width: 100% !important;
+    display: block !important;
+    --wallet-button-width: 100% !important;
+    --wallet-button-border-radius: 50px !important;
+    --wallet-button-height: 52px !important;
+    --payment-button-width: 100% !important;
+  }
+  
+  .custom-payment-button-wrapper .shopify-payment-button,
+  .custom-payment-button-wrapper shopify-accelerated-checkout,
+  .custom-payment-button-wrapper shopify-accelerated-checkout-cart,
+  .custom-payment-button-wrapper shopify-payment-terms {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  .custom-payment-button-wrapper .shopify-payment-button__button,
+  .custom-payment-button-wrapper .shopify-payment-button__button--unbranded,
+  .custom-payment-button-wrapper .shopify-payment-button__button--hidden {
+    width: 100% !important;
+    max-width: 100% !important;
     border-radius: 50px !important;
     background-color: #000 !important;
     color: #fff !important;
@@ -393,8 +416,13 @@
     font-size: 1rem !important;
     font-weight: 500 !important;
     transition: transform 0.3s ease !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    min-height: 52px !important;
   }
-  .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  
+  .custom-payment-button-wrapper .shopify-payment-button__button:hover:not([disabled]),
+  .custom-payment-button-wrapper .shopify-payment-button__button--unbranded:hover:not([disabled]) {
     transform: scale(1.02);
     background-color: #222 !important;
   }
