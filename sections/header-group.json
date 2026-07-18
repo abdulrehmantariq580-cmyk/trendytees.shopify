@@ -14,13 +14,12 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "text": "Lead The Trend Dont Follow it"
+        "text": "FREE SHIPPING ON ORDERS ABOVE RS. 3999"
       }
     },
     "header": {
       "type": "header",
       "settings": {
-        "logo": "",
         "menu": "main-menu"
       }
     }
