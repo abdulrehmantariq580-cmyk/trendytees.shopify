@@ -6,10 +6,10 @@
     display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%; padding: 0 10px; box-sizing: border-box;
   }
   .announcement-fade-wrapper {
-    position: relative; display: flex; align-items: center; justify-content: center; min-height: 24px;
+    display: grid; align-items: center; justify-items: center;
   }
   .announcement-bar__message {
-    text-transform: uppercase; text-align: center; white-space: nowrap; transition: opacity 0.5s ease-in-out;
+    grid-area: 1 / 1; text-transform: uppercase; text-align: center; white-space: nowrap; transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
   }
   .announcement-bar__socials, .announcement-bar__empty {
     display: none; /* Hide socials in slider to guarantee center alignment */
@@ -33,7 +33,6 @@
     }
     .announcement-fade-wrapper {
       max-width: calc(100vw - 60px);
-      min-height: 32px; /* Accommodate up to 2 lines */
     }
   }
 </style>
@@ -42,9 +41,9 @@
     <span class="announcement-prev" style="cursor: pointer; opacity: 0.7; padding: 0 10px; user-select: none; flex-shrink: 0; font-weight: bold;">&lt;</span>
     <div class="announcement-fade-wrapper">
       {% for block in section.blocks %}
-        <span class="announcement-bar__message fade-slide" style="{% if forloop.first %}opacity: 1; position: relative; z-index: 1; pointer-events: auto;{% else %}opacity: 0; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 0; pointer-events: none;{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+        <span class="announcement-bar__message fade-slide" style="{% if forloop.first %}opacity: 1; visibility: visible; pointer-events: auto;{% else %}opacity: 0; visibility: hidden; pointer-events: none;{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
       {% else %}
-        <span class="announcement-bar__message fade-slide" style="opacity: 1; position: relative; z-index: 1;">{{ section.settings.text }}</span>
+        <span class="announcement-bar__message fade-slide" style="opacity: 1; visibility: visible;">{{ section.settings.text }}</span>
       {% endfor %}
     </div>
     <span class="announcement-next" style="cursor: pointer; opacity: 0.7; padding: 0 10px; user-select: none; flex-shrink: 0; font-weight: bold;">&gt;</span>
@@ -71,11 +70,7 @@
     
     function goToSlide(index) {
       slides[currentIndex].style.opacity = '0';
-      slides[currentIndex].style.position = 'absolute';
-      slides[currentIndex].style.left = '50%';
-      slides[currentIndex].style.top = '50%';
-      slides[currentIndex].style.transform = 'translate(-50%, -50%)';
-      slides[currentIndex].style.zIndex = '0';
+      slides[currentIndex].style.visibility = 'hidden';
       slides[currentIndex].style.pointerEvents = 'none';
 
       if (index < 0) index = slideCount - 1;
@@ -83,11 +78,7 @@
       currentIndex = index;
 
       slides[currentIndex].style.opacity = '1';
-      slides[currentIndex].style.position = 'relative';
-      slides[currentIndex].style.left = 'auto';
-      slides[currentIndex].style.top = 'auto';
-      slides[currentIndex].style.transform = 'none';
-      slides[currentIndex].style.zIndex = '1';
+      slides[currentIndex].style.visibility = 'visible';
       slides[currentIndex].style.pointerEvents = 'auto';
     }
 
