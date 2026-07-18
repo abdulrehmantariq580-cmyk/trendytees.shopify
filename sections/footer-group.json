@@ -33,8 +33,8 @@
           "settings": {
             "heading": "Contact Us",
             "address": "123 Trendy Street, Fashion City",
-            "email": "hello@trendytees.com",
-            "phone": "+1 (555) 123-4567"
+            "phone": "+92 315 4426479",
+            "email": "trendytees10@gmal.com"
           }
         }
       },
@@ -44,7 +44,8 @@
         "contact"
       ],
       "settings": {
-        "show_payment_icons": true
+        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_text": "Be the first to know about new collections and exclusive offers."
       }
     }
   },
