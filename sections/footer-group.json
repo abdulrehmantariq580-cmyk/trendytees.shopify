@@ -18,7 +18,8 @@
           "type": "text",
           "settings": {
             "heading": "TRENDY TEES",
-            "text": "<p>Discover the finest premium t-shirts crafted for comfort and modern style. Stand out from the crowd.</p>"
+            "text": "<p>Discover the finest premium t-shirts crafted for comfort and modern style. Stand out from the crowd.</p>",
+            "show_social": true
           }
         },
         "menu": {
