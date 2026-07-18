@@ -142,28 +142,46 @@
       if (!wrapper) return;
 
       // Force width on common wrappers in light DOM
-      const lightElements = wrapper.querySelectorAll('.shopify-payment-button, .shopify-payment-button__button, .shopify-payment-button__button--unbranded, shopify-accelerated-checkout, shopify-payment-terms');
+      const lightElements = wrapper.querySelectorAll('*');
       lightElements.forEach(el => {
         if (el.style) {
           el.style.setProperty('width', '100%', 'important');
-          el.style.setProperty('max-width', '100%', 'important');
+          el.style.setProperty('max-width', 'none', 'important');
+          el.style.setProperty('margin', '0', 'important');
         }
       });
+      if (wrapper.style) {
+        wrapper.style.setProperty('width', '100%', 'important');
+        wrapper.style.setProperty('margin', '0', 'important');
+        wrapper.style.setProperty('padding', '0', 'important');
+      }
 
       // Pierce Shadow DOM if present
       const webComponents = wrapper.querySelectorAll('shopify-accelerated-checkout, shopify-payment-terms');
       webComponents.forEach(comp => {
-        if (comp.shadowRoot && !comp.shadowRoot.querySelector('#force-checkout-width')) {
+        if (comp.shadowRoot && !comp.shadowRoot.querySelector('#force-checkout-width-v2')) {
           const style = document.createElement('style');
-          style.id = 'force-checkout-width';
+          style.id = 'force-checkout-width-v2';
           style.innerHTML = `
+            * {
+              max-width: none !important;
+            }
             .shopify-cleanslate,
             .shopify-cleanslate > div,
+            .shopify-cleanslate ul,
+            .shopify-cleanslate li,
             [role="button"],
             button {
               width: 100% !important;
-              max-width: 100% !important;
+              max-width: none !important;
+              min-width: 100% !important;
               box-sizing: border-box !important;
+              margin: 0 !important;
+            }
+            [role="button"], button {
+              min-height: 52px !important;
+              border-radius: 50px !important;
+              padding: 14px !important;
             }
           `;
           comp.shadowRoot.appendChild(style);
@@ -173,7 +191,7 @@
 
     // Run periodically to catch asynchronous rendering of the button
     forceFullWidth();
-    setInterval(forceFullWidth, 800);
+    setInterval(forceFullWidth, 500);
   });
 </script>
 
