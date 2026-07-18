@@ -171,35 +171,22 @@
       <ul class="site-header__nav-list">
         <!-- Home -->
         <li><a href="/" class="site-header__nav-item site-header__nav-item--active">HOME</a></li>
-        <!-- New Arrivals -->
-        <li><a href="/collections/new-collection" class="site-header__nav-item">NEW ARRIVALS</a></li>
-        <!-- Tops -->
+        <!-- Best Sellers -->
+        <li><a href="/collections/best-sellers" class="site-header__nav-item">BEST SELLERS</a></li>
+        <!-- T-Shirts -->
         <li style="position: relative;" class="nav-item-dropdown">
-          <a href="/collections/tops" class="site-header__nav-item" style="display: flex; align-items: center; gap: 5px;">
-            TOPS
+          <a href="/collections/t-shirts" class="site-header__nav-item" style="display: flex; align-items: center; gap: 5px;">
+            T-SHIRTS
             <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </a>
           <ul class="dropdown-menu" style="display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #eee; padding: 1rem; list-style: none; min-width: 200px; z-index: 20; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-            <li style="margin-bottom: 0.8rem;"><a href="/collections/t-shirts" style="color: #666; text-decoration: none; font-size: 0.85rem; text-transform: uppercase;">T-Shirts</a></li>
+            <li style="margin-bottom: 0.8rem;"><a href="/collections/graphic-tees" style="color: #666; text-decoration: none; font-size: 0.85rem; text-transform: uppercase;">Graphic Tees</a></li>
             <li style="margin-bottom: 0.8rem;"><a href="/collections/oversized-tees" style="color: #666; text-decoration: none; font-size: 0.85rem; text-transform: uppercase;">Oversized Tees</a></li>
-            <li style="margin-bottom: 0.8rem;"><a href="/collections/hoodies" style="color: #666; text-decoration: none; font-size: 0.85rem; text-transform: uppercase;">Hoodies</a></li>
-            <li><a href="/collections/jackets" style="color: #666; text-decoration: none; font-size: 0.85rem; text-transform: uppercase;">Jackets</a></li>
+            <li><a href="/collections/basics" style="color: #666; text-decoration: none; font-size: 0.85rem; text-transform: uppercase;">Basics</a></li>
           </ul>
         </li>
-        <!-- Bottoms -->
-        <li style="position: relative;" class="nav-item-dropdown">
-          <a href="/collections/bottoms" class="site-header__nav-item" style="display: flex; align-items: center; gap: 5px;">
-            BOTTOMS
-            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </a>
-          <ul class="dropdown-menu" style="display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #eee; padding: 1rem; list-style: none; min-width: 200px; z-index: 20; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-            <li style="margin-bottom: 0.8rem;"><a href="/collections/cargos" style="color: #666; text-decoration: none; font-size: 0.85rem; text-transform: uppercase;">Cargos</a></li>
-            <li style="margin-bottom: 0.8rem;"><a href="/collections/sweatpants" style="color: #666; text-decoration: none; font-size: 0.85rem; text-transform: uppercase;">Sweatpants</a></li>
-            <li><a href="/collections/denim" style="color: #666; text-decoration: none; font-size: 0.85rem; text-transform: uppercase;">Denim</a></li>
-          </ul>
-        </li>
-        <!-- Accessories -->
-        <li><a href="/collections/accessories" class="site-header__nav-item">ACCESSORIES</a></li>
+        <!-- New Arrivals -->
+        <li><a href="/collections/new-arrivals" class="site-header__nav-item">NEW ARRIVALS</a></li>
         <!-- Shop All -->
         <li><a href="/collections/all" class="site-header__nav-item">SHOP ALL</a></li>
       </ul>
@@ -225,38 +212,25 @@
           <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
             <a href="/" class="mobile-nav__link" style="color: #000; font-weight: 500; font-size: 1rem; text-decoration: none; text-transform: uppercase;">HOME</a>
           </li>
+          <!-- Mobile Best Sellers -->
+          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
+            <a href="/collections/best-sellers" class="mobile-nav__link" style="color: #000; font-weight: 500; font-size: 1rem; text-decoration: none; text-transform: uppercase;">BEST SELLERS</a>
+          </li>
+          <!-- Mobile T-Shirts Dropdown -->
+          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="var ul = this.nextElementSibling; ul.style.display = ul.style.display === 'none' ? 'block' : 'none';">
+              <span style="color: #000; font-weight: 500; font-size: 1rem; text-transform: uppercase;">T-SHIRTS</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <ul style="display: none; list-style: none; padding-left: 1rem; margin-top: 1.5rem; width: 100%;">
+              <li style="margin-bottom: 1rem;"><a href="/collections/graphic-tees" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Graphic Tees</a></li>
+              <li style="margin-bottom: 1rem;"><a href="/collections/oversized-tees" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Oversized Tees</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="/collections/basics" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Basics</a></li>
+            </ul>
+          </li>
           <!-- Mobile New Arrivals -->
           <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
-            <a href="/collections/new-collection" class="mobile-nav__link" style="color: #000; font-weight: 500; font-size: 1rem; text-decoration: none; text-transform: uppercase;">NEW ARRIVALS</a>
-          </li>
-          <!-- Mobile Tops Dropdown -->
-          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
-            <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="var ul = this.nextElementSibling; ul.style.display = ul.style.display === 'none' ? 'block' : 'none';">
-              <span style="color: #000; font-weight: 500; font-size: 1rem; text-transform: uppercase;">TOPS</span>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </div>
-            <ul style="display: none; list-style: none; padding-left: 1rem; margin-top: 1.5rem; width: 100%;">
-              <li style="margin-bottom: 1rem;"><a href="/collections/t-shirts" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">T-Shirts</a></li>
-              <li style="margin-bottom: 1rem;"><a href="/collections/oversized-tees" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Oversized Tees</a></li>
-              <li style="margin-bottom: 1rem;"><a href="/collections/hoodies" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Hoodies</a></li>
-              <li style="margin-bottom: 0.5rem;"><a href="/collections/jackets" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Jackets</a></li>
-            </ul>
-          </li>
-          <!-- Mobile Bottoms Dropdown -->
-          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
-            <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="var ul = this.nextElementSibling; ul.style.display = ul.style.display === 'none' ? 'block' : 'none';">
-              <span style="color: #000; font-weight: 500; font-size: 1rem; text-transform: uppercase;">BOTTOMS</span>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </div>
-            <ul style="display: none; list-style: none; padding-left: 1rem; margin-top: 1.5rem; width: 100%;">
-              <li style="margin-bottom: 1rem;"><a href="/collections/cargos" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Cargos</a></li>
-              <li style="margin-bottom: 1rem;"><a href="/collections/sweatpants" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Sweatpants</a></li>
-              <li style="margin-bottom: 0.5rem;"><a href="/collections/denim" style="color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.9rem;">Denim</a></li>
-            </ul>
-          </li>
-          <!-- Mobile Accessories -->
-          <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
-            <a href="/collections/accessories" class="mobile-nav__link" style="color: #000; font-weight: 500; font-size: 1rem; text-decoration: none; text-transform: uppercase;">ACCESSORIES</a>
+            <a href="/collections/new-arrivals" class="mobile-nav__link" style="color: #000; font-weight: 500; font-size: 1rem; text-decoration: none; text-transform: uppercase;">NEW ARRIVALS</a>
           </li>
           <!-- Mobile Shop All -->
           <li class="mobile-nav__item" style="border-bottom: 1px solid #eee; padding: 1.2rem 0;">
