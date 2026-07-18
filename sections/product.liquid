@@ -134,6 +134,49 @@
   {{ product | json }}
 </script>
 
+<script>
+  // Advanced fix for Shopify Dynamic Checkout Button width
+  document.addEventListener('DOMContentLoaded', () => {
+    const forceFullWidth = () => {
+      const wrapper = document.querySelector('.custom-payment-button-wrapper');
+      if (!wrapper) return;
+
+      // Force width on common wrappers in light DOM
+      const lightElements = wrapper.querySelectorAll('.shopify-payment-button, .shopify-payment-button__button, .shopify-payment-button__button--unbranded, shopify-accelerated-checkout, shopify-payment-terms');
+      lightElements.forEach(el => {
+        if (el.style) {
+          el.style.setProperty('width', '100%', 'important');
+          el.style.setProperty('max-width', '100%', 'important');
+        }
+      });
+
+      // Pierce Shadow DOM if present
+      const webComponents = wrapper.querySelectorAll('shopify-accelerated-checkout, shopify-payment-terms');
+      webComponents.forEach(comp => {
+        if (comp.shadowRoot && !comp.shadowRoot.querySelector('#force-checkout-width')) {
+          const style = document.createElement('style');
+          style.id = 'force-checkout-width';
+          style.innerHTML = `
+            .shopify-cleanslate,
+            .shopify-cleanslate > div,
+            [role="button"],
+            button {
+              width: 100% !important;
+              max-width: 100% !important;
+              box-sizing: border-box !important;
+            }
+          `;
+          comp.shadowRoot.appendChild(style);
+        }
+      });
+    };
+
+    // Run periodically to catch asynchronous rendering of the button
+    forceFullWidth();
+    setInterval(forceFullWidth, 800);
+  });
+</script>
+
 {%- style -%}
   /* Global Resets for Product Page */
   #MainProduct-{{ section.id }} {
