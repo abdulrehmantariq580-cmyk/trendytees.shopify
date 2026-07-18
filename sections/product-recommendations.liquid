@@ -1,15 +1,35 @@
-<div class="product-recommendations" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}">
-  {%- if recommendations.performed and recommendations.products_count > 0 -%}
-    <div class="page-width" style="padding-top: 4rem; padding-bottom: 4rem; border-top: 1px solid #eee;">
-      <h2 class="product-recommendations__heading" style="text-align: center; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; text-transform: uppercase; margin-bottom: 3rem;">{{ section.settings.heading }}</h2>
+{%- assign limit = section.settings.products_to_show -%}
+{%- assign current_product_id = product.id -%}
+{%- assign collection_to_use = product.collections.first | default: collections.all -%}
+
+<div class="product-recommendations">
+  <div class="page-width" style="padding-top: 4rem; padding-bottom: 4rem; border-top: 1px solid #eee;">
+    <h2 class="product-recommendations__heading" style="text-align: center; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; text-transform: uppercase; margin-bottom: 3rem;">{{ section.settings.heading }}</h2>
+    
+    <div class="product-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+      {%- assign count = 0 -%}
       
-      <div class="product-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
-        {%- for product in recommendations.products -%}
-          {% render 'product-card', product: product %}
+      {% comment %} First try to get products from the Shopify Recommendation API if there are enough {% endcomment %}
+      {%- if recommendations.performed and recommendations.products_count >= limit -%}
+        {%- for prod in recommendations.products limit: limit -%}
+          {% render 'product-card', product: prod %}
         {%- endfor -%}
-      </div>
+      {%- else -%}
+        {% comment %} Fallback: Output products from the same collection to ensure we always show 4 {% endcomment %}
+        {%- for prod in collection_to_use.products -%}
+          {%- if prod.id != current_product_id -%}
+            <div class="random-product-card" style="display: none;">
+              {% render 'product-card', product: prod %}
+            </div>
+            {%- assign count = count | plus: 1 -%}
+            {%- if count >= 12 -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
     </div>
-  {%- endif -%}
+  </div>
 </div>
 
 <style>
@@ -29,25 +49,25 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const recommendationsSection = document.querySelector('.product-recommendations');
-    if (!recommendationsSection) return;
-
-    const url = recommendationsSection.dataset.url;
-    
-    fetch(url)
-      .then(response => response.text())
-      .then(text => {
-        const html = document.createElement('div');
-        html.innerHTML = text;
-        const recommendations = html.querySelector('.product-recommendations');
-        
-        if (recommendations && recommendations.innerHTML.trim().length) {
-          recommendationsSection.innerHTML = recommendations.innerHTML;
-        }
-      })
-      .catch(e => {
-        console.error('Error fetching product recommendations', e);
+    // Collect all loaded fallback products
+    const cards = Array.from(document.querySelectorAll('.random-product-card'));
+    if (cards.length > 0) {
+      // Shuffle array to make it random
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      }
+      
+      // Show exactly 'limit' number of products
+      const limit = {{ section.settings.products_to_show }};
+      cards.slice(0, limit).forEach(card => {
+        card.style.display = 'block';
       });
+      // Remove the rest from DOM so they don't take up space or mess up CSS grid
+      cards.slice(limit).forEach(card => {
+        card.remove();
+      });
+    }
   });
 </script>
 
