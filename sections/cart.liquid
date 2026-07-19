@@ -1,7 +1,7 @@
 <div class="page-width cart-page-container">
   <div class="cart-page-header">
     <h1 class="cart-page-title">Your Cart</h1>
-    <a href="{{ routes.all_products_collection_url }}" class="cart-page-continue">Continue Shopping</a>
+    <a href="{{ routes.all_products_collection_url }}" class="cart-page-continue">More Shopping</a>
   </div>
 
   {% if cart.item_count > 0 %}
@@ -103,7 +103,7 @@
   .cart-page-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     margin-bottom: 40px;
     border-bottom: 2px solid #000;
     padding-bottom: 15px;
@@ -116,10 +116,20 @@
     margin: 0;
   }
   .cart-page-continue {
-    font-size: 1rem;
-    text-decoration: underline;
+    font-size: 0.95rem;
+    text-decoration: none;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
+    color: #000;
+    border: 1px solid #000;
+    padding: 10px 25px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+  }
+  .cart-page-continue:hover {
+    background-color: #000;
+    color: #fff;
   }
   .cart-page-content {
     display: flex;
