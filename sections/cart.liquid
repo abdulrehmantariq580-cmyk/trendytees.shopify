@@ -68,6 +68,12 @@
               <span>Subtotal</span>
               <span class="order-summary-price">{{ cart.total_price | money }}</span>
             </div>
+            
+            <div class="cart-discount-wrapper">
+              <label for="CartDiscount" class="cart-discount-label">Discount Code</label>
+              <input type="text" name="discount" id="CartDiscount" placeholder="Enter discount code" class="cart-discount-input">
+            </div>
+
             <p class="order-summary-note">Taxes and shipping calculated at checkout.</p>
             <button type="submit" name="checkout" class="button button--primary cart-checkout-btn">Proceed to Checkout</button>
           </div>
@@ -256,6 +262,8 @@
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    box-sizing: border-box;
+    width: 100%;
   }
   .order-summary-title {
     font-size: 1.5rem;
@@ -269,15 +277,42 @@
     justify-content: space-between;
     font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+  }
+  .cart-discount-wrapper {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+  .cart-discount-label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  .cart-discount-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+  }
+  .cart-discount-input:focus {
+    outline: none;
+    border-color: #000;
   }
   .order-summary-note {
     font-size: 0.85rem;
     color: #666;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     text-align: center;
   }
   .cart-checkout-btn {
+    display: block;
+    box-sizing: border-box;
     width: 100%;
     padding: 18px !important;
     font-size: 1.1rem !important;
