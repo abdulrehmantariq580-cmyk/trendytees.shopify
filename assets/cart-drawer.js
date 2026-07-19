@@ -30,19 +30,22 @@ class CartDrawer {
     // Handle Quantity and Remove in Drawer
     this.drawer.addEventListener('click', (e) => {
       // Remove Item
-      if (e.target.matches('.cart-drawer__item-remove')) {
+      const removeBtn = e.target.closest('.cart-drawer__item-remove');
+      if (removeBtn) {
         e.preventDefault();
-        const key = e.target.dataset.key;
+        const key = removeBtn.dataset.key;
         this.updateItem(key, 0);
+        return;
       }
 
       // Quantity Buttons
-      if (e.target.matches('.qty-btn')) {
+      const qtyBtn = e.target.closest('.qty-btn');
+      if (qtyBtn) {
         e.preventDefault();
-        const input = e.target.parentNode.querySelector('.qty-input');
+        const input = qtyBtn.parentNode.querySelector('.qty-input');
         let qty = parseInt(input.value);
-        const action = e.target.dataset.action;
-        const key = e.target.dataset.key;
+        const action = qtyBtn.dataset.action;
+        const key = qtyBtn.dataset.key;
 
         if (action === 'plus') {
           qty += 1;
@@ -200,7 +203,7 @@ class CartDrawer {
                 <button class="qty-btn" type="button" data-action="plus" data-key="${item.key}">+</button>
               </div>
               
-              <a href="${item.url_to_remove}" class="cart-drawer__item-remove" data-key="${item.key}" aria-label="Remove item">
+              <a href="javascript:void(0);" class="cart-drawer__item-remove" data-key="${item.key}" aria-label="Remove item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
                   <polyline points="3 6 5 6 21 6"></polyline>
                   <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
