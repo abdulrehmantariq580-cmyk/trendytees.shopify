@@ -120,8 +120,8 @@ class CartDrawer {
       body: body
     })
       .then(response => response.json())
-      .then(() => {
-        this.refreshCart();
+      .then(cart => {
+        this.renderCart(cart);
       })
       .catch((error) => {
         console.error('Error updating cart:', error);
@@ -130,21 +130,14 @@ class CartDrawer {
   }
 
   refreshCart() {
-    // Fetch the updated cart snippet via Section API
-    fetch(window.Shopify.routes.root + '?section_id=cart-drawer')
-      .then(response => response.text())
-      .then(html => {
-        // Since we cannot easily render snippets directly via section rendering api unless it's a section,
-        // We will fallback to fetching /cart.js and building HTML, OR we can fetch /cart and parse it.
-        // Wait, standard Shopify method: Fetch /cart.js and update UI.
-        return fetch(window.Shopify.routes.root + 'cart.js');
-      })
+    fetch(window.Shopify.routes.root + 'cart.js')
       .then(response => response.json())
       .then(cart => {
         this.renderCart(cart);
       })
       .catch((error) => {
         console.error('Error fetching cart:', error);
+        this.drawer.classList.remove('is-loading');
       });
   }
 
