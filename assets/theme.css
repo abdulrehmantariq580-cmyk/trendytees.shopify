@@ -1413,17 +1413,17 @@ body.is-transitioning .page-transition-overlay {
 .shopify-policy__container {
   max-width: 800px !important;
   margin: 0 auto;
-  padding: 8rem 2rem 5rem !important; /* Extra top padding to clear header */
+  padding: 4rem 2rem 5rem !important; /* Reduced top padding */
 }
 
 .shopify-policy__title {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #000;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   border-bottom: 2px solid #eee;
   padding-bottom: 1rem;
 }
@@ -1458,9 +1458,9 @@ body.is-transitioning .page-transition-overlay {
 
 @media screen and (max-width: 768px) {
   .shopify-policy__title {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .shopify-policy__container {
-    padding-top: 6rem !important;
+    padding-top: 3rem !important;
   }
 }
