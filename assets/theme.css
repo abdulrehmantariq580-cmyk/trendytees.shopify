@@ -370,8 +370,9 @@ button {
   position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   z-index: 2000;
   pointer-events: none;
 }
@@ -407,6 +408,7 @@ button {
   transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .mobile-drawer[aria-hidden="false"] .mobile-drawer__inner {
