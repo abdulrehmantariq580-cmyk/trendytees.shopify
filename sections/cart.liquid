@@ -82,13 +82,16 @@
     </form>
   {% else %}
     <div class="cart-page-empty">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 80px; height: 80px; color: #ccc; margin-bottom: 20px;">
-        <circle cx="9" cy="21" r="1"></circle>
-        <circle cx="20" cy="21" r="1"></circle>
-        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-      </svg>
-      <h2>Your cart is currently empty.</h2>
-      <a href="{{ routes.all_products_collection_url }}" class="button button--primary cart-empty-btn">Start Shopping</a>
+      <div class="empty-cart-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="9" cy="21" r="2"></circle>
+          <circle cx="20" cy="21" r="2"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      </div>
+      <h2 class="empty-cart-title">Your cart is feeling light</h2>
+      <p class="empty-cart-subtitle">Let's add some trendy items to it.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button button--primary cart-empty-btn">Shop Now</a>
     </div>
   {% endif %}
 </div>
@@ -335,11 +338,44 @@
   /* Empty State */
   .cart-page-empty {
     text-align: center;
-    padding: 80px 20px;
+    padding: 100px 20px;
+    background: #fafafa;
+    border-radius: 20px;
+    margin: 40px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  }
+  .empty-cart-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    animation: floatCart 3s ease-in-out infinite;
+  }
+  .empty-cart-icon svg {
+    width: 80px;
+    height: 80px;
+    color: #111;
+  }
+  .empty-cart-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+    color: #000;
+  }
+  .empty-cart-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  @keyframes floatCart {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
   }
   .cart-empty-btn {
     display: inline-block;
-    margin-top: 20px;
     padding: 15px 40px;
     background: #000;
     color: #fff;
@@ -347,6 +383,12 @@
     text-transform: uppercase;
     font-weight: 600;
     text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .cart-empty-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    background: #222;
   }
 
   @media screen and (max-width: 900px) {
