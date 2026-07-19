@@ -1418,7 +1418,7 @@ body.is-transitioning .page-transition-overlay {
 
 .shopify-policy__title {
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -1458,7 +1458,7 @@ body.is-transitioning .page-transition-overlay {
 
 @media screen and (max-width: 768px) {
   .shopify-policy__title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
   .shopify-policy__container {
     padding-top: 3rem !important;
