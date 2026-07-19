@@ -16,20 +16,22 @@
           
           {% for item in cart.items %}
             <div class="cart-item">
-              <div class="cart-item-image-wrapper">
-                {% if item.image %}
-                  <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" loading="lazy" class="cart-item-image">
-                {% else %}
-                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                {% endif %}
-              </div>
-              
-              <div class="cart-item-details">
-                <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
-                {% unless item.product.has_only_default_variant %}
-                  <p class="cart-item-variant">{{ item.variant.title }}</p>
-                {% endunless %}
-                <p class="cart-item-price-mobile">{{ item.final_price | money }}</p>
+              <div class="cart-item-product">
+                <div class="cart-item-image-wrapper">
+                  {% if item.image %}
+                    <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" loading="lazy" class="cart-item-image">
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+                </div>
+                
+                <div class="cart-item-details">
+                  <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+                  {% unless item.product.has_only_default_variant %}
+                    <p class="cart-item-variant">{{ item.variant.title }}</p>
+                  {% endunless %}
+                  <p class="cart-item-price-mobile">{{ item.final_price | money }}</p>
+                </div>
               </div>
               
               <div class="cart-item-quantity">
@@ -138,11 +140,15 @@
     border-bottom: 1px solid #f5f5f5;
     padding: 20px 0;
   }
+  .cart-item-product {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
   .cart-item-image-wrapper {
     display: inline-block;
     width: 100px;
     height: 120px;
-    margin-right: 20px;
     background: #f9f9f9;
   }
   .cart-item-image {
@@ -153,7 +159,7 @@
   .cart-item-details {
     display: inline-block;
     vertical-align: top;
-    max-width: calc(100% - 130px);
+    max-width: 100%;
   }
   .cart-item-title {
     font-size: 1.1rem;
