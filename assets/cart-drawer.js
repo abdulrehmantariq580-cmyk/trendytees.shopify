@@ -148,7 +148,7 @@ class CartDrawer {
   formatMoney(cents) {
     const value = (cents / 100).toFixed(2);
     // Hardcoded currency symbol for simplicity. In production, use theme settings.
-    return '$' + value;
+    return 'Rs ' + value;
   }
 
   renderCart(cart) {
@@ -200,7 +200,14 @@ class CartDrawer {
                 <button class="qty-btn" type="button" data-action="plus" data-key="${item.key}">+</button>
               </div>
               
-              <a href="${item.url_to_remove}" class="cart-drawer__item-remove" data-key="${item.key}">Remove</a>
+              <a href="${item.url_to_remove}" class="cart-drawer__item-remove" data-key="${item.key}" aria-label="Remove item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  <line x1="10" y1="11" x2="10" y2="17"></line>
+                  <line x1="14" y1="11" x2="14" y2="17"></line>
+                </svg>
+              </a>
             </div>
           </div>
         `;
