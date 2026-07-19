@@ -19,7 +19,7 @@
               <div class="cart-item-product">
                 <div class="cart-item-image-wrapper">
                   {% if item.image %}
-                    <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" loading="lazy" class="cart-item-image">
+                    <img src="{{ item.image | image_url: width: 200 }}" width="{{ item.image.width }}" height="{{ item.image.height }}" alt="{{ item.title | escape }}" loading="lazy" class="cart-item-image">
                   {% else %}
                     {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
                   {% endif %}
