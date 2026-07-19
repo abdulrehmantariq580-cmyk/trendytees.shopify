@@ -7,59 +7,64 @@
   {% if cart.item_count > 0 %}
     <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-page-form">
       <div class="cart-page-content">
-        <div class="cart-page-items">
-          <div class="cart-items-header">
-            <span class="col-product">Product</span>
-            <span class="col-quantity">Quantity</span>
-            <span class="col-total">Total</span>
-          </div>
-          
-          {% for item in cart.items %}
-            <div class="cart-item">
-              <div class="cart-item-product">
-                <div class="cart-item-image-wrapper">
-                  {% if item.image %}
-                    <img src="{{ item.image | image_url: width: 200 }}" width="{{ item.image.width }}" height="{{ item.image.height }}" alt="{{ item.title | escape }}" loading="lazy" class="cart-item-image">
-                  {% else %}
-                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                  {% endif %}
-                </div>
-                
-                <div class="cart-item-details">
-                  <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
-                  {% unless item.product.has_only_default_variant %}
-                    <p class="cart-item-variant">{{ item.variant.title }}</p>
-                  {% endunless %}
-                  <p class="cart-item-price-mobile">{{ item.final_price | money }}</p>
-                </div>
-              </div>
-              
-              <div class="cart-item-quantity">
-                <div class="qty-wrapper">
-                  <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" class="qty-btn" aria-label="Decrease quantity">-</a>
-                  <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" class="qty-input" aria-label="Item quantity">
-                  <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" class="qty-btn" aria-label="Increase quantity">+</a>
-                </div>
-                <a href="{{ item.url_to_remove }}" class="cart-item-remove" aria-label="Remove item">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
-                    <polyline points="3 6 5 6 21 6"></polyline>
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                    <line x1="14" y1="11" x2="14" y2="17"></line>
-                  </svg>
-                </a>
-              </div>
-              
-              <div class="cart-item-total">
-                <span class="cart-item-final-price">{{ item.final_line_price | money }}</span>
-              </div>
-            </div>
-          {% endfor %}
-          
-
+        <div class="cart-table-wrapper">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th class="col-product">Product</th>
+                <th class="col-quantity">Quantity</th>
+                <th class="col-total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in cart.items %}
+                <tr class="cart-item">
+                  <td class="cart-item-product">
+                    <div class="cart-item-image-wrapper">
+                      {% if item.image %}
+                        <img src="{{ item.image | image_url: width: 200 }}" width="{{ item.image.width }}" height="{{ item.image.height }}" alt="{{ item.title | escape }}" loading="lazy" class="cart-item-image">
+                      {% else %}
+                        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {% endif %}
+                    </div>
+                    
+                    <div class="cart-item-details">
+                      <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+                      {% unless item.product.has_only_default_variant %}
+                        <p class="cart-item-variant">{{ item.variant.title }}</p>
+                      {% endunless %}
+                      <p class="cart-item-price-mobile">{{ item.final_price | money }}</p>
+                    </div>
+                  </td>
+                  
+                  <td class="cart-item-quantity">
+                    <div class="cart-item-qty-flex">
+                      <div class="qty-wrapper">
+                        <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" class="qty-btn" aria-label="Decrease quantity">-</a>
+                        <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" class="qty-input" aria-label="Item quantity">
+                        <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" class="qty-btn" aria-label="Increase quantity">+</a>
+                      </div>
+                      <a href="{{ item.url_to_remove }}" class="cart-item-remove" aria-label="Remove item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+                          <polyline points="3 6 5 6 21 6"></polyline>
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                          <line x1="10" y1="11" x2="10" y2="17"></line>
+                          <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
+                      </a>
+                    </div>
+                  </td>
+                  
+                  <td class="cart-item-total">
+                    <span class="cart-item-final-price">{{ item.final_line_price | money }}</span>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
         
-        <div class="cart-page-sidebar">
+        <div class="cart-footer">
           <div class="order-summary-box">
             <h2 class="order-summary-title">Order Summary</h2>
             <div class="order-summary-row">
@@ -118,29 +123,36 @@
   }
   .cart-page-content {
     display: flex;
-    gap: 50px;
-    align-items: flex-start;
+    flex-direction: column;
+    gap: 40px;
   }
-  .cart-page-items {
-    flex: 1;
+  .cart-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
   }
-  .cart-items-header {
-    display: grid;
-    grid-template-columns: 3fr 1fr 1fr;
-    border-bottom: 1px solid #eee;
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  .cart-table th {
     padding-bottom: 15px;
-    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.9rem;
     color: #666;
   }
-  .cart-item {
-    display: grid;
-    grid-template-columns: 3fr 1fr 1fr;
-    align-items: center;
+  .col-total {
+    text-align: right;
+  }
+  .col-quantity {
+    text-align: center;
+  }
+  .cart-item td {
+    padding: 30px 0;
     border-bottom: 1px solid #f5f5f5;
-    padding: 20px 0;
+    vertical-align: middle;
   }
   .cart-item-product {
     display: flex;
@@ -152,22 +164,20 @@
     width: 100px;
     height: 120px;
     background: #f9f9f9;
+    flex-shrink: 0;
   }
   .cart-item-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  .cart-item-details {
-    display: inline-block;
-    vertical-align: top;
-    max-width: 100%;
-  }
   .cart-item-title {
     font-size: 1.1rem;
     font-weight: 600;
     display: block;
     margin-bottom: 5px;
+    text-decoration: none;
+    color: #000;
   }
   .cart-item-variant {
     font-size: 0.9rem;
@@ -178,12 +188,16 @@
     display: none;
   }
   .cart-item-quantity {
+    text-align: center;
+  }
+  .cart-item-qty-flex {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 15px;
   }
   .qty-wrapper {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 30px;
@@ -234,44 +248,24 @@
     font-size: 1.2rem;
     font-weight: 600;
   }
-  .cart-page-actions {
-    margin-top: 30px;
-    text-align: right;
-  }
-  .cart-update-btn {
-    background: transparent;
-    border: 1px solid #000;
-    color: #000;
-    padding: 10px 30px;
-    border-radius: 30px;
-    font-weight: 500;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.3s;
-  }
-  .cart-update-btn:hover {
-    background: #000;
-    color: #fff;
-  }
-  
-  /* Sidebar Summary */
-  .cart-page-sidebar {
-    width: 350px;
+  .cart-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
   }
   .order-summary-box {
     background: #fff;
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
     box-sizing: border-box;
-    width: 100%;
+    width: 400px;
+    max-width: 100%;
   }
   .order-summary-title {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
   }
   .order-summary-row {
     display: flex;
@@ -279,31 +273,6 @@
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 20px;
-  }
-  .cart-discount-wrapper {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
-  }
-  .cart-discount-label {
-    display: block;
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #333;
-  }
-  .cart-discount-input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-  }
-  .cart-discount-input:focus {
-    outline: none;
-    border-color: #000;
   }
   .order-summary-note {
     font-size: 0.85rem;
@@ -332,8 +301,6 @@
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
   }
-  
-  /* Empty State */
   .cart-page-empty {
     text-align: center;
     padding: 100px 20px;
@@ -389,42 +356,39 @@
     background: #222;
   }
 
-  @media screen and (max-width: 900px) {
-    .cart-page-content {
-      flex-direction: column;
-    }
-    .cart-page-sidebar {
-      width: 100%;
-      margin-top: 30px;
-    }
-    .cart-items-header {
+  @media screen and (max-width: 768px) {
+    .cart-table thead {
       display: none;
     }
     .cart-item {
       display: flex;
       flex-direction: column;
-      position: relative;
+      border-bottom: 1px solid #eee;
+      padding: 20px 0;
     }
-    .cart-item-image-wrapper {
-      width: 80px;
-      height: 100px;
-      margin-right: 15px;
+    .cart-item td {
+      display: block;
+      padding: 10px 0;
+      border: none;
+      text-align: left;
     }
-    .cart-item-details {
-      max-width: calc(100% - 95px);
+    .cart-item-qty-flex {
+      justify-content: flex-start;
+    }
+    .cart-item-total {
+      text-align: left;
+      font-size: 1.1rem;
     }
     .cart-item-price-mobile {
       display: block;
       font-weight: 600;
       margin-top: 5px;
     }
-    .cart-item-total {
-      display: none;
+    .cart-footer {
+      justify-content: center;
     }
-    .cart-item-quantity {
-      margin-top: 20px;
+    .order-summary-box {
       width: 100%;
-      justify-content: space-between;
     }
     .cart-page-header {
       flex-direction: column;
