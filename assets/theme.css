@@ -1408,3 +1408,59 @@ body.is-transitioning .page-transition-overlay {
 .mobile-drawer__content::-webkit-scrollbar-thumb:hover {
   background: #999; 
 }
+
+/* Policy Pages Styling */
+.shopify-policy__container {
+  max-width: 800px !important;
+  margin: 0 auto;
+  padding: 8rem 2rem 5rem !important; /* Extra top padding to clear header */
+}
+
+.shopify-policy__title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #000;
+  margin-bottom: 2.5rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.shopify-policy__body {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+.shopify-policy__body h1,
+.shopify-policy__body h2,
+.shopify-policy__body h3 {
+  color: #000;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.shopify-policy__body ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.shopify-policy__body li {
+  margin-bottom: 0.5rem;
+}
+
+.shopify-policy__body p {
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .shopify-policy__title {
+    font-size: 2rem;
+  }
+  .shopify-policy__container {
+    padding-top: 6rem !important;
+  }
+}
