@@ -1118,6 +1118,7 @@ body.is-transitioning .page-transition-overlay {
   color: #333;
   transition: background 0.3s;
 }
+.product-card__title {
   margin: 0 0 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
