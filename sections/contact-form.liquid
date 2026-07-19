@@ -1,0 +1,187 @@
+<div class="contact-page-container">
+  <div class="contact-form-wrapper">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="contact-heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- form 'contact', id: 'ContactForm', class: 'contact-form' -%}
+      {%- if form.posted_successfully? -%}
+        <div class="form-success">
+          Thanks for contacting us. We'll get back to you as soon as possible.
+        </div>
+      {%- elsif form.errors -%}
+        <div class="form-error">
+          Oops! There was an error submitting your form. Please check the fields below.
+        </div>
+      {%- endif -%}
+
+      <div class="contact-fields">
+        <div class="field-group">
+          <label for="ContactForm-name">Name</label>
+          <input class="field__input" autocomplete="name" type="text" id="ContactForm-name" name="contact[name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="Your Name">
+        </div>
+        <div class="field-group">
+          <label for="ContactForm-email">Email <span aria-hidden="true">*</span></label>
+          <input
+            autocomplete="email"
+            type="email"
+            id="ContactForm-email"
+            class="field__input"
+            name="contact[email]"
+            spellcheck="false"
+            autocapitalize="off"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            aria-required="true"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true"
+              aria-describedby="ContactForm-email-error"
+            {% endif %}
+            placeholder="Your Email"
+            required
+          >
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="ContactForm-phone">Phone Number</label>
+        <input type="tel" id="ContactForm-phone" class="field__input" autocomplete="tel" name="contact[phone]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="Your Phone Number">
+      </div>
+
+      <div class="field-group">
+        <label for="ContactForm-body">Message</label>
+        <textarea
+          rows="10"
+          id="ContactForm-body"
+          class="text-area field__input"
+          name="contact[body]"
+          placeholder="Write your message here..."
+        >
+          {{- form.body -}}
+        </textarea>
+      </div>
+
+      <div class="contact-submit">
+        <button type="submit" class="button button--primary contact-btn">
+          Send Message
+        </button>
+      </div>
+    {%- endform -%}
+  </div>
+</div>
+
+<style>
+  .contact-page-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+  }
+  .contact-heading {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .contact-fields {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .contact-fields .field-group {
+    flex: 1;
+  }
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .field-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .field__input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    background: transparent;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  .field__input:focus {
+    outline: none;
+    border-color: #000;
+  }
+  .text-area {
+    resize: vertical;
+    min-height: 150px;
+  }
+  .contact-submit {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .contact-btn {
+    background: #000;
+    color: #fff;
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .contact-btn:hover {
+    background: transparent;
+    color: #000;
+  }
+  .form-success {
+    padding: 1rem;
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 500;
+  }
+  .form-error {
+    padding: 1rem;
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 500;
+  }
+  @media screen and (max-width: 768px) {
+    .contact-fields {
+      flex-direction: column;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get in Touch"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact form"
+    }
+  ]
+}
+{% endschema %}
