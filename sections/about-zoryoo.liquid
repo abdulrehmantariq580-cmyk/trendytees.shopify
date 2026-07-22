@@ -83,29 +83,47 @@
 
   @media screen and (max-width: 768px) {
     .about-zoryoo-section {
-      width: 100%;
-      margin-left: 0;
-      margin-right: 0;
-      left: 0;
-      right: 0;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
       padding: 3rem 0;
     }
     .about-zoryoo-container {
       flex-direction: column;
-      width: 90%;
+      width: 85%;
+      max-width: 400px;
       margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
     }
     .about-zoryoo-image-col,
     .about-zoryoo-text-col {
       width: 100%;
     }
+    .about-zoryoo-image {
+      min-height: 250px;
+      max-height: 300px;
+    }
     .about-zoryoo-text-col {
-      padding: 3rem 1.5rem;
+      padding: 2.5rem 1.5rem;
       text-align: center;
       align-items: center;
     }
-    .about-zoryoo-image {
-      min-height: 300px;
+    .about-zoryoo-title {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .about-zoryoo-text {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .about-zoryoo-btn {
+      padding: 0.8rem 2rem;
+      font-size: 0.9rem;
     }
   }
 {%- endstyle -%}
