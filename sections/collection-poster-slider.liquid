@@ -1,0 +1,233 @@
+{%- style -%}
+  .collection-poster-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: #000;
+    overflow: hidden;
+  }
+
+  .collection-poster__swiper {
+    width: 100%;
+    height: auto;
+  }
+
+  .collection-poster__slide {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #111;
+  }
+
+  .collection-poster__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .collection-poster__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2); /* Light overlay */
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .collection-poster__content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .collection-poster__title {
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    margin: 0 0 1rem 0;
+  }
+
+  .collection-poster__button {
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    padding: 0.8rem 2.5rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .collection-poster__button:hover {
+    background: #000;
+    color: #fff;
+  }
+
+  /* Swiper Pagination */
+  .collection-poster-section .swiper-pagination-bullet {
+    background: #fff;
+    opacity: 0.5;
+  }
+  .collection-poster-section .swiper-pagination-bullet-active {
+    opacity: 1;
+  }
+
+  @media screen and (max-width: 768px) {
+    .collection-poster__slide {
+      aspect-ratio: 4 / 5; /* Mobile friendly aspect ratio */
+    }
+  }
+{%- endstyle -%}
+
+<section class="collection-poster-section" id="CollectionPoster-{{ section.id }}">
+  <div class="swiper collection-poster__swiper collection-poster-swiper-{{ section.id }}">
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        {%- assign collection = collections[block.settings.collection] -%}
+        
+        <div class="swiper-slide collection-poster__slide" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy', class: 'collection-poster__image' }}
+          {%- elsif collection.image != blank -%}
+            {{ collection.image | image_url: width: 2000 | image_tag: loading: 'lazy', class: 'collection-poster__image' }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg collection-poster__image' }}
+          {%- endif -%}
+
+          <div class="collection-poster__overlay"></div>
+
+          {%- if block.settings.show_title or block.settings.button_label != blank -%}
+            <div class="collection-poster__content">
+              {%- if block.settings.show_title -%}
+                <h2 class="collection-poster__title">
+                  {{ block.settings.title | default: collection.title | default: 'New Collection' }}
+                </h2>
+              {%- endif -%}
+
+              {%- if block.settings.button_label != blank -%}
+                <a href="{{ collection.url | default: '#' }}" class="collection-poster__button">
+                  {{ block.settings.button_label }}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- else -%}
+             <a href="{{ collection.url | default: '#' }}" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 4;"></a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+
+      {%- if section.blocks.size == 0 -%}
+        {%- for i in (1..3) -%}
+          <div class="swiper-slide collection-poster__slide">
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg collection-poster__image' }}
+            <div class="collection-poster__overlay"></div>
+            <div class="collection-poster__content">
+              <h2 class="collection-poster__title">Example Collection</h2>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+    
+    <!-- Pagination -->
+    <div class="swiper-pagination collection-poster-pagination-{{ section.id }}"></div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Swiper !== 'undefined') {
+      new Swiper('.collection-poster-swiper-{{ section.id }}', {
+        slidesPerView: 1,
+        loop: true,
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+        effect: 'slide',
+        speed: 800,
+        pagination: {
+          el: '.collection-poster-pagination-{{ section.id }}',
+          clickable: true,
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collection Poster Slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "A dynamic 16:9 poster slider"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_poster",
+      "name": "Collection Poster",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Poster Image (16:9)",
+          "info": "Leave blank to use the Collection's featured image."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_title",
+          "label": "Show Collection Title overlay",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom Title",
+          "info": "Overrides the collection title if showing."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Shop Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Poster Slider",
+      "blocks": [
+        { "type": "collection_poster" },
+        { "type": "collection_poster" }
+      ]
+    }
+  ]
+}
+{% endschema %}
