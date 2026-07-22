@@ -91,9 +91,49 @@
     opacity: 1;
   }
 
+  .collection-poster-button-next,
+  .collection-poster-button-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    color: #000;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .collection-poster-button-next:hover,
+  .collection-poster-button-prev:hover {
+    background: #fff;
+  }
+
+  .collection-poster-button-prev {
+    left: 20px;
+  }
+
+  .collection-poster-button-next {
+    right: 20px;
+  }
+
+  .collection-poster-button-next svg,
+  .collection-poster-button-prev svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+
   @media screen and (max-width: 768px) {
-    .collection-poster__slide {
-      aspect-ratio: 4 / 5; /* Mobile friendly aspect ratio */
+    .collection-poster-button-next,
+    .collection-poster-button-prev {
+      width: 40px;
+      height: 40px;
     }
   }
 {%- endstyle -%}
@@ -125,7 +165,7 @@
 
               {%- if block.settings.button_label != blank -%}
                 <a href="{{ collection.url | default: '#' }}" class="collection-poster__button">
-                  {{ block.settings.button_label }}
+                  {{ block.settings.title | default: collection.title | default: 'Shop Collection' }}
                 </a>
               {%- endif -%}
             </div>
@@ -148,7 +188,13 @@
       {%- endif -%}
     </div>
     
-    <!-- Pagination -->
+    <!-- Navigation & Pagination -->
+    <div class="collection-poster-button-prev collection-poster-prev-{{ section.id }}">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </div>
+    <div class="collection-poster-button-next collection-poster-next-{{ section.id }}">
+      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </div>
     <div class="swiper-pagination collection-poster-pagination-{{ section.id }}"></div>
   </div>
 </section>
@@ -165,6 +211,10 @@
         },
         effect: 'slide',
         speed: 800,
+        navigation: {
+          nextEl: '.collection-poster-next-{{ section.id }}',
+          prevEl: '.collection-poster-prev-{{ section.id }}',
+        },
         pagination: {
           el: '.collection-poster-pagination-{{ section.id }}',
           clickable: true,
