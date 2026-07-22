@@ -1,0 +1,160 @@
+{%- style -%}
+  .about-zoryoo-section {
+    padding: 5rem 0;
+    background-color: #cecfd1; /* matching the screenshot outer background */
+  }
+
+  .about-zoryoo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    background: #111; /* Right side background */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .about-zoryoo-image-col {
+    flex: 1 1 50%;
+    min-width: 300px;
+    position: relative;
+    background-color: #fff;
+  }
+
+  .about-zoryoo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    min-height: 400px;
+  }
+
+  .about-zoryoo-text-col {
+    flex: 1 1 50%;
+    min-width: 300px;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #111;
+    color: #fff;
+  }
+
+  .about-zoryoo-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+  }
+
+  .about-zoryoo-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+    margin-bottom: 3rem;
+  }
+
+  .about-zoryoo-btn {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 0.8rem 2.5rem;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .about-zoryoo-btn:hover {
+    background: #fff;
+    color: #111;
+  }
+
+  @media screen and (max-width: 768px) {
+    .about-zoryoo-container {
+      flex-direction: column;
+    }
+    .about-zoryoo-text-col {
+      padding: 3rem 2rem;
+    }
+    .about-zoryoo-image {
+      min-height: 300px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="about-zoryoo-section" id="AboutZoryoo-{{ section.id }}">
+  <div class="page-width">
+    <div class="about-zoryoo-container">
+      <div class="about-zoryoo-image-col">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'about-zoryoo-image' }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg about-zoryoo-image' }}
+        {%- endif -%}
+      </div>
+      <div class="about-zoryoo-text-col">
+        {%- if section.settings.title != blank -%}
+          <h2 class="about-zoryoo-title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        
+        {%- if section.settings.text != blank -%}
+          <div class="about-zoryoo-text">{{ section.settings.text }}</div>
+        {%- endif -%}
+        
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="about-zoryoo-btn">
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Zoryoo",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "ZORYOO"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>ZORYOO is a premium fashion brand redefining modern streetwear through exceptional quality, innovative design, and luxury presentation. Our signature down-shoulder T-shirts are crafted from carefully selected fabrics to deliver superior comfort, durability, and style. Every ZORYOO piece is designed to make a statement, while our premium packaging ensures an elevated experience from the moment your order arrives.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Zoryoo",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}
