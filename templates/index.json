@@ -110,6 +110,15 @@
     "collection_poster_slider_DPxFNx": {
       "type": "collection-poster-slider",
       "blocks": {
+        "collection_poster_ETM8LX": {
+          "type": "collection_poster",
+          "settings": {
+            "collection": "amazing-designs",
+            "show_title": false,
+            "title": "",
+            "button_label": "Shop Collection"
+          }
+        },
         "collection_poster_P6JLeq": {
           "type": "collection_poster",
           "settings": {
@@ -130,6 +139,7 @@
         }
       },
       "block_order": [
+        "collection_poster_ETM8LX",
         "collection_poster_P6JLeq",
         "collection_poster_w868x7"
       ],
