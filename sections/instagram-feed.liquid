@@ -193,6 +193,7 @@
   <div class="instagram-container">
     <div class="swiper instagram-slider-{{ section.id }}">
       <div class="swiper-wrapper">
+        {%- assign total_blocks = section.blocks.size -%}
         {%- for block in section.blocks -%}
           <div class="swiper-slide" {{ block.shopify_attributes }}>
             <a href="{{ block.settings.link | default: '#' }}" target="_blank" class="instagram-card">
@@ -204,6 +205,21 @@
             </a>
           </div>
         {%- endfor -%}
+        
+        {%- comment -%} Ensure enough slides for Swiper Loop {%- endcomment -%}
+        {%- if total_blocks > 0 and total_blocks < 6 -%}
+          {%- for block in section.blocks -%}
+            <div class="swiper-slide">
+              <a href="{{ block.settings.link | default: '#' }}" target="_blank" class="instagram-card">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'instagram-card__image' }}
+                {%- else -%}
+                  {{ 'lifestyle-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg instagram-card__image' }}
+                {%- endif -%}
+              </a>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
       </div>
     </div>
     
