@@ -1,157 +1,72 @@
-<style>
-  .announcement-bar-wrapper {
-    background-color: #000; color: #fff; padding: 10px 0; font-size: 0.8rem; letter-spacing: 1px; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative;
+{%- style -%}
+  .announcement-bar-marquee {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    white-space: nowrap;
+    background-color: #000;
+    color: #fff;
+    padding: 0.6rem 0;
+    z-index: 1001;
   }
-  .announcement-bar__content {
-    display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%; padding: 0 80px; box-sizing: border-box;
-  }
-  .announcement-fade-wrapper {
-    display: grid; align-items: center; justify-items: center;
-  }
-  .announcement-bar__message {
-    grid-area: 1 / 1; text-transform: uppercase; text-align: center; white-space: nowrap; transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-  }
-  .announcement-bar__socials {
-    display: flex; gap: 15px; position: absolute; left: 20px; z-index: 2; align-items: center;
-  }
-  .announcement-bar__socials a {
-    color: #fff; opacity: 0.8; transition: opacity 0.3s; display: flex; align-items: center;
-  }
-  .announcement-bar__socials a:hover {
-    opacity: 1;
-  }
-  @media screen and (max-width: 768px) {
-    .announcement-bar__socials {
-      display: none;
-    }
-    .announcement-bar__content {
-      padding: 0 10px;
-    }
-    .announcement-bar-wrapper {
-      padding: 10px 0;
-    }
-    .announcement-bar__message {
-      font-size: 12px !important;
-      letter-spacing: 0.5px;
-      white-space: normal; /* Allow wrapping */
-      line-height: 1.3;
-      display: -webkit-box;
-      -webkit-line-clamp: 2; /* Maximum 2 lines */
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .announcement-bar__content {
-      gap: 0.5rem;
-    }
-    .announcement-fade-wrapper {
-      max-width: calc(100vw - 60px);
-    }
-  }
-</style>
-<div class="announcement-bar full-width announcement-bar-wrapper" role="region" aria-label="Announcement">
-  <div class="announcement-bar__socials">
-    {% if settings.social_instagram_link != blank %}
-      <a href="{{ settings.social_instagram_link }}" aria-label="Instagram">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-      </a>
-    {% endif %}
-    {% if settings.social_whatsapp_link != blank %}
-      <a href="{{ settings.social_whatsapp_link }}" aria-label="WhatsApp">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path>
-          <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"></path>
-        </svg>
-      </a>
-    {% endif %}
-  </div>
 
-  <div class="announcement-bar__content">
-    <span class="announcement-prev" style="cursor: pointer; opacity: 0.7; padding: 0 10px; user-select: none; flex-shrink: 0; font-weight: bold;">&lt;</span>
-    <div class="announcement-fade-wrapper">
-      {% for block in section.blocks %}
-        <span class="announcement-bar__message fade-slide" style="{% if forloop.first %}opacity: 1; visibility: visible; pointer-events: auto;{% else %}opacity: 0; visibility: hidden; pointer-events: none;{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
-      {% else %}
-        <span class="announcement-bar__message fade-slide" style="opacity: 1; visibility: visible;">{{ section.settings.text }}</span>
-      {% endfor %}
-    </div>
-    <span class="announcement-next" style="cursor: pointer; opacity: 0.7; padding: 0 10px; user-select: none; flex-shrink: 0; font-weight: bold;">&gt;</span>
+  .announcement-bar__marquee-inner {
+    display: flex;
+    animation: marquee-scroll 20s linear infinite;
+    width: max-content;
+  }
+
+  .announcement-bar-marquee:hover .announcement-bar__marquee-inner {
+    animation-play-state: paused;
+  }
+
+  .announcement-bar__item {
+    display: flex;
+    align-items: center;
+    padding-right: 3rem;
+  }
+
+  .announcement-bar__text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: none;
+  }
+
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+{%- endstyle -%}
+
+<div class="announcement-bar-marquee">
+  <div class="announcement-bar__marquee-inner">
+    {%- capture announcement_text -%}
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="announcement-bar__item">
+            <span class="announcement-bar__text">{{ block.settings.text }}</span>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="announcement-bar__item">
+          <span class="announcement-bar__text">{{ section.settings.text }}</span>
+        </div>
+      {%- endif -%}
+    {%- endcapture -%}
+    
+    {%- comment -%} Repeat the text multiple times to ensure smooth scrolling {%- endcomment -%}
+    {{ announcement_text }}
+    {{ announcement_text }}
+    {{ announcement_text }}
+    {{ announcement_text }}
+    {{ announcement_text }}
+    {{ announcement_text }}
+    {{ announcement_text }}
+    {{ announcement_text }}
   </div>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const prevBtn = document.querySelector('.announcement-prev');
-    const nextBtn = document.querySelector('.announcement-next');
-    const slides = document.querySelectorAll('.fade-slide');
-    
-    if (slides.length <= 1) {
-      if (prevBtn) prevBtn.style.display = 'none';
-      if (nextBtn) nextBtn.style.display = 'none';
-      return;
-    }
-
-    let currentIndex = 0;
-    const slideCount = slides.length;
-    let interval;
-
-    // Font size scaling removed - using CSS line-wrapping for mobile instead
-    
-    function goToSlide(index) {
-      slides[currentIndex].style.opacity = '0';
-      slides[currentIndex].style.visibility = 'hidden';
-      slides[currentIndex].style.pointerEvents = 'none';
-
-      if (index < 0) index = slideCount - 1;
-      if (index >= slideCount) index = 0;
-      currentIndex = index;
-
-      slides[currentIndex].style.opacity = '1';
-      slides[currentIndex].style.visibility = 'visible';
-      slides[currentIndex].style.pointerEvents = 'auto';
-    }
-
-    function nextSlide() {
-      goToSlide(currentIndex + 1);
-    }
-
-    function prevSlide() {
-      goToSlide(currentIndex - 1);
-    }
-
-    function startAutoSlide() {
-      clearInterval(interval);
-      interval = setInterval(nextSlide, 4000);
-    }
-
-    function stopAutoSlide() {
-      clearInterval(interval);
-    }
-
-    if(nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        stopAutoSlide();
-        nextSlide();
-        startAutoSlide();
-      });
-    }
-
-    if(prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        stopAutoSlide();
-        prevSlide();
-        startAutoSlide();
-      });
-    }
-
-    const wrapper = document.querySelector('.announcement-bar__content');
-    if(wrapper) {
-      wrapper.addEventListener('mouseenter', stopAutoSlide);
-      wrapper.addEventListener('mouseleave', startAutoSlide);
-    }
-
-    startAutoSlide();
-  });
-</script>
 
 {% schema %}
 {
@@ -160,7 +75,7 @@
     {
       "type": "text",
       "id": "text",
-      "default": "PREMIUM T-SHIRTS • FREE SHIPPING ON ORDERS OVER $50 • NEW COLLECTION OUT NOW",
+      "default": "Welcome to our store",
       "label": "Announcement Text"
     }
   ],
@@ -172,7 +87,7 @@
         {
           "type": "text",
           "id": "text",
-          "default": "PREMIUM T-SHIRTS",
+          "default": "Welcome to our store",
           "label": "Text"
         }
       ]
@@ -182,12 +97,8 @@
     {
       "name": "Announcement Bar",
       "blocks": [
-        {
-          "type": "announcement"
-        },
-        {
-          "type": "announcement"
-        }
+        { "type": "announcement" },
+        { "type": "announcement" }
       ]
     }
   ]
