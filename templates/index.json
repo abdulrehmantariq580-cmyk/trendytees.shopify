@@ -101,7 +101,7 @@
       "type": "product-slider",
       "settings": {
         "title": "Featured Products",
-        "subtitle": "Upgrade Your Wardrobe",
+        "subtitle": "Lead the Trend, Don't Follow it",
         "collection": "featured-products",
         "products_to_show": 8,
         "bg_color": "grey"
