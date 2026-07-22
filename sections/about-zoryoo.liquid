@@ -2,12 +2,9 @@
   .about-zoryoo-section {
     padding: 6rem 0;
     background-color: #cecfd1;
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
   .about-zoryoo-container {
@@ -82,15 +79,21 @@
   }
 
   @media screen and (max-width: 768px) {
+    .about-zoryoo-section {
+      padding: 3rem 0;
+    }
     .about-zoryoo-container {
       flex-direction: column;
+      width: 100%;
     }
     .about-zoryoo-image-col,
     .about-zoryoo-text-col {
       width: 100%;
     }
     .about-zoryoo-text-col {
-      padding: 3rem 2rem;
+      padding: 3rem 1.5rem;
+      text-align: center;
+      align-items: center;
     }
     .about-zoryoo-image {
       min-height: 300px;
