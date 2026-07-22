@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_slider": {
@@ -6,41 +15,43 @@
         "slide_1": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/male_streetwear_hero_1_1784727885377.png",
+            "image": "shopify://shop_images/Gemini_Generated_Image_olb6xqolb6xqolb6.png",
+            "overlay_opacity": 30,
             "subheading": "LUXURY STREETWEAR!",
             "heading": "Discover Your Style",
             "button_label": "SHOP NOW",
-            "button_link": "shopify:\/\/collections\/all"
+            "button_link": "shopify://collections/all"
           }
         },
         "slide_2": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/male_streetwear_hero_2_1784727918544.png",
+            "image": "shopify://shop_images/Gemini_Generated_Image_z1pqz3z1pqz3z1pq.png",
+            "overlay_opacity": 30,
             "subheading": "NEW COLLECTION",
             "heading": "Elevate Your Game",
             "button_label": "SHOP NOW",
-            "button_link": "shopify:\/\/collections\/all"
+            "button_link": "shopify://collections/all"
           }
         },
         "slide_3": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/male_streetwear_hero_3_1784727952057.png",
+            "overlay_opacity": 30,
             "subheading": "PREMIUM APPAREL",
             "heading": "Unmatched Quality",
             "button_label": "SHOP NOW",
-            "button_link": "shopify:\/\/collections\/all"
+            "button_link": "shopify://collections/all"
           }
         },
         "slide_4": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/male_streetwear_hero_4_1784727964054.png",
+            "overlay_opacity": 30,
             "subheading": "EXCLUSIVE DROPS",
             "heading": "Own The Streets",
             "button_label": "SHOP NOW",
-            "button_link": "shopify:\/\/collections\/all"
+            "button_link": "shopify://collections/all"
           }
         }
       },
@@ -49,7 +60,8 @@
         "slide_2",
         "slide_3",
         "slide_4"
-      ]
+      ],
+      "settings": {}
     },
     "features_bar": {
       "type": "features-bar",
@@ -80,7 +92,8 @@
         "feature_1",
         "feature_2",
         "feature_3"
-      ]
+      ],
+      "settings": {}
     },
     "product_slider_dropping_now": {
       "type": "product-slider",
@@ -94,9 +107,6 @@
     },
     "collection_banners": {
       "type": "collection-list-banners",
-      "settings": {
-        "title": "Collections"
-      },
       "blocks": {
         "collection_1": {
           "type": "collection",
@@ -109,7 +119,10 @@
       },
       "block_order": [
         "collection_1"
-      ]
+      ],
+      "settings": {
+        "title": "Collections"
+      }
     },
     "product_slider_drop_shoulder": {
       "type": "product-slider",
@@ -123,19 +136,34 @@
     },
     "instagram_feed": {
       "type": "instagram-feed",
-      "settings": {
-        "title": "Instagram"
-      },
       "blocks": {
-        "img_1": { "type": "image" },
-        "img_2": { "type": "image" },
-        "img_3": { "type": "image" }
+        "img_1": {
+          "type": "image",
+          "settings": {
+            "link": ""
+          }
+        },
+        "img_2": {
+          "type": "image",
+          "settings": {
+            "link": ""
+          }
+        },
+        "img_3": {
+          "type": "image",
+          "settings": {
+            "link": ""
+          }
+        }
       },
       "block_order": [
         "img_1",
         "img_2",
         "img_3"
-      ]
+      ],
+      "settings": {
+        "title": "Instagram"
+      }
     }
   },
   "order": [
