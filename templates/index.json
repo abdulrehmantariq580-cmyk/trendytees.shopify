@@ -159,6 +159,13 @@
     "instagram_feed_fkBWzf": {
       "type": "instagram-feed",
       "blocks": {
+        "image_G8BLAn": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/1784738063608.jpg",
+            "link": "https://www.instagram.com/p/DaQQPEeNqw8/"
+          }
+        },
         "image_a4PXHt": {
           "type": "image",
           "settings": {
@@ -189,6 +196,7 @@
         }
       },
       "block_order": [
+        "image_G8BLAn",
         "image_a4PXHt",
         "image_PELdgK",
         "image_UenwNy",
