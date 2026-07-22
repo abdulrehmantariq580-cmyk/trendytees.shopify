@@ -107,73 +107,40 @@
         "bg_color": "grey"
       }
     },
-    "collection_banners": {
-      "type": "collection-list-banners",
+    "collection_poster_slider_DPxFNx": {
+      "type": "collection-poster-slider",
       "blocks": {
-        "collection_1": {
-          "type": "collection",
+        "collection_poster_P6JLeq": {
+          "type": "collection_poster",
+          "settings": {
+            "collection": "featured-products",
+            "show_title": false,
+            "title": "",
+            "button_label": "Shop Collection"
+          }
+        },
+        "collection_poster_w868x7": {
+          "type": "collection_poster",
           "settings": {
             "collection": "new-colleection",
-            "title": "Drop-Shoulder T-Shirts",
-            "subtitle": ""
+            "show_title": false,
+            "title": "",
+            "button_label": "Shop Collection"
           }
         }
       },
       "block_order": [
-        "collection_1"
+        "collection_poster_P6JLeq",
+        "collection_poster_w868x7"
       ],
-      "settings": {
-        "title": "Collections"
-      }
-    },
-    "product_slider_drop_shoulder": {
-      "type": "product-slider",
-      "settings": {
-        "title": "Drop-Shoulder T-Shirts",
-        "subtitle": "Discover our latest arrivals",
-        "collection": "new-colleection",
-        "products_to_show": 8,
-        "bg_color": "white"
-      }
-    },
-    "instagram_feed": {
-      "type": "instagram-feed",
-      "blocks": {
-        "img_1": {
-          "type": "image",
-          "settings": {
-            "link": ""
-          }
-        },
-        "img_2": {
-          "type": "image",
-          "settings": {
-            "link": ""
-          }
-        },
-        "img_3": {
-          "type": "image",
-          "settings": {
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "img_1",
-        "img_2",
-        "img_3"
-      ],
-      "settings": {
-        "title": "Instagram"
-      }
+      "name": "Collection Poster Slider",
+      "settings": {}
     }
   },
   "order": [
     "hero_slider",
     "features_bar",
     "product_slider_dropping_now",
-    "collection_banners",
-    "product_slider_drop_shoulder",
-    "instagram_feed"
+    "collection_poster_slider_DPxFNx"
   ]
 }
