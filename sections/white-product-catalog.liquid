@@ -1,0 +1,235 @@
+{%- style -%}
+  .white-product-section {
+    padding: 4rem 0;
+    background-color: #ffffff;
+    overflow: hidden;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .white-product__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .white-product__title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #000;
+  }
+
+  .white-product__subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: #555;
+    font-weight: 600;
+  }
+
+  .white-product-container {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0; 
+  }
+
+  .white-product-container .swiper {
+    width: 100%;
+    padding: 0 2rem 2rem 2rem;
+  }
+
+  .white-product-container .swiper-slide {
+    height: auto;
+  }
+
+  .white-product-button-next,
+  .white-product-button-prev {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    z-index: 10;
+    color: #000;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .white-product-button-next:hover,
+  .white-product-button-prev:hover {
+    background: #000;
+    color: #fff;
+  }
+
+  .white-product-button-prev {
+    left: 1rem;
+  }
+
+  .white-product-button-next {
+    right: 1rem;
+  }
+
+  .white-product-button-next.swiper-button-disabled,
+  .white-product-button-prev.swiper-button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .white-product-button-next svg,
+  .white-product-button-prev svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  @media screen and (max-width: 768px) {
+    .white-product-container {
+      padding: 0 1rem;
+    }
+    .white-product-button-next,
+    .white-product-button-prev {
+      width: 36px;
+      height: 36px;
+    }
+    .white-product-button-next svg,
+    .white-product-button-prev svg {
+      width: 16px;
+      height: 16px;
+    }
+    .white-product-button-prev {
+      left: 0.5rem;
+    }
+    .white-product-button-next {
+      right: 0.5rem;
+    }
+    .white-product-section {
+      padding: 3rem 0;
+    }
+  }
+{%- endstyle -%}
+
+<section class="white-product-section" id="WhiteProductCatalog-{{ section.id }}">
+  <div class="white-product__header page-width">
+    {%- if section.settings.title != blank -%}
+      <h2 class="white-product__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="white-product__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="white-product-container">
+    <div class="swiper white-product-{{ section.id }}">
+      <div class="swiper-wrapper">
+        {%- assign collection = collections[section.settings.collection] -%}
+        {%- if collection != blank and collection.products_count > 0 -%}
+          {%- for product in collection.products limit: section.settings.products_to_show -%}
+            <div class="swiper-slide">
+              {% render 'product-card', product: product %}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..6) -%}
+            <div class="swiper-slide">
+              <div class="product-card">
+                <div class="product-card__image-container">
+                  {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg product-card__image' }}
+                </div>
+                <div class="product-card__info">
+                  <div class="product-card__vendor">ZORYOO</div>
+                  <h3 class="product-card__title">Example T-Shirt</h3>
+                  <div class="product-card__price-wrapper">
+                    <span class="product-card__price">$29.99</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+    
+    <div class="white-product-button-prev white-product-prev-{{ section.id }}">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </div>
+    <div class="white-product-button-next white-product-next-{{ section.id }}">
+      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Swiper !== 'undefined') {
+      new Swiper('.white-product-{{ section.id }}', {
+        slidesPerView: 1.5,
+        spaceBetween: 16,
+        navigation: {
+          nextEl: '.white-product-next-{{ section.id }}',
+          prevEl: '.white-product-prev-{{ section.id }}',
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2.5,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+          },
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "White Product Catalog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Drop-Shoulder T-Shirts"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Discover our latest arrivals"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8,
+      "label": "Maximum products to show"
+    }
+  ],
+  "presets": [
+    {
+      "name": "White Product Catalog",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}
