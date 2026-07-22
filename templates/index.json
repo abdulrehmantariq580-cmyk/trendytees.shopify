@@ -150,9 +150,9 @@
       "type": "product-slider",
       "name": "Product Slider",
       "settings": {
-        "title": "Fe",
-        "subtitle": "Upgrade Your Wardrobe",
-        "collection": "",
+        "title": "New Collection",
+        "subtitle": "Lead the Trend, Don't Follow it",
+        "collection": "new-colleection",
         "products_to_show": 8,
         "bg_color": "grey"
       }
