@@ -124,9 +124,10 @@
   }
   
   .footer__newsletter-heading {
+    font-family: 'Playfair Display', serif;
     color: #ffffff;
-    font-size: 2.2rem;
-    font-weight: 400;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
     margin-bottom: 1rem;
   }
 
@@ -145,9 +146,14 @@
     position: relative;
     display: flex;
     align-items: center;
-    border: 1px solid #444;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50px;
     overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  
+  .footer__newsletter-input-group:focus-within {
+    border-color: rgba(255, 255, 255, 0.8);
   }
 
   .footer__newsletter-input {
@@ -155,13 +161,15 @@
     background: transparent;
     border: none;
     color: #ffffff;
-    padding: 12px 20px;
-    font-size: 1rem;
+    padding: 14px 24px;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
     outline: none;
   }
 
   .footer__newsletter-input::placeholder {
     color: #888;
+    font-family: 'Inter', sans-serif;
   }
 
   .footer__newsletter-btn {
