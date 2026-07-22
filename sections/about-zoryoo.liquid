@@ -1,23 +1,30 @@
 {%- style -%}
   .about-zoryoo-section {
-    padding: 5rem 0;
-    background-color: #cecfd1; /* matching the screenshot outer background */
+    padding: 6rem 0;
+    background-color: #cecfd1;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
   }
 
   .about-zoryoo-container {
     max-width: 1200px;
+    width: 90%;
     margin: 0 auto;
     display: flex;
-    flex-wrap: wrap;
-    background: #111; /* Right side background */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    flex-direction: row;
+    align-items: stretch;
+    background: #111; 
   }
 
   .about-zoryoo-image-col {
-    flex: 1 1 50%;
-    min-width: 300px;
+    width: 50%;
     position: relative;
     background-color: #fff;
+    display: flex;
   }
 
   .about-zoryoo-image {
@@ -25,13 +32,12 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    min-height: 400px;
+    min-height: 500px;
   }
 
   .about-zoryoo-text-col {
-    flex: 1 1 50%;
-    min-width: 300px;
-    padding: 4rem;
+    width: 50%;
+    padding: 5rem 4rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -50,16 +56,16 @@
 
   .about-zoryoo-text {
     font-family: 'Inter', sans-serif;
-    font-size: 1.05rem;
+    font-size: 1rem;
     line-height: 1.8;
-    color: #e0e0e0;
+    color: #ccc;
     margin-bottom: 3rem;
   }
 
   .about-zoryoo-btn {
     display: inline-block;
     align-self: flex-start;
-    padding: 0.8rem 2.5rem;
+    padding: 1rem 3rem;
     background: transparent;
     border: 1px solid #fff;
     color: #fff;
@@ -79,6 +85,10 @@
     .about-zoryoo-container {
       flex-direction: column;
     }
+    .about-zoryoo-image-col,
+    .about-zoryoo-text-col {
+      width: 100%;
+    }
     .about-zoryoo-text-col {
       padding: 3rem 2rem;
     }
@@ -89,30 +99,28 @@
 {%- endstyle -%}
 
 <section class="about-zoryoo-section" id="AboutZoryoo-{{ section.id }}">
-  <div class="page-width">
-    <div class="about-zoryoo-container">
-      <div class="about-zoryoo-image-col">
-        {%- if section.settings.image != blank -%}
-          {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'about-zoryoo-image' }}
-        {%- else -%}
-          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg about-zoryoo-image' }}
-        {%- endif -%}
-      </div>
-      <div class="about-zoryoo-text-col">
-        {%- if section.settings.title != blank -%}
-          <h2 class="about-zoryoo-title">{{ section.settings.title }}</h2>
-        {%- endif -%}
-        
-        {%- if section.settings.text != blank -%}
-          <div class="about-zoryoo-text">{{ section.settings.text }}</div>
-        {%- endif -%}
-        
-        {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_link | default: '#' }}" class="about-zoryoo-btn">
-            {{ section.settings.button_label }}
-          </a>
-        {%- endif -%}
-      </div>
+  <div class="about-zoryoo-container">
+    <div class="about-zoryoo-image-col">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'about-zoryoo-image' }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg about-zoryoo-image' }}
+      {%- endif -%}
+    </div>
+    <div class="about-zoryoo-text-col">
+      {%- if section.settings.title != blank -%}
+        <h2 class="about-zoryoo-title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      
+      {%- if section.settings.text != blank -%}
+        <div class="about-zoryoo-text">{{ section.settings.text }}</div>
+      {%- endif -%}
+      
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="about-zoryoo-btn">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
     </div>
   </div>
 </section>
