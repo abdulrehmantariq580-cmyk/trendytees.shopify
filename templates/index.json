@@ -101,7 +101,7 @@
       "type": "product-slider",
       "settings": {
         "title": "Featured Products",
-        "subtitle": "Lead the Trend, Don't Follow it",
+        "subtitle": "Lead The Trend, Don't Follow It",
         "collection": "featured-products",
         "products_to_show": 8,
         "bg_color": "grey"
@@ -146,15 +146,14 @@
       "name": "Collection Poster Slider",
       "settings": {}
     },
-    "product_slider_Mymn4i": {
-      "type": "product-slider",
-      "name": "Product Slider",
+    "white_product_catalog_RX3Jhk": {
+      "type": "white-product-catalog",
+      "name": "White Product Catalog",
       "settings": {
         "title": "New Collection",
-        "subtitle": "Lead the Trend, Don't Follow it",
+        "subtitle": "Lead The Trend, Don't Follow It",
         "collection": "new-colleection",
-        "products_to_show": 8,
-        "bg_color": "grey"
+        "products_to_show": 8
       }
     }
   },
@@ -163,6 +162,6 @@
     "features_bar",
     "product_slider_dropping_now",
     "collection_poster_slider_DPxFNx",
-    "product_slider_Mymn4i"
+    "white_product_catalog_RX3Jhk"
   ]
 }
