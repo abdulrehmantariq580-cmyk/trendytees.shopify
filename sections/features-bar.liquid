@@ -1,0 +1,121 @@
+{%- style -%}
+  .features-bar {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 1.5rem 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+  }
+
+  .features-bar__inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 var(--page-margin);
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .feature-item__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .feature-item__icon svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+
+  .feature-item__text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .features-bar__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding-left: 2rem;
+    }
+  }
+{%- endstyle -%}
+
+<section class="features-bar" id="FeaturesBar-{{ section.id }}">
+  <div class="features-bar__inner">
+    {%- for block in section.blocks -%}
+      <div class="feature-item" {{ block.shopify_attributes }}>
+        {%- if block.settings.icon != 'none' -%}
+          <div class="feature-item__icon">
+            {%- case block.settings.icon -%}
+              {%- when 'truck' -%}
+                <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3v13h2a3 3 0 006 0h4a3 3 0 006 0h2v-5l-3-4zM8 15a1 1 0 110-2 1 1 0 010 2zm10 0a1 1 0 110-2 1 1 0 010 2zm-1-8l2.25 3H17V7zM5 13H4V6h11v7h-1.5A3.01 3.01 0 0011 11c-1.34 0-2.47.88-2.88 2H5z"/></svg>
+              {%- when 'check' -%}
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              {%- when 'refresh' -%}
+                <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+            {%- endcase -%}
+          </div>
+        {%- endif -%}
+        <span class="feature-item__text">{{ block.settings.text }}</span>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Features Bar",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "truck", "label": "Delivery Truck" },
+            { "value": "check", "label": "Checkmark Circle" },
+            { "value": "refresh", "label": "Exchange/Refresh" }
+          ],
+          "default": "truck"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free Delivery"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features Bar",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "truck", "text": "Free Delivery" } },
+        { "type": "feature", "settings": { "icon": "check", "text": "24/7 Support" } },
+        { "type": "feature", "settings": { "icon": "refresh", "text": "Easy Exchange" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

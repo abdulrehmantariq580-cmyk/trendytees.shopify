@@ -1,0 +1,231 @@
+{%- style -%}
+  .product-slider-section {
+    padding: 4rem 0;
+    background-color: #f2f4f8; /* default light grey */
+    overflow: hidden;
+  }
+
+  .product-slider-section--white {
+    background-color: #ffffff;
+  }
+
+  .product-slider__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .product-slider__title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #000;
+  }
+
+  .product-slider__subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #666;
+    font-weight: 500;
+  }
+
+  .product-slider-container {
+    position: relative;
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 40px; /* Space for arrows */
+  }
+
+  .product-slider-container .swiper {
+    width: 100%;
+    padding-bottom: 2rem; /* space for pagination if needed */
+  }
+
+  .product-slider-container .swiper-slide {
+    height: auto; /* To make cards equal height */
+  }
+
+  .product-slider-button-next,
+  .product-slider-button-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    z-index: 10;
+    color: #000;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .product-slider-button-next:hover,
+  .product-slider-button-prev:hover {
+    background: #000;
+    color: #fff;
+  }
+
+  .product-slider-button-prev {
+    left: 10px;
+  }
+
+  .product-slider-button-next {
+    right: 10px;
+  }
+
+  .product-slider-button-next.swiper-button-disabled,
+  .product-slider-button-prev.swiper-button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .product-slider-button-next svg,
+  .product-slider-button-prev svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  @media screen and (max-width: 768px) {
+    .product-slider-container {
+      padding: 0 1rem; /* Less padding on mobile, hide arrows or put inside */
+    }
+    .product-slider-button-next,
+    .product-slider-button-prev {
+      display: none; /* Often hidden on mobile in favor of swipe */
+    }
+    .product-slider-section {
+      padding: 3rem 0;
+    }
+  }
+{%- endstyle -%}
+
+<section class="product-slider-section {% if section.settings.bg_color == 'white' %}product-slider-section--white{% endif %}" id="ProductSlider-{{ section.id }}">
+  <div class="product-slider__header page-width">
+    {%- if section.settings.title != blank -%}
+      <h2 class="product-slider__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="product-slider__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="product-slider-container">
+    <div class="swiper product-slider-{{ section.id }}">
+      <div class="swiper-wrapper">
+        {%- assign collection = collections[section.settings.collection] -%}
+        {%- if collection != blank and collection.products_count > 0 -%}
+          {%- for product in collection.products limit: section.settings.products_to_show -%}
+            <div class="swiper-slide">
+              {% render 'product-card', product: product %}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..6) -%}
+            <div class="swiper-slide">
+              <div class="product-card">
+                <div class="product-card__image-container">
+                  {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg product-card__image' }}
+                </div>
+                <div class="product-card__info">
+                  <div class="product-card__vendor">ZORYOO</div>
+                  <h3 class="product-card__title">Example T-Shirt</h3>
+                  <div class="product-card__price-wrapper">
+                    <span class="product-card__price">$29.99</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+    
+    <div class="product-slider-button-prev product-slider-prev-{{ section.id }}">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </div>
+    <div class="product-slider-button-next product-slider-next-{{ section.id }}">
+      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Swiper !== 'undefined') {
+      new Swiper('.product-slider-{{ section.id }}', {
+        slidesPerView: 1.5,
+        spaceBetween: 16,
+        navigation: {
+          nextEl: '.product-slider-next-{{ section.id }}',
+          prevEl: '.product-slider-prev-{{ section.id }}',
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2.5,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+          },
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Dropping Now"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Upgrade Your Wardrobe"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8,
+      "label": "Maximum products to show"
+    },
+    {
+      "type": "select",
+      "id": "bg_color",
+      "label": "Background Color",
+      "options": [
+        { "value": "grey", "label": "Light Grey" },
+        { "value": "white", "label": "White" }
+      ],
+      "default": "grey"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Slider",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

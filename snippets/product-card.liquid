@@ -1,29 +1,158 @@
 <div class="product-card">
-  <a href="{{ product.url }}" class="product-card__link" style="text-decoration:none; color:inherit; display:block; position:relative;">
-    <div class="product-card__image-wrapper">
-      {%- if product.compare_at_price > product.price -%}
-        {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
-        <span class="product-card__badge">{{ savings }}% OFF</span>
-      {%- endif -%}
+  <div class="product-card__image-container">
+    {%- if product.compare_at_price > product.price -%}
+      <span class="product-card__badge-sale">SALE</span>
+    {%- endif -%}
+    
+    <a href="{{ product.url | default: '#' }}" class="product-card__image-link">
       {%- if product.featured_image != blank -%}
-        {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'product-card__image' }}
+        <img 
+          src="{{ product.featured_image | image_url: width: 600 }}" 
+          alt="{{ product.featured_image.alt | escape }}"
+          class="product-card__image product-card__image--primary"
+          loading="lazy"
+          width="600"
+          height="800"
+        >
+        {%- if product.images[1] != blank -%}
+          <img 
+            src="{{ product.images[1] | image_url: width: 600 }}" 
+            alt="{{ product.images[1].alt | escape }}"
+            class="product-card__image product-card__image--secondary"
+            loading="lazy"
+            width="600"
+            height="800"
+          >
+        {%- endif -%}
       {%- else -%}
-        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-card__image' }}
+      {%- endif -%}
+    </a>
+  </div>
+
+  <div class="product-card__info">
+    <div class="product-card__vendor">
+      {{ product.vendor | default: 'ZORYOO' }}
+    </div>
+    <a href="{{ product.url | default: '#' }}" class="product-card__title-link">
+      <h3 class="product-card__title">{{ product.title | default: 'Example T-Shirt' }}</h3>
+    </a>
+    <div class="product-card__price-wrapper">
+      {%- if product.compare_at_price > product.price -%}
+        <s class="product-card__price--regular">{{ product.compare_at_price | money }}</s>
+        <span class="product-card__price--sale">{{ product.price | money }}</span>
+      {%- else -%}
+        <span class="product-card__price">{{ product.price | default: 249900 | money }}</span>
       {%- endif -%}
     </div>
-  </a>
-  <div class="product-card__info">
-    <a href="{{ product.url }}" style="text-decoration:none; color:inherit; display:block;">
-      <h3 class="product-card__title">{{ product.title }}</h3>
-    </a>
-    <p class="product-card__price">
-      {%- if product.compare_at_price > product.price -%}
-        <span class="product-card__price--sale">{{ product.price | money }}</span>
-        <s class="product-card__price--regular">{{ product.compare_at_price | money }}</s>
-      {%- else -%}
-        {{ product.price | money }}
-      {%- endif -%}
-    </p>
-    <button class="product-card__button" type="button" onclick="window.location.href='{{ product.url }}'">Choose options</button>
   </div>
 </div>
+
+{%- style -%}
+  .product-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+  }
+
+  .product-card__image-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 125%; /* 4:5 aspect ratio */
+    overflow: hidden;
+    background-color: #f5f5f5;
+  }
+
+  .product-card__badge-sale {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #000;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    z-index: 2;
+  }
+
+  .product-card__image-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .product-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .product-card__image--secondary {
+    opacity: 0;
+  }
+
+  .product-card:hover .product-card__image--primary {
+    {% if product.images[1] != blank %}
+      opacity: 0;
+    {% endif %}
+  }
+
+  .product-card:hover .product-card__image--secondary {
+    opacity: 1;
+  }
+
+  .product-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .product-card__vendor {
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+  }
+
+  .product-card__title-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .product-card__title {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+
+  .product-card__price-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .product-card__price,
+  .product-card__price--sale {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #000;
+  }
+
+  .product-card__price--regular {
+    color: #999;
+    font-size: 0.9rem;
+  }
+{%- endstyle -%}

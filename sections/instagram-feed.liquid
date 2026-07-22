@@ -1,0 +1,207 @@
+{%- style -%}
+  .instagram-section {
+    padding: 5rem 0;
+    background-color: #ffffff;
+    overflow: hidden;
+  }
+
+  .instagram__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .instagram__title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+  }
+
+  .instagram-container {
+    position: relative;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .instagram-container .swiper {
+    width: 100%;
+    padding-bottom: 1rem;
+  }
+
+  .instagram-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #eee;
+  }
+
+  .instagram-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .instagram-card:hover .instagram-card__image {
+    transform: scale(1.05);
+  }
+
+  /* Slider Navigation */
+  .instagram-button-next,
+  .instagram-button-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    z-index: 10;
+    color: #000;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .instagram-button-next:hover,
+  .instagram-button-prev:hover {
+    background: #000;
+    color: #fff;
+  }
+
+  .instagram-button-prev {
+    left: 10px;
+  }
+
+  .instagram-button-next {
+    right: 10px;
+  }
+
+  .instagram-button-next svg,
+  .instagram-button-prev svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  @media screen and (max-width: 768px) {
+    .instagram-container {
+      padding: 0 1rem;
+    }
+    .instagram-button-next,
+    .instagram-button-prev {
+      display: none;
+    }
+  }
+{%- endstyle -%}
+
+<section class="instagram-section" id="InstagramFeed-{{ section.id }}">
+  <div class="instagram__header">
+    <h2 class="instagram__title">{{ section.settings.title }}</h2>
+  </div>
+
+  <div class="instagram-container">
+    <div class="swiper instagram-slider-{{ section.id }}">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="swiper-slide" {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.link | default: '#' }}" target="_blank" class="instagram-card">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'instagram-card__image' }}
+              {%- else -%}
+                {{ 'lifestyle-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg instagram-card__image' }}
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    
+    <div class="instagram-button-prev instagram-prev-{{ section.id }}">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </div>
+    <div class="instagram-button-next instagram-next-{{ section.id }}">
+      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Swiper !== 'undefined') {
+      new Swiper('.instagram-slider-{{ section.id }}', {
+        slidesPerView: 1.5,
+        spaceBetween: 16,
+        centeredSlides: true,
+        loop: true,
+        navigation: {
+          nextEl: '.instagram-next-{{ section.id }}',
+          prevEl: '.instagram-prev-{{ section.id }}',
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2.5,
+            spaceBetween: 20,
+            centeredSlides: false,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+            centeredSlides: false,
+          },
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Instagram Feed",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Instagram"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Instagram Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Instagram Post Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Feed",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

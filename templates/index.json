@@ -1,102 +1,115 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "hero_banner": {
-      "type": "hero-banner",
-      "settings": {
-        "image": "shopify://shop_images/Gemini_Generated_Image_kkyp45kkyp45kkyp-clean.png",
-        "overlay_opacity": 0,
-        "text_alignment": "center",
-        "subheading": "",
-        "heading": "",
-        "text": "",
-        "button_label": "",
-        "button_link": ""
-      }
+    "hero_slider": {
+      "type": "hero-slider",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "subheading": "LUXURY STREETWEAR!",
+            "heading": "Feel The Luxury Thread",
+            "button_label": "SHOP NOW",
+            "button_link": "shopify:\/\/collections\/all"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1"
+      ]
     },
-    "featured_products": {
-      "type": "featured-products",
+    "features_bar": {
+      "type": "features-bar",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "text": "Free Delivery"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "text": "24/7 Support"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "refresh",
+            "text": "Easy Exchange"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ]
+    },
+    "product_slider_dropping_now": {
+      "type": "product-slider",
       "settings": {
-        "title": "Trending Tees",
-        "subtitle": "Lead the Trend, Don't follow it",
+        "title": "Dropping Now",
+        "subtitle": "Upgrade Your Wardrobe",
         "collection": "featured-products",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "show_view_all": true,
-        "video": "shopify://files/videos/WhatsApp Video 2026-07-18 at 4.53.40 PM (1).mp4",
-        "video_url": ""
+        "products_to_show": 8,
+        "bg_color": "grey"
       }
     },
-    "featured_products_9VBgeW": {
-      "type": "featured-products",
+    "collection_banners": {
+      "type": "collection-list-banners",
       "settings": {
-        "title": "New Collection",
-        "subtitle": "Lead the trend, Don't Follow it",
+        "title": "Collections"
+      },
+      "blocks": {
+        "collection_1": {
+          "type": "collection",
+          "settings": {
+            "collection": "new-colleection",
+            "title": "Drop-Shoulder T-Shirts",
+            "subtitle": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_1"
+      ]
+    },
+    "product_slider_drop_shoulder": {
+      "type": "product-slider",
+      "settings": {
+        "title": "Drop-Shoulder T-Shirts",
+        "subtitle": "Discover our latest arrivals",
         "collection": "new-colleection",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "show_view_all": true,
-        "video_url": ""
+        "products_to_show": 8,
+        "bg_color": "white"
       }
     },
-    "hero_banner_2": {
-      "type": "hero-banner",
+    "instagram_feed": {
+      "type": "instagram-feed",
       "settings": {
-        "image": "shopify://shop_images/Gemini_Generated_Image_tkmut3tkmut3tkmu-clean.png",
-        "overlay_opacity": 0,
-        "text_alignment": "center",
-        "subheading": "",
-        "heading": "",
-        "text": "",
-        "button_label": "",
-        "button_link": ""
-      }
-    },
-    "featured_products_iLrA6p": {
-      "type": "featured-products",
-      "settings": {
-        "title": "Amazing Designs",
-        "subtitle": "Lead the trend, don't Follow it",
-        "collection": "amazing-designs",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "show_view_all": true,
-        "video_url": ""
-      }
-    },
-    "about_us": {
-      "type": "about-us",
-      "name": "About Us (Trendy Tees)",
-      "settings": {
-        "heading": "Born in the Streets.",
-        "text": "<p>We don't follow trends, we create them. Trendy Tees represents the bold, the unapologetic, and the visionaries. Every piece is crafted for maximum impact and ultimate comfort. Step into the new era of streetwear.</p>"
-      }
-    },
-    "about_us_m66MME": {
-      "type": "about-us",
-      "name": "About Us",
-      "settings": {
-        "image": "shopify://shop_images/Gemini_Generated_Image_mbwvl7mbwvl7mbwv-clean.png",
-        "heading": "More Than Just A Clothing Brand",
-        "text": "<p>Trendy Tees is more than just a clothing brand—it's a movement. Rooted in modern streetwear, each T-shirt  tells a powerful story of resilience, skill, and bold style.</p>"
-      }
+        "title": "Instagram"
+      },
+      "blocks": {
+        "img_1": { "type": "image" },
+        "img_2": { "type": "image" },
+        "img_3": { "type": "image" }
+      },
+      "block_order": [
+        "img_1",
+        "img_2",
+        "img_3"
+      ]
     }
   },
   "order": [
-    "hero_banner",
-    "featured_products",
-    "featured_products_9VBgeW",
-    "hero_banner_2",
-    "featured_products_iLrA6p",
-    "about_us",
-    "about_us_m66MME"
+    "hero_slider",
+    "features_bar",
+    "product_slider_dropping_now",
+    "collection_banners",
+    "product_slider_drop_shoulder",
+    "instagram_feed"
   ]
 }
