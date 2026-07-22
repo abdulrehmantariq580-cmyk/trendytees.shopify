@@ -30,6 +30,18 @@
     padding-bottom: 1rem;
   }
 
+  .instagram-container .swiper-slide {
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  
+  .instagram-container .swiper-slide-active {
+    transform: scale(1);
+    opacity: 1;
+    z-index: 2;
+  }
+
   .instagram-card {
     position: relative;
     display: block;
@@ -98,7 +110,13 @@
     }
     .instagram-button-next,
     .instagram-button-prev {
-      display: none;
+      width: 36px;
+      height: 36px;
+    }
+    .instagram-button-next svg,
+    .instagram-button-prev svg {
+      width: 16px;
+      height: 16px;
     }
   }
 
@@ -206,9 +224,13 @@
     if (typeof Swiper !== 'undefined') {
       new Swiper('.instagram-slider-{{ section.id }}', {
         slidesPerView: 1.5,
-        spaceBetween: 16,
+        spaceBetween: 10,
         centeredSlides: true,
         loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
         navigation: {
           nextEl: '.instagram-next-{{ section.id }}',
           prevEl: '.instagram-prev-{{ section.id }}',
@@ -219,14 +241,14 @@
         },
         breakpoints: {
           640: {
-            slidesPerView: 2.5,
+            slidesPerView: 3,
             spaceBetween: 20,
-            centeredSlides: false,
+            centeredSlides: true,
           },
           1024: {
-            slidesPerView: 4,
-            spaceBetween: 24,
-            centeredSlides: false,
+            slidesPerView: 3,
+            spaceBetween: 30,
+            centeredSlides: true,
           },
         }
       });
