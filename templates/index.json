@@ -155,6 +155,46 @@
         "collection": "new-colleection",
         "products_to_show": 8
       }
+    },
+    "instagram_feed_fkBWzf": {
+      "type": "instagram-feed",
+      "blocks": {
+        "image_a4PXHt": {
+          "type": "image",
+          "settings": {
+            "link": ""
+          }
+        },
+        "image_PELdgK": {
+          "type": "image",
+          "settings": {
+            "link": ""
+          }
+        },
+        "image_UenwNy": {
+          "type": "image",
+          "settings": {
+            "link": ""
+          }
+        },
+        "image_9F4HUz": {
+          "type": "image",
+          "settings": {
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_a4PXHt",
+        "image_PELdgK",
+        "image_UenwNy",
+        "image_9F4HUz"
+      ],
+      "name": "Instagram Feed",
+      "settings": {
+        "title": "Instagram",
+        "instagram_link": ""
+      }
     }
   },
   "order": [
@@ -162,6 +202,7 @@
     "features_bar",
     "product_slider_dropping_now",
     "collection_poster_slider_DPxFNx",
-    "white_product_catalog_RX3Jhk"
+    "white_product_catalog_RX3Jhk",
+    "instagram_feed_fkBWzf"
   ]
 }
