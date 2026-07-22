@@ -3,6 +3,12 @@
     padding: 4rem 0;
     background-color: #cecfd1; /* matching the screenshot grey */
     overflow: hidden;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
   }
 
   .product-slider-section--white {
@@ -93,11 +99,23 @@
 
   @media screen and (max-width: 768px) {
     .product-slider-container {
-      padding: 0 1rem; /* Less padding on mobile, hide arrows or put inside */
+      padding: 0 1rem;
     }
     .product-slider-button-next,
     .product-slider-button-prev {
-      display: none; /* Often hidden on mobile in favor of swipe */
+      width: 36px;
+      height: 36px;
+    }
+    .product-slider-button-next svg,
+    .product-slider-button-prev svg {
+      width: 16px;
+      height: 16px;
+    }
+    .product-slider-button-prev {
+      left: 0.5rem;
+    }
+    .product-slider-button-next {
+      right: 0.5rem;
     }
     .product-slider-section {
       padding: 3rem 0;
