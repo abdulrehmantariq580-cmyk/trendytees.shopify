@@ -215,6 +215,16 @@
         "title": "Instagram",
         "instagram_link": "https://www.instagram.com/try.trendytees/"
       }
+    },
+    "about_zoryoo_CD9Ygd": {
+      "type": "about-zoryoo",
+      "name": "About Us",
+      "settings": {
+        "title": "Trendy Teees",
+        "text": "<p>Trendy Teees is a premium t-shirt brand redefining modern streetwear through exceptional quality, innovative design, and luxury presentation. Our signature down-shoulder T-shirts are crafted from carefully selected fabrics to deliver superior comfort, durability, and style. Every piece is designed to make a statement, while our premium packaging ensures an elevated experience from the moment your order arrives.</p>",
+        "button_label": "Shop Now",
+        "button_link": ""
+      }
     }
   },
   "order": [
@@ -223,6 +233,7 @@
     "product_slider_dropping_now",
     "collection_poster_slider_DPxFNx",
     "white_product_catalog_RX3Jhk",
-    "instagram_feed_fkBWzf"
+    "instagram_feed_fkBWzf",
+    "about_zoryoo_CD9Ygd"
   ]
 }
