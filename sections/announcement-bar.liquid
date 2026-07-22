@@ -1,6 +1,11 @@
 {%- style -%}
   .announcement-bar-marquee {
     position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     overflow: hidden;
     display: flex;
     white-space: nowrap;
@@ -12,7 +17,7 @@
 
   .announcement-bar__marquee-inner {
     display: flex;
-    animation: marquee-scroll 20s linear infinite;
+    animation: marquee-scroll 50s linear infinite;
     width: max-content;
   }
 
