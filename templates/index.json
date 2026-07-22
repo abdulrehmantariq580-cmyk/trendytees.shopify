@@ -145,12 +145,23 @@
       ],
       "name": "Collection Poster Slider",
       "settings": {}
+    },
+    "product_slider_VreRUw": {
+      "type": "product-slider",
+      "settings": {
+        "title": "Dropping Now",
+        "subtitle": "Upgrade Your Wardrobe",
+        "collection": "new-colleection",
+        "products_to_show": 8,
+        "bg_color": "grey"
+      }
     }
   },
   "order": [
     "hero_slider",
     "features_bar",
     "product_slider_dropping_now",
-    "collection_poster_slider_DPxFNx"
+    "collection_poster_slider_DPxFNx",
+    "product_slider_VreRUw"
   ]
 }
