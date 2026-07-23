@@ -1,0 +1,398 @@
+{%- style -%}
+  .size-guide-section {
+    padding: 6rem 0;
+    background-color: #cecfd1;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow-x: hidden;
+  }
+
+  .size-guide-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .size-guide-main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 1rem;
+  }
+
+  .size-guide-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: #444;
+    margin-bottom: 2rem;
+  }
+
+  .size-guide-arrow {
+    font-size: 2rem;
+    color: #111;
+  }
+
+  .size-guide-container {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+    align-items: flex-start;
+  }
+
+  .size-guide-left {
+    flex: 1 1 45%;
+    min-width: 300px;
+  }
+
+  .size-guide-left-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 1.5rem;
+  }
+
+  .size-guide-left-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 2rem;
+  }
+
+  .size-guide-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    display: block;
+    margin: 0 auto 2rem auto;
+  }
+
+  .size-guide-help-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 2rem;
+  }
+
+  .size-guide-btn {
+    display: inline-block;
+    padding: 0.8rem 2.5rem;
+    background-color: #111;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .size-guide-btn:hover {
+    background-color: #333;
+  }
+
+  .size-guide-right {
+    flex: 1 1 45%;
+    min-width: 300px;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+
+  .size-guide-table-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #111;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .size-guide-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 3rem;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .size-guide-table th {
+    background-color: #111;
+    color: #fff;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  
+  .size-guide-table th:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+
+  .size-guide-table th:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  .size-guide-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #eaeaea;
+    color: #333;
+    font-size: 0.95rem;
+  }
+
+  .size-guide-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .size-guide-tips-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 1.5rem;
+  }
+
+  .size-guide-tips-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .size-guide-tips-list li {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .size-guide-tips-list li::before {
+    content: '✓';
+    color: #111;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .size-guide-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 4rem 0;
+    }
+    .size-guide-container {
+      flex-direction: column;
+      gap: 3rem;
+    }
+    .size-guide-right {
+      padding: 2rem 1.5rem;
+    }
+    .size-guide-btn {
+      display: block;
+      text-align: center;
+      margin: 0 auto;
+    }
+  }
+{%- endstyle -%}
+
+<section class="size-guide-section" id="SizeGuide-{{ section.id }}">
+  <div class="size-guide-header">
+    <h2 class="size-guide-main-title">{{ section.settings.main_title }}</h2>
+    <p class="size-guide-subtitle">{{ section.settings.main_subtitle }}</p>
+    <div class="size-guide-arrow">↓</div>
+  </div>
+
+  <div class="size-guide-container">
+    <div class="size-guide-left">
+      <h3 class="size-guide-left-title">{{ section.settings.left_title }}</h3>
+      <p class="size-guide-left-text">{{ section.settings.left_text }}</p>
+      
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'size-guide-image' }}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg size-guide-image' }}
+      {%- endif -%}
+
+      <p class="size-guide-help-text">{{ section.settings.help_text }}</p>
+
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="size-guide-btn">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+    
+    <div class="size-guide-right">
+      <h3 class="size-guide-table-title">{{ section.settings.table_title }}</h3>
+      <table class="size-guide-table">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Length</th>
+            <th>Width</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'size_row' -%}
+              <tr>
+                <td>{{ block.settings.size }}</td>
+                <td>{{ block.settings.length }}</td>
+                <td>{{ block.settings.width }}</td>
+              </tr>
+            {%- endif -%}
+          {%- endfor -%}
+        </tbody>
+      </table>
+
+      <h3 class="size-guide-tips-title">{{ section.settings.tips_title }}</h3>
+      <ul class="size-guide-tips-list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'tip' -%}
+            <li>{{ block.settings.tip_text }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Size Guide",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top Header"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Title",
+      "default": "Find Your Perfect Fit"
+    },
+    {
+      "type": "text",
+      "id": "main_subtitle",
+      "label": "Main Subtitle",
+      "default": "Use our size guide to choose the right fit for maximum comfort and style."
+    },
+    {
+      "type": "header",
+      "content": "Left Column"
+    },
+    {
+      "type": "text",
+      "id": "left_title",
+      "label": "Left Title",
+      "default": "How To Measure"
+    },
+    {
+      "type": "textarea",
+      "id": "left_text",
+      "label": "Left Text",
+      "default": "For the most accurate sizing, measure a similar t-shirt you already own and compare the dimensions below."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Measurement Diagram Image"
+    },
+    {
+      "type": "textarea",
+      "id": "help_text",
+      "label": "Help Text",
+      "default": "Need help choosing a size? Contact our support team before placing your order."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Right Column"
+    },
+    {
+      "type": "text",
+      "id": "table_title",
+      "label": "Table Title",
+      "default": "Size Chart"
+    },
+    {
+      "type": "text",
+      "id": "tips_title",
+      "label": "Tips Title",
+      "default": "Sizing Tips"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "size_row",
+      "name": "Size Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "size",
+          "label": "Size Name (e.g. M)"
+        },
+        {
+          "type": "text",
+          "id": "length",
+          "label": "Length (e.g. 24\")"
+        },
+        {
+          "type": "text",
+          "id": "width",
+          "label": "Width (e.g. 23\")"
+        }
+      ]
+    },
+    {
+      "type": "tip",
+      "name": "Sizing Tip",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tip_text",
+          "label": "Tip Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Size Guide",
+      "blocks": [
+        { "type": "size_row", "settings": { "size": "M", "length": "24\"", "width": "23\"" } },
+        { "type": "size_row", "settings": { "size": "L", "length": "26\"", "width": "24\"" } },
+        { "type": "size_row", "settings": { "size": "XL", "length": "27\"", "width": "25\"" } },
+        { "type": "tip", "settings": { "tip_text": "All measurements are in inches" } },
+        { "type": "tip", "settings": { "tip_text": "Allow 0.5-1 inch variation due to manual measurement" } },
+        { "type": "tip", "settings": { "tip_text": "For an oversized fit, choose one size larger" } },
+        { "type": "tip", "settings": { "tip_text": "If you're between sizes, size up for added comfort" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
