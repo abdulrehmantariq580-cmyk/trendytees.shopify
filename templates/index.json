@@ -272,6 +272,80 @@
         "button_label": "Shop Now",
         "button_link": ""
       }
+    },
+    "size_guide_Fizfqj": {
+      "type": "size-guide",
+      "blocks": {
+        "size_row_NxQYtB": {
+          "type": "size_row",
+          "settings": {
+            "size": "M",
+            "length": "24\"",
+            "width": "23\""
+          }
+        },
+        "size_row_tmzEaT": {
+          "type": "size_row",
+          "settings": {
+            "size": "L",
+            "length": "26\"",
+            "width": "24\""
+          }
+        },
+        "size_row_Up7Nnz": {
+          "type": "size_row",
+          "settings": {
+            "size": "XL",
+            "length": "27\"",
+            "width": "25\""
+          }
+        },
+        "tip_eiXqA4": {
+          "type": "tip",
+          "settings": {
+            "tip_text": "All measurements are in inches"
+          }
+        },
+        "tip_4RtPFd": {
+          "type": "tip",
+          "settings": {
+            "tip_text": "Allow 0.5-1 inch variation due to manual measurement"
+          }
+        },
+        "tip_jyVETD": {
+          "type": "tip",
+          "settings": {
+            "tip_text": "For an oversized fit, choose one size larger"
+          }
+        },
+        "tip_ihH6VP": {
+          "type": "tip",
+          "settings": {
+            "tip_text": "If you're between sizes, size up for added comfort"
+          }
+        }
+      },
+      "block_order": [
+        "size_row_NxQYtB",
+        "size_row_tmzEaT",
+        "size_row_Up7Nnz",
+        "tip_eiXqA4",
+        "tip_4RtPFd",
+        "tip_jyVETD",
+        "tip_ihH6VP"
+      ],
+      "name": "Size Guide",
+      "settings": {
+        "main_title": "Find Your Perfect Fit",
+        "main_subtitle": "Use our size guide to choose the right fit for maximum comfort and style.",
+        "left_title": "How To Measure",
+        "left_text": "For the most accurate sizing, measure a similar t-shirt you already own and compare the dimensions below.",
+        "help_text": "Need help choosing a size? Contact our support team before placing your order.",
+        "button_label": "Shop Now",
+        "button_link": "",
+        "table_title": "Size Chart",
+        "tips_title": "Sizing Tips"
+      }
     }
   },
   "order": [
@@ -282,6 +356,7 @@
     "white_product_catalog_RX3Jhk",
     "instagram_feed_fkBWzf",
     "about_zoryoo_CD9Ygd",
-    "why_choose_us_8GFWHr"
+    "why_choose_us_8GFWHr",
+    "size_guide_Fizfqj"
   ]
 }
