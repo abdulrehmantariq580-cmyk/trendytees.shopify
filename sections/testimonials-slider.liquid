@@ -1,388 +1,189 @@
-<section id="Testimonials-{{ section.id }}" class="testimonials-section page-width">
-  {%- if section.settings.title != blank -%}
-    <h2 class="testimonials__heading" data-animate-text>{{ section.settings.title }}</h2>
-  {%- endif -%}
-
-  <div class="testimonials-carousel" data-autoplay-speed="{{ section.settings.autoplay_speed | times: 1000 }}">
-    <div class="testimonials-carousel__inner">
-      {%- for block in section.blocks -%}
-        <div class="testimonial-card" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
-          <div class="testimonial-card__content">
-            <div class="testimonial-card__stars">
-              {%- for i in (1..5) -%}
-                <svg viewBox="0 0 24 24" class="icon-star {% if i <= block.settings.rating %}icon-star--filled{% else %}icon-star--empty{% endif %}">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-              {%- endfor -%}
-            </div>
-            
-            <blockquote class="testimonial-card__text">
-              "{{ block.settings.text }}"
-            </blockquote>
-            
-            <div class="testimonial-card__author">
-              <div class="testimonial-card__avatar">
-                {%- if block.settings.image != blank -%}
-                  {{ block.settings.image | image_url: width: 100 | image_tag: loading: 'lazy' }}
-                {%- else -%}
-                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                {%- endif -%}
-              </div>
-              <div class="testimonial-card__info">
-                <span class="testimonial-card__name">{{ block.settings.author_name }}</span>
-                {%- if block.settings.author_title != blank -%}
-                  <span class="testimonial-card__title">{{ block.settings.author_title }}</span>
-                {%- endif -%}
-              </div>
-            </div>
-          </div>
-        </div>
-      {%- else -%}
-        {%- for i in (1..3) -%}
-          <div class="testimonial-card" data-index="{{ forloop.index0 }}">
-            <div class="testimonial-card__content">
-              <div class="testimonial-card__stars">
-                {%- for j in (1..5) -%}
-                  <svg viewBox="0 0 24 24" class="icon-star icon-star--filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                {%- endfor -%}
-              </div>
-              <blockquote class="testimonial-card__text">"This is an example review. Add your own customer reviews in the Theme Editor!"</blockquote>
-              <div class="testimonial-card__author">
-                <div class="testimonial-card__avatar">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
-                <div class="testimonial-card__info">
-                  <span class="testimonial-card__name">Customer Name</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        {%- endfor -%}
-      {%- endfor -%}
-    </div>
-
-    <div class="testimonials-carousel__controls">
-      <button class="testimonials-carousel__btn testimonials-carousel__btn--prev" aria-label="Previous review">
-        <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-      </button>
-      <button class="testimonials-carousel__btn testimonials-carousel__btn--next" aria-label="Next review">
-        <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M10.59 6L9.17 7.41 13.58 12l-4.41 4.59L10.59 18l6-6z"/></svg>
-      </button>
-    </div>
-  </div>
-</section>
-
 {%- style -%}
-  #Testimonials-{{ section.id }} {
+  .testimonials-section {
     padding: 6rem 0;
-    overflow: hidden;
-  }
-
-  .testimonials__heading {
-    text-align: center;
-    font-size: clamp(2rem, 4vw, 3rem);
-    text-transform: uppercase;
-    font-style: italic;
-    font-weight: 900;
-    margin-bottom: 4rem;
-  }
-
-  .testimonials-carousel {
+    background-color: #111; /* Dark background */
+    width: 100vw;
     position: relative;
-    max-width: 1200px;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden; /* For Swiper */
+    color: #fff;
+  }
+
+  .testimonials-container {
+    max-width: 1000px;
+    width: 90%;
     margin: 0 auto;
-    padding: 2rem 0;
-  }
-
-  .testimonials-carousel__inner {
-    position: relative;
-    height: 350px;
-    perspective: 1200px;
-    transform-style: preserve-3d;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .testimonial-card {
-    position: absolute;
-    width: 100%;
-    max-width: 500px;
-    background: #111;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 2.5rem;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1), 
-                opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1),
-                z-index 0.6s step-end;
-    opacity: 0;
-    z-index: 0;
-    pointer-events: none;
-    will-change: transform, opacity;
-  }
-
-  /* 3D Positions */
-  .testimonial-card.is-active {
-    opacity: 1;
-    z-index: 3;
-    pointer-events: auto;
-    transform: translateX(0) translateZ(0) rotateY(0deg);
-  }
-
-  .testimonial-card.is-prev {
-    opacity: 0.5;
-    z-index: 2;
-    transform: translateX(-45%) translateZ(-150px) rotateY(15deg);
-  }
-
-  .testimonial-card.is-next {
-    opacity: 0.5;
-    z-index: 2;
-    transform: translateX(45%) translateZ(-150px) rotateY(-15deg);
-  }
-
-  .testimonial-card.is-hidden-left {
-    opacity: 0;
-    z-index: 1;
-    transform: translateX(-80%) translateZ(-300px) rotateY(25deg);
-  }
-
-  .testimonial-card.is-hidden-right {
-    opacity: 0;
-    z-index: 1;
-    transform: translateX(80%) translateZ(-300px) rotateY(-25deg);
-  }
-
-  /* Card Content Styles */
-  .testimonial-card__stars {
-    margin-bottom: 1.5rem;
-    display: flex;
-    gap: 4px;
-    justify-content: center;
-  }
-
-  .icon-star {
-    width: 20px;
-    height: 20px;
-  }
-
-  .icon-star--filled {
-    fill: var(--color-primary-accent, #000000);
-  }
-
-  .icon-star--empty {
-    fill: #444;
-  }
-
-  .testimonial-card__text {
-    font-size: 1.1rem;
-    line-height: 1.6;
     text-align: center;
-    margin: 0 0 2rem;
-    font-style: italic;
-    color: #e0e0e0;
   }
 
-  .testimonial-card__author {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
+  .testimonials-tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 2rem;
   }
 
-  .testimonial-card__avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    background: #333;
-    flex-shrink: 0;
-  }
-
-  .testimonial-card__avatar img, .testimonial-card__avatar svg {
+  /* Swiper styles for testimonials */
+  .testimonials-swiper {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    padding-bottom: 4rem; /* Space for pagination */
   }
 
-  .testimonial-card__info {
+  .testimonial-slide {
     display: flex;
     flex-direction: column;
-    text-align: left;
-  }
-
-  .testimonial-card__name {
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
-
-  .testimonial-card__title {
-    font-size: 0.85rem;
-    color: var(--color-primary-accent, #000000);
-  }
-
-  /* Controls */
-  .testimonials-carousel__controls {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 1rem;
-  }
-
-  .testimonials-carousel__btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #222;
-    border: 1px solid rgba(255,255,255,0.1);
-    color: #fff;
-    display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    opacity: 0;
+    transition: opacity 0.5s ease;
   }
 
-  .testimonials-carousel__btn:hover {
-    background: var(--color-primary-accent, #000000);
-    color: #000;
-    transform: scale(1.1);
+  .testimonial-slide.swiper-slide-active {
+    opacity: 1;
+  }
+
+  .testimonial-stars {
+    color: #f5b301; /* Gold color */
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .testimonial-text {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.2rem, 3.5vw, 2.2rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: #fff;
+    max-width: 800px;
+    margin: 0 auto 2.5rem auto;
+  }
+
+  .testimonial-author {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #ccc;
+  }
+
+  /* Custom Pagination (Dots to pill) */
+  .testimonials-pagination {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 10;
+  }
+
+  .testimonials-pagination .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    background: #555;
+    opacity: 1;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    margin: 0 !important;
+  }
+
+  .testimonials-pagination .swiper-pagination-bullet-active {
+    width: 24px;
+    background: #fff;
+    border-radius: 4px;
   }
 
   @media screen and (max-width: 768px) {
-    .testimonials-carousel {
-      max-width: 100%;
-      overflow: hidden;
+    .testimonials-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 4rem 0;
     }
-    .testimonials-carousel__inner {
-      height: 400px;
-    }
-    .testimonial-card {
-      padding: 2rem 1.5rem;
-      max-width: 90%;
-    }
-    .testimonial-card.is-prev {
-      transform: translateX(-50%) translateZ(-200px) rotateY(10deg);
-      opacity: 0.1;
-    }
-    .testimonial-card.is-next {
-      transform: translateX(50%) translateZ(-200px) rotateY(-10deg);
-      opacity: 0.1;
+    .testimonial-text {
+      font-size: 1.4rem;
     }
   }
 {%- endstyle -%}
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const section = document.querySelector('#Testimonials-{{ section.id }}');
-    if (!section) return;
+<!-- Swiper CSS & JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 
-    const carousel = section.querySelector('.testimonials-carousel');
-    const cards = Array.from(carousel.querySelectorAll('.testimonial-card'));
-    const prevBtn = carousel.querySelector('.testimonials-carousel__btn--prev');
-    const nextBtn = carousel.querySelector('.testimonials-carousel__btn--next');
-    
-    if (cards.length === 0) return;
+<section class="testimonials-section" id="Testimonials-{{ section.id }}">
+  <div class="testimonials-container">
+    {%- if section.settings.tagline != blank -%}
+      <div class="testimonials-tagline">{{ section.settings.tagline }}</div>
+    {%- endif -%}
 
-    let currentIndex = 0;
-    let autoplayInterval;
-    const speed = parseInt(carousel.dataset.autoplaySpeed) || 5000;
-
-    function updateCards() {
-      const total = cards.length;
+    <div class="swiper testimonials-swiper" id="TestimonialsSwiper-{{ section.id }}">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="swiper-slide testimonial-slide" {{ block.shopify_attributes }}>
+            <div class="testimonial-stars">
+              {%- assign stars = block.settings.stars | plus: 0 -%}
+              {%- for i in (1..5) -%}
+                {%- if i <= stars -%}
+                  ★
+                {%- else -%}
+                  ☆
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            
+            <div class="testimonial-text">
+              "{{ block.settings.text }}"
+            </div>
+            
+            <div class="testimonial-author">
+              — {{ block.settings.author }}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
       
-      cards.forEach((card, index) => {
-        card.classList.remove('is-active', 'is-prev', 'is-next', 'is-hidden-left', 'is-hidden-right');
-        
-        if (index === currentIndex) {
-          card.classList.add('is-active');
-        } else if (index === (currentIndex - 1 + total) % total) {
-          card.classList.add('is-prev');
-        } else if (index === (currentIndex + 1) % total) {
-          card.classList.add('is-next');
-        } else {
-          // Determine if it should be hidden-left or hidden-right based on shortest distance
-          let diff = index - currentIndex;
-          if (diff < 0) diff += total;
-          
-          if (diff <= total / 2) {
-            card.classList.add('is-hidden-right');
-          } else {
-            card.classList.add('is-hidden-left');
-          }
-        }
-      });
-    }
+      <!-- Custom Pagination -->
+      <div class="swiper-pagination testimonials-pagination"></div>
+    </div>
+  </div>
+</section>
 
-    function next() {
-      currentIndex = (currentIndex + 1) % cards.length;
-      updateCards();
-    }
-
-    function prev() {
-      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-      updateCards();
-    }
-
-    function startAutoplay() {
-      if (speed > 0) {
-        clearInterval(autoplayInterval);
-        autoplayInterval = setInterval(next, speed);
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const initTestimonialsSwiper = () => {
+      if (typeof Swiper !== 'undefined') {
+        new Swiper('#TestimonialsSwiper-{{ section.id }}', {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          loop: true,
+          autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+          },
+          effect: 'fade',
+          fadeEffect: {
+            crossFade: true
+          },
+          pagination: {
+            el: '.testimonials-pagination',
+            clickable: true,
+          },
+        });
+      } else {
+        setTimeout(initTestimonialsSwiper, 100);
       }
-    }
-
-    function stopAutoplay() {
-      clearInterval(autoplayInterval);
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        prev();
-        startAutoplay(); // Reset timer
-      });
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        next();
-        startAutoplay(); // Reset timer
-      });
-    }
-
-    // Swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    carousel.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
-      stopAutoplay();
-    }, {passive: true});
-
-    carousel.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-      startAutoplay();
-    }, {passive: true});
-
-    function handleSwipe() {
-      if (touchEndX < touchStartX - 50) next();
-      if (touchEndX > touchStartX + 50) prev();
-    }
-
-    // Pause on hover
-    carousel.addEventListener('mouseenter', stopAutoplay);
-    carousel.addEventListener('mouseleave', startAutoplay);
-
-    // Initial setup
-    updateCards();
-    startAutoplay();
-    
-    // Text reveal animation
-    setTimeout(() => {
-      if (typeof window.animateTextReveal === 'function') {
-        window.animateTextReveal('#Testimonials-{{ section.id }} [data-animate-text]');
-      }
-    }, 200);
+    };
+    initTestimonialsSwiper();
   });
 </script>
 
@@ -392,19 +193,9 @@
   "settings": [
     {
       "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "What Our Customers Say"
-    },
-    {
-      "type": "range",
-      "id": "autoplay_speed",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "s",
-      "label": "Autoplay Speed (0 to disable)",
-      "default": 5
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "T E S T I M O N I A L S"
     }
   ],
   "blocks": [
@@ -413,25 +204,8 @@
       "name": "Testimonial",
       "settings": [
         {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Customer Image"
-        },
-        {
-          "type": "text",
-          "id": "author_name",
-          "label": "Customer Name",
-          "default": "John Doe"
-        },
-        {
-          "type": "text",
-          "id": "author_title",
-          "label": "Customer Title/Location",
-          "default": "Verified Buyer"
-        },
-        {
           "type": "range",
-          "id": "rating",
+          "id": "stars",
           "min": 1,
           "max": 5,
           "step": 1,
@@ -441,20 +215,25 @@
         {
           "type": "textarea",
           "id": "text",
-          "label": "Review Text",
-          "default": "The quality of these tees is absolutely insane. Best streetwear drop I've copped this year!"
+          "label": "Testimonial Text",
+          "default": "I received my order within a few days and was genuinely impressed by the quality. The fabric feels premium and the fit was exactly as expected."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Rayyan Saeed"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Testimonials 3D Slider",
+      "name": "Testimonials Slider",
       "blocks": [
-        { "type": "testimonial" },
-        { "type": "testimonial" },
-        { "type": "testimonial" },
-        { "type": "testimonial" }
+        { "type": "testimonial", "settings": { "text": "I received my order within a few days and was genuinely impressed by the quality. The fabric feels premium and the fit was exactly as expected.", "author": "Rayyan Saeed", "stars": 5 } },
+        { "type": "testimonial", "settings": { "text": "The drop shoulder tees are incredible. Fits perfectly and looks super stylish. Highly recommend Trendy Tees to everyone!", "author": "Ali Khan", "stars": 5 } },
+        { "type": "testimonial", "settings": { "text": "Best customer service and amazing packaging. The clothes feel luxurious and comfortable.", "author": "Ahmed Raza", "stars": 5 } }
       ]
     }
   ]
