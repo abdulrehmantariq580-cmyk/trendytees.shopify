@@ -226,6 +226,52 @@
         "button_label": "Shop Now",
         "button_link": ""
       }
+    },
+    "why_choose_us_8GFWHr": {
+      "type": "why-choose-us",
+      "blocks": {
+        "feature_FrRRjX": {
+          "type": "feature",
+          "settings": {
+            "title": "Premium Craftsmanship",
+            "text": "<p>Every t-shirt is designed and stitched in-house to guarantee exceptional durability and a perfect fit.</p>"
+          }
+        },
+        "feature_BEMKij": {
+          "type": "feature",
+          "settings": {
+            "title": "Open Parcel Policy",
+            "text": "<p>Your satisfaction comes first. We allow you to open and inspect your parcel before making the payment.</p>"
+          }
+        },
+        "feature_pHUxEW": {
+          "type": "feature",
+          "settings": {
+            "title": "Hassle-Free Exchange",
+            "text": "<p>Not loving your new fit? Enjoy a smooth and incredibly easy 7-day return or exchange process.</p>"
+          }
+        },
+        "feature_kwWQVa": {
+          "type": "feature",
+          "settings": {
+            "title": "Express Nationwide Delivery",
+            "text": "<p>Fast, secure, and reliable shipping right to your doorstep, anywhere across Pakistan.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_FrRRjX",
+        "feature_BEMKij",
+        "feature_pHUxEW",
+        "feature_kwWQVa"
+      ],
+      "name": "Why Choose Us",
+      "settings": {
+        "title": "Why Choose Trendy Tees?",
+        "text": "<p>We don't just sell clothes; we deliver an experience. From sourcing top-tier fabrics to ensuring flawless stitching, our focus is always on you. Experience unmatched quality, transparent pricing, and a seamless shopping journey with every order.</p>",
+        "button_label": "Shop Now",
+        "button_link": ""
+      }
     }
   },
   "order": [
@@ -235,6 +281,7 @@
     "collection_poster_slider_DPxFNx",
     "white_product_catalog_RX3Jhk",
     "instagram_feed_fkBWzf",
-    "about_zoryoo_CD9Ygd"
+    "about_zoryoo_CD9Ygd",
+    "why_choose_us_8GFWHr"
   ]
 }
