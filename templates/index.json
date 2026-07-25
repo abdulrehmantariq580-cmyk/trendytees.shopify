@@ -394,6 +394,15 @@
       "settings": {
         "tagline": "T E S T I M O N I A L S"
       }
+    },
+    "fill_bag_TKR4Ck": {
+      "type": "fill-bag",
+      "name": "Fill Bag Prompt",
+      "settings": {
+        "text": "Your bag feels light, fill it out.",
+        "button_label": "Shop Now",
+        "button_link": ""
+      }
     }
   },
   "order": [
@@ -406,6 +415,7 @@
     "about_zoryoo_CD9Ygd",
     "why_choose_us_8GFWHr",
     "size_guide_Fizfqj",
-    "testimonials_slider_6MnANb"
+    "testimonials_slider_6MnANb",
+    "fill_bag_TKR4Ck"
   ]
 }
