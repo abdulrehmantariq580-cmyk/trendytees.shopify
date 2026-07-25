@@ -29,6 +29,14 @@
     height: 100%;
     object-fit: cover;
     z-index: 1;
+    transform: scale(1);
+    transition: transform 1.5s ease-out; /* Reset transition */
+  }
+
+  /* Zoom in animation for active slide */
+  .hero-slider .swiper-slide-active .hero-slider__image {
+    transform: scale(1.08); /* Slight zoom */
+    transition: transform 8s linear; /* Slow, continuous zoom */
   }
 
   .hero-slider__overlay {
@@ -85,6 +93,34 @@
   .hero-slider__button:hover {
     background: #fff;
     color: #000;
+  }
+
+  /* Text Animations - Initial hidden state */
+  .hero-slider__subheading,
+  .hero-slider__heading,
+  .hero-slider__button {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  /* Text Animations - Active slide stagger effect */
+  .hero-slider .swiper-slide-active .hero-slider__subheading {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+  }
+
+  .hero-slider .swiper-slide-active .hero-slider__heading {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.6s;
+  }
+
+  .hero-slider .swiper-slide-active .hero-slider__button {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.9s;
   }
 
   /* Swiper Pagination */
