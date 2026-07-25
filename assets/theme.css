@@ -1496,3 +1496,19 @@ body.is-transitioning .page-transition-overlay {
     padding-top: 3rem !important;
   }
 }
+
+/* Fix for grey space between custom sections and footer */
+.shopify-section:has(.fill-bag-section),
+.shopify-section:has(.size-guide-section),
+.shopify-section:has(.why-choose-section),
+.shopify-section:has(.about-zoryoo-section),
+.shopify-section:has(.testimonials-section) {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#shopify-section-footer, 
+#shopify-section-newsletter,
+.footer {
+  margin-top: 0 !important;
+}
