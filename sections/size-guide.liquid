@@ -2,12 +2,7 @@
   .size-guide-section {
     padding: 6rem 0;
     background-color: #cecfd1;
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    width: 100%;
     overflow-x: hidden;
   }
 
@@ -186,12 +181,6 @@
 
   @media screen and (max-width: 768px) {
     .size-guide-section {
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
       padding: 4rem 0;
     }
     .size-guide-container {
@@ -202,8 +191,11 @@
       padding: 2rem 1.5rem;
     }
     .size-guide-btn {
-      display: block;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 300px; /* Limit width so it looks like a nice button, not a block */
       margin: 0 auto;
     }
   }
