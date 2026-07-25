@@ -52,7 +52,6 @@
     "header": {
       "type": "header",
       "settings": {
-        "logo": "shopify://shop_images/bg_removed.png",
         "logo_text": "Trendy Tees",
         "logo_subtext": "Lead the Trend Don't Follow it",
         "menu": "main-menu"
