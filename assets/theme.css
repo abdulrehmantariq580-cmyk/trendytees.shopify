@@ -1510,7 +1510,14 @@ body.is-transitioning .page-transition-overlay {
 #shopify-section-footer, 
 #shopify-section-newsletter,
 .footer,
+.site-footer,
 .shopify-section-group,
 #shopify-section-group-footer-group {
   margin-top: 0 !important;
+}
+
+.content-for-layout,
+main#MainContent {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
