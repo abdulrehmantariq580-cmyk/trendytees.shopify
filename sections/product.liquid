@@ -52,8 +52,8 @@
   .product-image-slider img {
     width: 100%;
     height: auto;
-    object-fit: cover;
-    max-height: 70vh; /* reasonable height on mobile */
+    display: block;
+    /* Removed max-height and object-fit: cover to prevent any image cropping */
   }
 
   .product-slider-pagination {
