@@ -80,6 +80,15 @@
     opacity: 1;
   }
 
+  .product-slider-nav {
+    color: #000 !important;
+  }
+
+  .product-slider-nav::after {
+    font-size: 1.8rem !important;
+    font-weight: 900;
+  }
+
   /* --- Product Info --- */
   .product-info-wrapper {
     padding: 2rem 1.5rem;
@@ -376,6 +385,8 @@
           {%- endif -%}
         </div>
         <div class="product-slider-pagination"></div>
+        <div class="swiper-button-prev product-slider-nav"></div>
+        <div class="swiper-button-next product-slider-nav"></div>
       </div>
     </div>
 
@@ -506,6 +517,10 @@
         pagination: {
           el: '.product-slider-pagination',
           clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         },
       });
     }
