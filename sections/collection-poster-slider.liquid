@@ -19,9 +19,7 @@
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
-    display: flex;
-    align-items: center; /* Exactly centered vertically */
-    justify-content: center; /* Exactly centered horizontally */
+    /* Flexbox removed in favor of absolute centering for better cross-browser support */
     overflow: hidden;
     background-color: #111;
   }
@@ -48,27 +46,33 @@
   }
 
   .collection-poster__content {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 3;
     text-align: center;
-    padding: 0; /* Removed padding so it's perfectly centered */
+    padding: 0;
+    width: max-content;
   }
 
   /* Title removed as user only wants the button */
 
   .collection-poster__button {
-    display: inline-block;
+    display: inline-block !important;
     background: transparent;
     color: #fff;
     border: 1px solid #fff;
-    padding: 0.5rem 1.2rem; /* Very small padding */
+    padding: 0.5rem 1.2rem !important; /* Very small padding */
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 0.8rem; /* Very small text */
+    font-size: 0.8rem !important; /* Very small text */
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: background 0.3s ease, color 0.3s ease;
+    width: auto !important;
+    white-space: nowrap !important;
   }
 
   .collection-poster__button:hover {
@@ -133,8 +137,8 @@
 
   @media screen and (min-width: 769px) {
     .collection-poster__button {
-      padding: 0.6rem 1.5rem; /* Small on desktop too */
-      font-size: 0.85rem; /* Small on desktop too */
+      padding: 0.6rem 1.5rem !important; /* Small on desktop too */
+      font-size: 0.85rem !important; /* Small on desktop too */
       border: 1px solid #fff;
     }
   }
