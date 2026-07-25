@@ -163,6 +163,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Global Text Reveal Animation for All Sections ---
+  if (typeof gsap !== 'undefined') {
+    const sections = document.querySelectorAll('.shopify-section:not(.hero-slider-section)');
+    sections.forEach(section => {
+      // Select headings, paragraphs, and standard buttons within the section
+      const textElements = section.querySelectorAll('h2, h3, p, a.btn, a.button, .featured-products__view-all-btn');
+      
+      const elementsToAnimate = Array.from(textElements).filter(el => {
+        // Exclude elements inside swiper wrappers to avoid slider conflicts
+        return !el.closest('.swiper-wrapper') && !el.closest('.testimonials-swiper') && !el.closest('.instagram-feed__grid');
+      });
+
+      if (elementsToAnimate.length > 0) {
+        gsap.from(elementsToAnimate, {
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 85%', // Trigger when section is 85% into view
+          },
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.15, // Beautiful stagger effect between text parts
+          ease: 'power3.out'
+        });
+      }
+    });
+  }
+
   // --- Shop The Look Hotspot Logic ---
   const hotspots = document.querySelectorAll('.hotspot');
   
