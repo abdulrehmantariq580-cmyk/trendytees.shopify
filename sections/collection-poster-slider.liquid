@@ -20,8 +20,8 @@
     width: 100%;
     aspect-ratio: 16 / 9;
     display: flex;
-    align-items: flex-end; /* Move content to the bottom */
-    justify-content: center;
+    align-items: center; /* Exactly centered vertically */
+    justify-content: center; /* Exactly centered horizontally */
     overflow: hidden;
     background-color: #111;
   }
@@ -51,8 +51,7 @@
     position: relative;
     z-index: 3;
     text-align: center;
-    padding: 2rem;
-    padding-bottom: 5rem; /* Add spacing from the bottom edge */
+    padding: 0; /* Removed padding so it's perfectly centered */
   }
 
   .collection-poster__title {
@@ -69,10 +68,10 @@
     background: transparent;
     color: #fff;
     border: 1px solid #fff;
-    padding: 0.8rem 2rem;
+    padding: 0.6rem 1.5rem; /* Smaller padding on mobile */
     font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-weight: 500;
+    font-size: 0.85rem; /* Smaller font on mobile */
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -141,9 +140,9 @@
 
   @media screen and (min-width: 769px) {
     .collection-poster__button {
-      padding: 1rem 3.5rem;
-      font-size: 1.15rem;
-      border: 2px solid #fff;
+      padding: 0.8rem 2rem; /* Smaller padding on desktop */
+      font-size: 0.95rem; /* Smaller font on desktop */
+      border: 1px solid #fff; /* Thinner border */
     }
   }
 {%- endstyle -%}
@@ -175,7 +174,7 @@
 
               {%- if block.settings.button_label != blank -%}
                 <a href="{{ collection.url | default: '#' }}" class="collection-poster__button">
-                  {{ block.settings.button_label }}
+                  {{ block.settings.title | default: collection.title | default: 'Shop Collection' }}
                 </a>
               {%- endif -%}
             </div>
