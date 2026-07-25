@@ -32,7 +32,7 @@
   /* Swiper styles for testimonials */
   .testimonials-swiper {
     width: 100%;
-    padding-bottom: 4rem; /* Space for pagination */
+    padding-bottom: 5rem; /* Increased space for pagination */
   }
 
   .testimonial-slide {
@@ -100,6 +100,17 @@
     border-radius: 4px;
   }
 
+  /* Custom Navigation */
+  .testimonials-prev,
+  .testimonials-next {
+    color: #fff !important;
+  }
+  
+  .testimonials-prev::after,
+  .testimonials-next::after {
+    font-size: 1.5rem !important; /* Make arrows slightly smaller */
+  }
+
   @media screen and (max-width: 768px) {
     .testimonials-section {
       width: 100vw;
@@ -154,6 +165,10 @@
       
       <!-- Custom Pagination -->
       <div class="swiper-pagination testimonials-pagination"></div>
+      
+      <!-- Navigation -->
+      <div class="swiper-button-prev testimonials-prev"></div>
+      <div class="swiper-button-next testimonials-next"></div>
     </div>
   </div>
 </section>
@@ -174,9 +189,14 @@
           fadeEffect: {
             crossFade: true
           },
+          autoHeight: true, /* This fixes the overlap issue by adapting to text height */
           pagination: {
             el: '.testimonials-pagination',
             clickable: true,
+          },
+          navigation: {
+            nextEl: '.testimonials-next',
+            prevEl: '.testimonials-prev',
           },
         });
       } else {
