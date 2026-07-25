@@ -20,7 +20,7 @@
     width: 100%;
     aspect-ratio: 16 / 9;
     display: flex;
-    align-items: center;
+    align-items: flex-end; /* Move content to the bottom */
     justify-content: center;
     overflow: hidden;
     background-color: #111;
@@ -52,6 +52,7 @@
     z-index: 3;
     text-align: center;
     padding: 2rem;
+    padding-bottom: 5rem; /* Add spacing from the bottom edge */
   }
 
   .collection-poster__title {
@@ -174,7 +175,7 @@
 
               {%- if block.settings.button_label != blank -%}
                 <a href="{{ collection.url | default: '#' }}" class="collection-poster__button">
-                  {{ block.settings.title | default: collection.title | default: 'Shop Collection' }}
+                  {{ block.settings.button_label }}
                 </a>
               {%- endif -%}
             </div>
