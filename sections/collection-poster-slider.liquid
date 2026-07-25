@@ -54,24 +54,17 @@
     padding: 0; /* Removed padding so it's perfectly centered */
   }
 
-  .collection-poster__title {
-    color: #fff;
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 700;
-    text-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    margin: 0 0 1rem 0;
-  }
+  /* Title removed as user only wants the button */
 
   .collection-poster__button {
     display: inline-block;
     background: transparent;
     color: #fff;
     border: 1px solid #fff;
-    padding: 0.6rem 1.5rem; /* Smaller padding on mobile */
+    padding: 0.5rem 1.2rem; /* Very small padding */
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 0.85rem; /* Smaller font on mobile */
+    font-size: 0.8rem; /* Very small text */
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -140,9 +133,9 @@
 
   @media screen and (min-width: 769px) {
     .collection-poster__button {
-      padding: 0.8rem 2rem; /* Smaller padding on desktop */
-      font-size: 0.95rem; /* Smaller font on desktop */
-      border: 1px solid #fff; /* Thinner border */
+      padding: 0.6rem 1.5rem; /* Small on desktop too */
+      font-size: 0.85rem; /* Small on desktop too */
+      border: 1px solid #fff;
     }
   }
 {%- endstyle -%}
@@ -164,19 +157,11 @@
 
           <div class="collection-poster__overlay"></div>
 
-          {%- if block.settings.show_title or block.settings.button_label != blank -%}
+          {%- if block.settings.title != blank or collection.title != blank -%}
             <div class="collection-poster__content">
-              {%- if block.settings.show_title -%}
-                <h2 class="collection-poster__title">
-                  {{ block.settings.title | default: collection.title | default: 'New Collection' }}
-                </h2>
-              {%- endif -%}
-
-              {%- if block.settings.button_label != blank -%}
-                <a href="{{ collection.url | default: '#' }}" class="collection-poster__button">
-                  {{ block.settings.title | default: collection.title | default: 'Shop Collection' }}
-                </a>
-              {%- endif -%}
+              <a href="{{ collection.url | default: '#' }}" class="collection-poster__button">
+                {{ block.settings.title | default: collection.title | default: 'Collection' }}
+              </a>
             </div>
           {%- else -%}
              <a href="{{ collection.url | default: '#' }}" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 4;"></a>
@@ -259,22 +244,10 @@
           "info": "Leave blank to use the Collection's featured image."
         },
         {
-          "type": "checkbox",
-          "id": "show_title",
-          "label": "Show Collection Title overlay",
-          "default": false
-        },
-        {
           "type": "text",
           "id": "title",
-          "label": "Custom Title",
-          "info": "Overrides the collection title if showing."
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "label": "Button Label",
-          "default": "Shop Collection"
+          "label": "Custom Button Text",
+          "info": "Overrides the collection title. Leave blank to use collection name."
         }
       ]
     }
