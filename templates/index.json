@@ -356,6 +356,44 @@
         "table_title": "Size Chart",
         "tips_title": "Sizing Tips"
       }
+    },
+    "testimonials_slider_6MnANb": {
+      "type": "testimonials-slider",
+      "blocks": {
+        "testimonial_pDnyJd": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "text": "I received my order within a few days and was genuinely impressed by the quality. The fabric feels premium and the fit was exactly as expected.",
+            "author": "Rayyan Saeed"
+          }
+        },
+        "testimonial_a3wfP6": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "text": "The drop shoulder tees are incredible. Fits perfectly and looks super stylish. Highly recommend Trendy Tees to everyone!",
+            "author": "Ali Khan"
+          }
+        },
+        "testimonial_dHJX6Y": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "text": "Best customer service and amazing packaging. The clothes feel luxurious and comfortable.",
+            "author": "Ahmed Raza"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_pDnyJd",
+        "testimonial_a3wfP6",
+        "testimonial_dHJX6Y"
+      ],
+      "name": "Testimonials Slider",
+      "settings": {
+        "tagline": "T E S T I M O N I A L S"
+      }
     }
   },
   "order": [
@@ -367,6 +405,7 @@
     "instagram_feed_fkBWzf",
     "about_zoryoo_CD9Ygd",
     "why_choose_us_8GFWHr",
-    "size_guide_Fizfqj"
+    "size_guide_Fizfqj",
+    "testimonials_slider_6MnANb"
   ]
 }
