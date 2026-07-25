@@ -15,7 +15,7 @@
         "slide_1": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_olb6xqolb6xqolb6.png",
+            "image": "shopify://shop_images/Gemini_Generated_Image_olb6xqolb6xqolb6-clean.png",
             "overlay_opacity": 30,
             "subheading": "LUXURY STREETWEAR!",
             "heading": "Discover Your Style",
@@ -26,7 +26,7 @@
         "slide_2": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_z1pqz3z1pqz3z1pq.png",
+            "image": "shopify://shop_images/Gemini_Generated_Image_z1pqz3z1pqz3z1pq-clean.png",
             "overlay_opacity": 30,
             "subheading": "NEW COLLECTION",
             "heading": "Elevate Your Game",
@@ -37,7 +37,7 @@
         "slide_3": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_3n4l0y3n4l0y3n4l.png",
+            "image": "shopify://shop_images/Gemini_Generated_Image_3n4l0y3n4l0y3n4l-clean.png",
             "overlay_opacity": 30,
             "subheading": "PREMIUM APPAREL",
             "heading": "Unmatched Quality",
@@ -48,7 +48,7 @@
         "slide_4": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_y7qslwy7qslwy7qs.png",
+            "image": "shopify://shop_images/Gemini_Generated_Image_y7qslwy7qslwy7qs-clean.png",
             "overlay_opacity": 30,
             "subheading": "EXCLUSIVE DROPS",
             "heading": "Own The Streets",
@@ -114,27 +114,21 @@
           "type": "collection_poster",
           "settings": {
             "collection": "amazing-designs",
-            "show_title": false,
-            "title": "",
-            "button_label": "Shop Collection"
+            "title": ""
           }
         },
         "collection_poster_P6JLeq": {
           "type": "collection_poster",
           "settings": {
             "collection": "featured-products",
-            "show_title": false,
-            "title": "",
-            "button_label": "Shop Collection"
+            "title": ""
           }
         },
         "collection_poster_w868x7": {
           "type": "collection_poster",
           "settings": {
             "collection": "new-colleection",
-            "show_title": false,
-            "title": "",
-            "button_label": "Shop Collection"
+            "title": ""
           }
         }
       },
