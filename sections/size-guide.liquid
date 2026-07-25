@@ -197,13 +197,23 @@
     .size-guide-container {
       flex-direction: column;
       gap: 3rem;
+      align-items: center;
+      width: 90%; /* Ensure container is properly constrained */
+    }
+    .size-guide-left, .size-guide-right {
+      width: 100%;
+      min-width: unset;
+      flex: none;
     }
     .size-guide-right {
-      padding: 2rem 1.5rem;
+      padding: 2rem 1.2rem;
+      box-sizing: border-box; /* Prevent padding from expanding width */
     }
     .size-guide-btn {
-      display: block;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: max-content;
       margin: 0 auto;
     }
   }
