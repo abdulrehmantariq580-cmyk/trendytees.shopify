@@ -276,6 +276,14 @@
     "size_guide_Fizfqj": {
       "type": "size-guide",
       "blocks": {
+        "size_row_ABqLGx": {
+          "type": "size_row",
+          "settings": {
+            "size": "S",
+            "length": "23\"",
+            "width": "22\""
+          }
+        },
         "size_row_NxQYtB": {
           "type": "size_row",
           "settings": {
@@ -326,6 +334,7 @@
         }
       },
       "block_order": [
+        "size_row_ABqLGx",
         "size_row_NxQYtB",
         "size_row_tmzEaT",
         "size_row_Up7Nnz",
