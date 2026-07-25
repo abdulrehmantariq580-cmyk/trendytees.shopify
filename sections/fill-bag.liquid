@@ -85,6 +85,11 @@
       max-width: 280px;
     }
   }
+
+  /* Force wrapper to have no margin at bottom */
+  #shopify-section-{{ section.id }} {
+    margin-bottom: 0 !important;
+  }
 {%- endstyle -%}
 
 <section class="fill-bag-section" id="FillBag-{{ section.id }}">

@@ -1509,6 +1509,8 @@ body.is-transitioning .page-transition-overlay {
 
 #shopify-section-footer, 
 #shopify-section-newsletter,
-.footer {
+.footer,
+.shopify-section-group,
+#shopify-section-group-footer-group {
   margin-top: 0 !important;
 }
