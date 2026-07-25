@@ -399,6 +399,7 @@
       "type": "fill-bag",
       "name": "Fill Bag Prompt",
       "settings": {
+        "image": "shopify://shop_images/Gemini_Generated_Image_4szod94szod94szo.png",
         "text": "Your bag feels light, fill it out.",
         "button_label": "Shop Now",
         "button_link": ""
