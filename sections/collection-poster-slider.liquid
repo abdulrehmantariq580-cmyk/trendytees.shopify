@@ -53,20 +53,30 @@
     z-index: 3;
     text-align: center;
     padding: 0;
-    width: max-content;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  /* Title removed as user only wants the button */
+  .collection-poster__title {
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+  }
 
   .collection-poster__button {
     display: inline-block !important;
     background: transparent;
     color: #fff;
     border: 1px solid #fff;
-    padding: 0.5rem 1.2rem !important; /* Very small padding */
+    padding: 0.8rem 2.5rem !important; 
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 0.8rem !important; /* Very small text */
+    font-weight: 600;
+    font-size: 0.95rem !important; 
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -76,8 +86,8 @@
   }
 
   .collection-poster__button:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    background: #fff;
+    color: #000;
   }
 
   /* Swiper Pagination */
@@ -128,9 +138,15 @@
   }
 
   @media screen and (max-width: 768px) {
+    .collection-poster__slide {
+      aspect-ratio: 4 / 3;
+    }
     .collection-poster-button-next,
     .collection-poster-button-prev {
       display: none !important; /* Hide arrows on mobile */
+    }
+    .collection-poster__title {
+      font-size: 2.5rem;
     }
   }
 
@@ -162,8 +178,9 @@
 
           {%- if block.settings.title != blank or collection.title != blank -%}
             <div class="collection-poster__content">
+              <h2 class="collection-poster__title">{{ block.settings.title | default: collection.title | default: 'Collection' }}</h2>
               <a href="{{ collection.url | default: '#' }}" class="collection-poster__button">
-                {{ block.settings.title | default: collection.title | default: 'Collection' }}
+                SHOP NOW
               </a>
             </div>
           {%- else -%}
@@ -179,6 +196,7 @@
             <div class="collection-poster__overlay"></div>
             <div class="collection-poster__content">
               <h2 class="collection-poster__title">Example Collection</h2>
+              <a href="#" class="collection-poster__button">SHOP NOW</a>
             </div>
           </div>
         {%- endfor -%}
