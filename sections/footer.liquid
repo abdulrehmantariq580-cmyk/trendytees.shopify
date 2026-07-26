@@ -1,9 +1,9 @@
 <footer class="site-footer">
   <div class="footer__rotating-badge">
     {%- if section.settings.rotating_badge_image != blank -%}
-      {{ section.settings.rotating_badge_image | image_url: width: 120 | image_tag: class: 'rotating-text-svg', style: 'border-radius: 50%; object-fit: cover; width: 120px; height: 120px;' }}
+      {{ section.settings.rotating_badge_image | image_url: width: 120 | image_tag: class: 'rotating-text-svg', style: 'border-radius: 50%; object-fit: cover;' }}
     {%- else -%}
-      <svg class="rotating-text-svg" viewBox="0 0 100 100" width="120" height="120">
+      <svg class="rotating-text-svg" viewBox="0 0 100 100">
         <defs>
           <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
         </defs>
@@ -236,6 +236,8 @@
 
   .rotating-text-svg {
     animation: rotateBadge 12s linear infinite;
+    width: 120px;
+    height: 120px;
   }
 
   .badge-center-icon {
@@ -251,6 +253,18 @@
   @keyframes rotateBadge {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+  }
+
+  @media screen and (max-width: 768px) {
+    .footer__rotating-badge {
+      width: 85px;
+      height: 85px;
+      top: -42px;
+    }
+    .rotating-text-svg {
+      width: 85px;
+      height: 85px;
+    }
   }
 
   /* Newsletter Section */
