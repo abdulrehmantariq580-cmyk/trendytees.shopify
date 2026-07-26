@@ -45,6 +45,8 @@
         "contact"
       ],
       "settings": {
+        "rotating_badge_image": "shopify://shop_images/Gemini_Generated_Image_exzufnexzufnexzu_c5d8df8d-7ee1-4df0-a199-23dc42bc6b75.png",
+        "rotating_badge_text": "TRENDY TEES • PREMIUM STREETWEAR •",
         "newsletter_heading": "Subscribe to our emails",
         "newsletter_text": "Be the first to know about new collections and exclusive offers."
       }
